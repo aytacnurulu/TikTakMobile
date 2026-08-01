@@ -1,0 +1,34 @@
+import { NavigatorScreenParams } from '@react-navigation/native';
+
+export type AuthStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Signup: undefined;
+};
+
+export type HomeStackParamList = {
+  Home: undefined;
+  Products: undefined;
+};
+
+export type AccountStackParamList = {
+  Account: undefined;
+  AccountInfo: undefined;
+  OrderHistory: undefined;
+  OrderHistoryDetail: { orderId: string };
+  Favorites: undefined;
+};
+
+export type MainTabParamList = {
+  HomeTab: NavigatorScreenParams<HomeStackParamList>;
+  SearchTab: undefined;
+  AccountTab: NavigatorScreenParams<AccountStackParamList>;
+};
+
+export type RootStackParamList = {
+  Auth: NavigatorScreenParams<AuthStackParamList>;
+  Main: NavigatorScreenParams<MainTabParamList>;
+  Basket: undefined;
+  Checkout: undefined;
+  OrderSuccess: undefined;
+};

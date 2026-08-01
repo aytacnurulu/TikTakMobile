@@ -20,7 +20,7 @@ This file describes the project's structure, patterns, and technical decisions f
 | Client state  | Zustand              | Client-only state only                   |
 | Local storage | MMKV                 | Token and other persisted data           |
 | Styling       | Vanilla StyleSheet   | No NativeWind/Tailwind                   |
-| Bottom sheet  | @gorhom/bottom-sheet | Product detail, theme/language selection |
+| Bottom sheet  | @gorhom/bottom-sheet | Product detail, language selection |
 
 ## Structure
 
@@ -76,7 +76,7 @@ src/
 │   │       └── basket.hooks.ts     # NO store — server-driven (TanStack Query)
 │   │
 │   ├── profile/
-│   │   ├── screens/                # Account screen: theme + language selection opens from here (bottom sheet)
+│   │   ├── screens/                # Account screen: language selection opens from here (bottom sheet)
 │   │   └── components/             # feature-local components, created as needed
 │   │
 │   ├── favorites/
@@ -88,10 +88,8 @@ src/
 │   │
 │   └── settings/
 │       ├── components/
-│       │   ├── ThemeSelectSheet.tsx
 │       │   └── LanguageSelectSheet.tsx
 │       └── store/
-│           ├── theme.store.ts      # MMKV persist
 │           └── locale.store.ts     # MMKV persist, wired to i18next
 │
 ├── shared/
@@ -124,11 +122,10 @@ Basket is managed entirely through TanStack Query; there's no Zustand store for 
 
 There is no `ProductDetailScreen`. Tapping a card opens `ProductDetailSheet` (`useRef<BottomSheetModal>` + `.present()`) — no new screen is pushed onto the navigation stack. The sheet consumes `product.hooks`, `basket.hooks`, and `favorites.store` together, and lives in `features/product/components/` since it belongs to the product feature.
 
-### Theme & Language — opened from the Profile screen
+### Language — opened from the Profile screen
 
-Both open from `features/profile/screens/` as bottom sheets, but the sheets themselves live in `features/settings/components/` since they're a settings concern, not a profile concern:
+Opens from `features/profile/screens/` as a bottom sheet, but the sheet itself lives in `features/settings/components/` since it's a settings concern, not a profile concern:
 
-- `ThemeSelectSheet` → `theme.store` (MMKV persist)
 - `LanguageSelectSheet` → `locale.store` (MMKV persist) + wired to i18next
 
 ### Shared apiFetch — same pattern as the admin panel
