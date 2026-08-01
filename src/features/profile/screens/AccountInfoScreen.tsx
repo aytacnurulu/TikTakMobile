@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-const ThemeSelectSheet = () => {
+const AccountInfoScreen = () => {
   return (
     <View>
-      <Text>ThemeSelectSheet</Text>
+      <Text>AccountInfoScreen</Text>
     </View>
   );
 };
 
-export default ThemeSelectSheet;
+export default AccountInfoScreen;

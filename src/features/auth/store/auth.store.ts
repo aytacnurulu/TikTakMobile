@@ -6,6 +6,6 @@ interface AuthStore {
 }
 
 export const useAuthStore = create<AuthStore>(() => ({
-  token: null,
+  token: 'true',
   role: null,
 }));
