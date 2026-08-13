@@ -1,35 +1,35 @@
+export const BASE_URL = 'https://api.sarkhanrahimli.dev/api/tiktak';
+
 export const API = {
   CLIENT: {
     AUTH: {
-      LOGIN: '/api/tiktak/auth/login',
-      SIGNUP: '/api/tiktak/auth/signup',
-      VERIFY_OTP: '/api/tiktak/auth/refresh',
+      LOGIN: '/auth/login',
+      SIGNUP: '/auth/signup',
+      REFRESH: '/auth/refresh',
     },
-    PRODUCT: {
-      LIST: '/api/tiktak/products',
-      DETAIL: (id: number) => `/api/tiktak/products/${id}`,
-      FAVORITE_TOGGLE: (id: number) => `/api/tiktak/products/${id}/favorite`,
-      FAVORITES_LIST: '/api/tiktak/products/favorites',
-    },
-    CATEGORY: {
-      LIST: '/api/tiktak/categories',
-    },
-    CAMPAIGN: {
-      LIST: '/api/tiktak/campaigns',
+    PROFILE: '/profile',
+    PRODUCTS: {
+      LIST: '/products',
+      DETAIL: (id: number | string) => `/products/${id}`,
+      FAVORITE: (id: number | string) => `/products/${id}/favorite`,
+      FAVORITES: '/products/favorites',
     },
     BASKET: {
-      LIST: '/api/tiktak/basket',
-      ADD: (productId: number) => `/api/tiktak/basket/${productId}/add`,
-      REMOVE: (productId: number) => `/api/tiktak/basket/${productId}/remove`,
-      REMOVE_ALL: (productId: number) =>
-        `/api/tiktak/basket/${productId}/remove-all`,
-      CLEAR: '/api/tiktak/basket/clear',
+      LIST: '/basket',
+      CLEAR: '/basket/clear',
+      ADD: (productId: number | string) => `/basket/${productId}/add`,
+      REMOVE: (productId: number | string) => `/basket/${productId}/remove`,
+      REMOVE_ALL: (productId: number | string) =>
+        `/basket/${productId}/remove-all`,
     },
+    CATEGORIES: '/categories',
+    CAMPAIGNS: '/campaigns',
     ORDERS: {
-      CREATE: '/api/tiktak/orders/user',
-      LIST: '/api/tiktak/orders/user',
+      CHECKOUT: '/orders/checkout',
+      LIST: '/orders/user',
+      DETAIL: (id: number | string) => `/orders/user/${id}`,
     },
   },
-
-  UPLOAD: '/api/tiktak/upload',
+  ADMIN: {},
+  UPLOAD: '/upload',
 };

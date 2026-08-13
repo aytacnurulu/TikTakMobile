@@ -10,11 +10,11 @@ import AccountIcon from '../../shared/icons/account.svg';
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const renderHomeIcon = ({ color, size }: { color: string; size: number }) => (
-  <HomeIcon width={size} height={size} fill={color} />
+  <HomeIcon width={size} height={size} color={color} />
 );
 
 const renderSearchIcon = ({ color, size }: { color: string; size: number }) => (
-  <SearchIcon width={size} height={size} fill={color} />
+  <SearchIcon width={size} height={size} color={color} />
 );
 
 const renderAccountIcon = ({
@@ -23,7 +23,7 @@ const renderAccountIcon = ({
 }: {
   color: string;
   size: number;
-}) => <AccountIcon width={size} height={size} fill={color} />;
+}) => <AccountIcon width={size} height={size} color={color} />;
 
 const MainTabNavigator = () => {
   return (
@@ -32,8 +32,9 @@ const MainTabNavigator = () => {
         name="HomeTab"
         component={HomeStackNavigator}
         options={{
+          tabBarLabel: 'Əsas',
           tabBarIcon: renderHomeIcon,
-          tabBarActiveTintColor: 'green',
+          tabBarActiveTintColor: '#76CB4F',
           tabBarInactiveTintColor: 'gray',
         }}
       />
@@ -41,8 +42,9 @@ const MainTabNavigator = () => {
         name="SearchTab"
         component={SearchScreen}
         options={{
+          tabBarLabel: 'Axtar',
           tabBarIcon: renderSearchIcon,
-          tabBarActiveTintColor: 'green',
+          tabBarActiveTintColor: '#76CB4F',
           tabBarInactiveTintColor: 'gray',
         }}
       />
@@ -50,8 +52,9 @@ const MainTabNavigator = () => {
         name="AccountTab"
         component={AccountStackNavigator}
         options={{
+          tabBarLabel: 'Hesabım',
           tabBarIcon: renderAccountIcon,
-          tabBarActiveTintColor: 'green',
+          tabBarActiveTintColor: '#76CB4F',
           tabBarInactiveTintColor: 'gray',
         }}
       />
