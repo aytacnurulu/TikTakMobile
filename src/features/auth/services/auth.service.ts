@@ -1,5 +1,7 @@
 export const authService = {
-  login: async () => {},
+  login: async () => {
+    
+  },
   register: async () => {},
   logout: async () => {},
 };
