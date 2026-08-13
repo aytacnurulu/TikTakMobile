@@ -81,8 +81,10 @@ src/
 │   │
 │   ├── favorites/
 │   │   ├── components/             # feature-local components, created as needed
-│   │   ├── store/
-│   │   │   └── favorites.store.ts  # Zustand, Set<string> pattern
+│   │   ├── services/
+│   │   │   └── favorites.service.ts
+│   │   ├── hooks/
+│   │   │   └── favorites.hooks.ts  # NO store — server-driven (TanStack Query)
 │   │   └── types/
 │   │       └── favorites.types.ts
 │   │
@@ -114,9 +116,9 @@ src/
 
 Basket is managed entirely through TanStack Query; there's no Zustand store for it. TanStack Query's own cache mechanism (`staleTime`, `gcTime`) minimizes request count, so no manual sync loop is needed. Set an appropriate `staleTime` (e.g. 30s), and only call `invalidateQueries` after a mutation succeeds.
 
-### Favorites — Set pattern
+### Favorites — server-driven, no store
 
-`favorites.store.ts` holds product IDs as a `Set<string>` for O(1) `has()` checks. `isFavorite` is not stored as a separate field — it's computed on the fly inside `ProductCard`. `toggleFavorite` adds/removes based on current Set state.
+Like basket, favorites are backed by real endpoints (`FAVORITE_TOGGLE`, `FAVORITES_LIST`) and managed entirely through TanStack Query — no Zustand store. `isFavorite` is not stored as a separate field — it's computed on the fly (`useIsFavorite(id)`) from the `['favorites']` query cache. `useToggleFavorite` uses an optimistic `onMutate` (cancel + snapshot + remove-if-present) with rollback in `onError`, and invalidates in `onSettled`, same as the basket convention.
 
 ### Product detail — bottom sheet, not a screen
 
