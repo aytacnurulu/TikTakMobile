@@ -92,7 +92,8 @@ src/
 │       ├── components/
 │       │   └── LanguageSelectSheet.tsx
 │       └── store/
-│           └── locale.store.ts     # MMKV persist, wired to i18next
+│           ├── locale.store.ts     # MMKV persist, wired to i18next
+│           └── theme.store.ts      # MMKV persist
 │
 ├── shared/
 │   ├── types/
@@ -100,7 +101,13 @@ src/
 │   ├── lib/
 │   │   ├── axios.ts                # axiosInstance + interceptor (token read via MMKV/Zustand)
 │   │   ├── api-fetch.ts            # generic apiFetch
-│   │   └── storage.ts              # MMKV instance + helpers
+│   │   ├── storage.ts              # MMKV instance + helpers
+│   │   └── i18n/                   # i18next init + resources
+│   │       ├── index.ts            # lng from locale.store, fallbackLng: 'az'
+│   │       └── locales/
+│   │           ├── az.json
+│   │           ├── ru.json
+│   │           └── en.json
 │   ├── components/                 # only genuinely cross-feature UI (buttons, inputs, cards)
 │   ├── hooks/
 │   └── constants/
