@@ -8,7 +8,7 @@ export type AuthStackParamList = {
 
 export type HomeStackParamList = {
   Home: undefined;
-  Products: undefined;
+  Products: { categoryId: number; categoryName: string };
 };
 
 export type AccountStackParamList = {

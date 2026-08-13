@@ -31,7 +31,7 @@ src/
 ├── app/
 │   ├── App.tsx
 │   ├── providers/                  # QueryClientProvider, GestureHandlerRootView, BottomSheetModalProvider
-│   └── navigation/
+│   └── stack/
 │       ├── RootNavigator.tsx       # Auth stack vs Main tab (based on auth store)
 │       ├── AuthNavigator.tsx       # imports from features/auth/screens
 │       ├── MainTabNavigator.tsx    # imports from features/{home,product,basket,profile}/screens
@@ -131,6 +131,15 @@ Opens from `features/profile/screens/` as a bottom sheet, but the sheet itself l
 ### Shared apiFetch — same pattern as the admin panel
 
 The admin panel's 3-layer architecture (shared `apiFetch` + feature `service` + feature `hooks`) continues unchanged here. The only difference: the interceptor reads the token from Zustand via MMKV (the admin panel reads directly from Zustand).
+
+### TanStack Query — consumption conventions
+
+- **`isPending` vs `isFetching`**: `isPending` = no data yet (initial load, full-screen loader). `isFetching` = any fetch in flight, including background refetch — use `isFetching` (not `isLoading`) for `RefreshControl`'s `refreshing` prop.
+- **`enabled`**: gate queries that depend on other data/auth (e.g. don't fetch basket without a `token`, don't fetch product detail without an `id`).
+- **`useInfiniteQuery`**: use for paginated product lists per category (`FlatList` + `onEndReached`) instead of plain `useQuery`.
+- **Optimistic updates**: for mutations that must feel instant (basket add/remove), use `onMutate` (cancel + snapshot + optimistic `setQueryData`) with rollback in `onError`; call `invalidateQueries` in `onSettled` only.
+- **`placeholderData: keepPreviousData`**: use when switching category/filter so the list doesn't flash empty before refilling.
+- **Global error handling**: 401s are caught centrally (axios response interceptor or `QueryCache`/`MutationCache` `onError`) to trigger logout — not per-hook `try/catch`.
 
 ## Known risks (from admin panel experience)
 
