@@ -31,7 +31,7 @@ src/
 ├── app/
 │   ├── App.tsx
 │   ├── providers/                  # QueryClientProvider, GestureHandlerRootView, BottomSheetModalProvider
-│   └── navigation/
+│   └── stack/
 │       ├── RootNavigator.tsx       # Auth stack vs Main tab (based on auth store)
 │       ├── AuthNavigator.tsx       # imports from features/auth/screens
 │       ├── MainTabNavigator.tsx    # imports from features/{home,product,basket,profile}/screens
@@ -81,8 +81,10 @@ src/
 │   │
 │   ├── favorites/
 │   │   ├── components/             # feature-local components, created as needed
-│   │   ├── store/
-│   │   │   └── favorites.store.ts  # Zustand, Set<string> pattern
+│   │   ├── services/
+│   │   │   └── favorites.service.ts
+│   │   ├── hooks/
+│   │   │   └── favorites.hooks.ts  # NO store — server-driven (TanStack Query)
 │   │   └── types/
 │   │       └── favorites.types.ts
 │   │
@@ -114,9 +116,9 @@ src/
 
 Basket is managed entirely through TanStack Query; there's no Zustand store for it. TanStack Query's own cache mechanism (`staleTime`, `gcTime`) minimizes request count, so no manual sync loop is needed. Set an appropriate `staleTime` (e.g. 30s), and only call `invalidateQueries` after a mutation succeeds.
 
-### Favorites — Set pattern
+### Favorites — server-driven, no store
 
-`favorites.store.ts` holds product IDs as a `Set<string>` for O(1) `has()` checks. `isFavorite` is not stored as a separate field — it's computed on the fly inside `ProductCard`. `toggleFavorite` adds/removes based on current Set state.
+Like basket, favorites are backed by real endpoints (`FAVORITE_TOGGLE`, `FAVORITES_LIST`) and managed entirely through TanStack Query — no Zustand store. `isFavorite` is not stored as a separate field — it's computed on the fly (`useIsFavorite(id)`) from the `['favorites']` query cache. `useToggleFavorite` uses an optimistic `onMutate` (cancel + snapshot + remove-if-present) with rollback in `onError`, and invalidates in `onSettled`, same as the basket convention.
 
 ### Product detail — bottom sheet, not a screen
 
@@ -131,6 +133,15 @@ Opens from `features/profile/screens/` as a bottom sheet, but the sheet itself l
 ### Shared apiFetch — same pattern as the admin panel
 
 The admin panel's 3-layer architecture (shared `apiFetch` + feature `service` + feature `hooks`) continues unchanged here. The only difference: the interceptor reads the token from Zustand via MMKV (the admin panel reads directly from Zustand).
+
+### TanStack Query — consumption conventions
+
+- **`isPending` vs `isFetching`**: `isPending` = no data yet (initial load, full-screen loader). `isFetching` = any fetch in flight, including background refetch — use `isFetching` (not `isLoading`) for `RefreshControl`'s `refreshing` prop.
+- **`enabled`**: gate queries that depend on other data/auth (e.g. don't fetch basket without a `token`, don't fetch product detail without an `id`).
+- **`useInfiniteQuery`**: use for paginated product lists per category (`FlatList` + `onEndReached`) instead of plain `useQuery`.
+- **Optimistic updates**: for mutations that must feel instant (basket add/remove), use `onMutate` (cancel + snapshot + optimistic `setQueryData`) with rollback in `onError`; call `invalidateQueries` in `onSettled` only.
+- **`placeholderData: keepPreviousData`**: use when switching category/filter so the list doesn't flash empty before refilling.
+- **Global error handling**: 401s are caught centrally (axios response interceptor or `QueryCache`/`MutationCache` `onError`) to trigger logout — not per-hook `try/catch`.
 
 ## Known risks (from admin panel experience)
 

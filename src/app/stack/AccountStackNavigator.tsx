@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator<AccountStackParamList>();
 
 const AccountStackNavigator = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Account" component={AccountScreen} />
         <Stack.Screen name="AccountInfo" component={AccountInfoScreen} />
