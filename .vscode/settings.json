@@ -1,0 +1,7 @@
+{
+  "i18n-ally.localesPaths": [
+    "src/shared/lib/i18n",
+    "src/shared/lib/i18n/locales"
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
+}

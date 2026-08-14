@@ -1,3 +1,4 @@
+import '../shared/lib/i18n';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppProviders from './providers/AppProviders';
