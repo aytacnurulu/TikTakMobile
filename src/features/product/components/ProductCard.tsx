@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import Card from '../../../shared/components/Card';
 
 const ProductCard = () => {
   return (
-    <View>
+    <Card>
       <Text>ProductCard</Text>
-    </View>
+    </Card>
   );
 };
 
