@@ -1,5 +1,143 @@
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { AuthStackParamList } from '../../../app/stack/types';
+import { useTheme } from '../../../shared/hooks/useTheme';
+import {
+  gapVertical,
+  pixelFont,
+  pixelHeight,
+  pixelWidth,
+} from '../../../shared/utils/metrics';
+import Input from '../../../shared/components/Input';
+import Button from '../../../shared/components/Button';
+import { useLogin } from '../hooks/auth.hooks';
+import { LoginPayload } from '../types/auth.types';
+import { ApiErrorResponse } from '../../../shared/types/api-response.type';
+
+type LoginScreenNavigationProp = NativeStackNavigationProp<
+  AuthStackParamList,
+  'Login'
+>;
+
+const loginSchema = Yup.object({
+  phone: Yup.string().required('Telefon nömrəsi tələb olunur'),
+  password: Yup.string()
+    .min(6, 'Parol ən azı 6 simvol olmalıdır')
+    .required('Parol tələb olunur'),
+});
+
 const LoginScreen = () => {
-  return null;
+  const { colors } = useTheme();
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const { mutate, isPending, error } = useLogin();
+
+  const errorMessage = axios.isAxiosError<ApiErrorResponse>(error)
+    ? error.response?.data?.message
+    : undefined;
+
+  return (
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
+      <Text style={[styles.title, { color: colors.textPrimary }]}>
+        Daxil ol
+      </Text>
+
+      <Formik<LoginPayload>
+        initialValues={{ phone: '', password: '' }}
+        validationSchema={loginSchema}
+        onSubmit={values => mutate(values)}
+      >
+        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+          <View style={styles.form}>
+            <Input
+              label="Telefon"
+              placeholder="telefon"
+              value={values.phone}
+              onChangeText={handleChange('phone')}
+              onBlur={handleBlur('phone')}
+              keyboardType="phone-pad"
+              error={touched.phone ? errors.phone : undefined}
+            />
+            <Input
+              label="Parol"
+              placeholder="parol"
+              value={values.password}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              secureTextEntry
+              error={touched.password ? errors.password : undefined}
+            />
+
+            {errorMessage ? (
+              <Text style={styles.apiError}>{errorMessage}</Text>
+            ) : null}
+
+            <Button
+              title="Daxil ol"
+              onPress={() => handleSubmit()}
+              loading={isPending}
+              style={styles.submitButton}
+            />
+          </View>
+        )}
+      </Formik>
+
+      <View style={styles.footer}>
+        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
+          Hesabınız yoxdursa{' '}
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <Text style={[styles.footerLink, { color: colors.primary }]}>
+            Qeydiyyatdan keç
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: pixelWidth(24),
+  },
+  title: {
+    fontSize: pixelFont(24),
+    fontWeight: '700',
+    textAlign: 'center',
+    marginTop: pixelHeight(120),
+    marginBottom: pixelHeight(40),
+  },
+  form: {
+    gap: gapVertical(20),
+  },
+  submitButton: {
+    marginTop: pixelHeight(12),
+  },
+  apiError: {
+    fontSize: pixelFont(13),
+    color: '#E5484D',
+    textAlign: 'center',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: pixelHeight(16),
+  },
+  footerText: {
+    fontSize: pixelFont(13),
+  },
+  footerLink: {
+    fontSize: pixelFont(13),
+    fontWeight: '600',
+  },
+});
 
 export default LoginScreen;

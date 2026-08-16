@@ -9,7 +9,11 @@ import {
 import { useTheme } from '../hooks/useTheme';
 import { gapVertical, pixelFont, pixelHeight, pixelWidth } from '../utils/metrics';
 
-interface InputProps extends Pick<TextInputProps, 'secureTextEntry' | 'multiline'> {
+interface InputProps
+  extends Pick<
+    TextInputProps,
+    'secureTextEntry' | 'multiline' | 'keyboardType' | 'onBlur'
+  > {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
@@ -24,6 +28,8 @@ const Input = ({
   placeholder,
   secureTextEntry,
   multiline,
+  keyboardType,
+  onBlur,
   error,
 }: InputProps) => {
   const { colors } = useTheme();
@@ -34,10 +40,12 @@ const Input = ({
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        onBlur={onBlur}
         placeholder={placeholder}
         placeholderTextColor={colors.textPlaceholder}
         secureTextEntry={secureTextEntry}
         multiline={multiline}
+        keyboardType={keyboardType}
         style={[
           styles.input,
           { backgroundColor: colors.surface, color: colors.textPrimary },
