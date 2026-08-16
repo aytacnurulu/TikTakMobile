@@ -6,29 +6,22 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../../../app/stack/types';
 import { useCategories } from '../hooks/category.hooks';
 import { Category } from '../types/category.types';
-
+import Card from '../../../shared/components/Card';
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
   'Home'
 >;
 
 const HomeScreen = () => {
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
-      <Text>Sample Text</Text>
+      <Card>
+        <Text>Sample Card</Text>
+      </Card>
+      <Card>
+        <Text>Sample Card</Text>
+      </Card>
+     
     </SafeAreaView>
   );
 };
