@@ -5,7 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { DevToolsBubble } from 'react-native-react-query-devtools';
-import { queryClient } from '../../shared/lib/query-client';
+import { queryClient } from '@/shared/lib/query-client';
 
 interface AppProvidersProps {
   children: React.ReactNode;

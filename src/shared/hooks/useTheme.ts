@@ -1,5 +1,5 @@
-import { useThemeStore } from '../../features/settings/store/theme.store';
-import { lightColors, darkColors } from '../constants/theme.constants';
+import { useThemeStore } from '@/features/settings/store/theme.store';
+import { lightColors, darkColors } from '@/shared/constants/theme.constants';
 
 export const useTheme = () => {
   const theme = useThemeStore(state => state.theme);

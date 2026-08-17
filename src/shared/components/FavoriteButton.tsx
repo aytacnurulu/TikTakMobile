@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { pixelWidth } from '../utils/metrics';
-import HeartIcon from '../icons/heart.svg';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelWidth } from '@/shared/utils/metrics';
+import HeartIcon from '@/shared/icons/heart.svg';
 
 interface FavoriteButtonProps {
   isFavorite: boolean;

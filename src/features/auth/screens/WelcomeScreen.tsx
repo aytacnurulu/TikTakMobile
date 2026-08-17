@@ -3,16 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../../../app/stack/types';
-import { useTheme } from '../../../shared/hooks/useTheme';
+import { AuthStackParamList } from '@/app/stack/types';
+import { useTheme } from '@/shared/hooks/useTheme';
 import {
   gapVertical,
   pixelFont,
   pixelHeight,
   pixelWidth,
-} from '../../../shared/utils/metrics';
-import Button from '../../../shared/components/Button';
-import FruitIcon from '../../../shared/icons/fruit.svg';
+} from '@/shared/utils/metrics';
+import Button from '@/shared/components/Button';
+import FruitIcon from '@/shared/icons/fruit.svg';
 
 type WelcomeScreenNavigationProp = NativeStackNavigationProp<
   AuthStackParamList,

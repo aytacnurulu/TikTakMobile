@@ -1,11 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAuthStore } from '../../features/auth/store/auth.store';
-import AuthNavigator from './AuthNavigator';
-import MainTabNavigator from './MainTabNavigator';
-import BasketScreen from '../../features/basket/screens/BasketScreen';
-import CheckoutScreen from '../../features/basket/screens/CheckoutScreen';
-import OrderSuccessScreen from '../../features/basket/screens/OrderSuccessScreen';
-import { RootStackParamList } from './types';
+import { useAuthStore } from '@/features/auth/store/auth.store';
+import AuthNavigator from '@/app/stack/AuthNavigator';
+import MainTabNavigator from '@/app/stack/MainTabNavigator';
+import BasketScreen from '@/features/basket/screens/BasketScreen';
+import CheckoutScreen from '@/features/basket/screens/CheckoutScreen';
+import OrderSuccessScreen from '@/features/basket/screens/OrderSuccessScreen';
+import { RootStackParamList } from '@/app/stack/types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
