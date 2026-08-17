@@ -5,7 +5,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
 import { useCategories } from '@/features/home/hooks/category.hooks';
-import { Category } from '@/features/home/types/category.types';
+import { Category } from '@/shared/types/category.type';
 import HomeHeader from '@/shared/components/HomeHeader';
 import DeliveryAddressCard from '@/features/home/components/DeliveryAddressCard';
 import PromoBanner from '@/features/home/components/PromoBanner';

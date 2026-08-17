@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
-import { Category } from '@/features/home/types/category.types';
+import { Category } from '@/shared/types/category.type';
 
 type CategoryCardNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,

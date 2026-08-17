@@ -5,6 +5,10 @@ import { Basket } from '@/features/basket/types/basket.types';
 
 export const basketService = {
   getBasket: () => apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.LIST),
-  addToBasket: async () => {},
-  removeFromBasket: async () => {},
+  addToBasket: (productId: number) =>
+    apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.ADD(productId), { method: 'POST' }),
+  removeFromBasket: (productId: number) =>
+    apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.REMOVE(productId), { method: 'POST' }),
+  removeAllFromBasket: (productId: number) =>
+    apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.REMOVE_ALL(productId), { method: 'POST' }),
 };

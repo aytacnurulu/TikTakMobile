@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import MinusIcon from '@/shared/icons/minus.svg';
@@ -11,6 +11,7 @@ interface QuantityStepperProps {
   onIncrement: () => void;
   onDecrement: () => void;
   min?: number;
+  style?: ViewStyle;
 }
 
 const QuantityStepper = ({
@@ -18,12 +19,13 @@ const QuantityStepper = ({
   onIncrement,
   onDecrement,
   min = 1,
+  style,
 }: QuantityStepperProps) => {
   const { colors } = useTheme();
   const atMin = value === min;
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.primary }]}>
+    <View style={[styles.container, { backgroundColor: colors.primary }, style]}>
       <TouchableOpacity
         onPress={onDecrement}
         style={styles.button}

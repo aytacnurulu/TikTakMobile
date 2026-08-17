@@ -1,4 +1,7 @@
-import { Category } from '@/features/home/types/category.types';
+export interface ProductCategory {
+  id: number;
+  name: string;
+}
 
 export interface Product {
   id: number;
@@ -8,5 +11,21 @@ export interface Product {
   price: string;
   type: string;
   created_at: string;
-  category: Category;
+  category: ProductCategory;
+  is_favorite?: boolean;
+}
+
+export interface ProductPagination {
+  next: number | null;
+  prev: number | null;
+  current: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface ProductListResponse {
+  message: string;
+  data: Product[];
+  pagination: ProductPagination;
+  result: boolean;
 }
