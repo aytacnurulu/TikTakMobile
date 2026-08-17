@@ -106,13 +106,13 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: pixelWidth(24),
   },
   title: {
     fontSize: pixelFont(24),
     fontWeight: '700',
     textAlign: 'center',
-    marginTop: pixelHeight(120),
     marginBottom: pixelHeight(40),
   },
   form: {

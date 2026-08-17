@@ -61,11 +61,11 @@ const WelcomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: pixelWidth(24),
   },
   illustrationWrapper: {
     alignItems: 'center',
-    marginTop: pixelHeight(80),
   },
   content: {
     marginTop: pixelHeight(48),
