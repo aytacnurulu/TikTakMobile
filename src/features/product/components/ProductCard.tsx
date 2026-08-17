@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import Card from '../../../shared/components/Card';
+import Card from '@/shared/components/Card';
 
 const ProductCard = () => {
   return (

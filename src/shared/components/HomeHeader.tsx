@@ -1,21 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CompositeNavigationProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList, RootStackParamList } from '../../../app/stack/types';
-import { useTheme } from '../../../shared/hooks/useTheme';
-import { pixelFont, pixelHeight, pixelWidth } from '../../../shared/utils/metrics';
-import { useBasket } from '../../basket/hooks/basket.hooks';
-import BasketIcon from '../../../shared/icons/basket.svg';
-
-type HomeHeaderNavigationProp = CompositeNavigationProp<
-  NativeStackNavigationProp<HomeStackParamList, 'Home'>,
-  NativeStackNavigationProp<RootStackParamList>
->;
+import { RootStackParamList } from '@/app/stack/types';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { useBasket } from '@/features/basket/hooks/basket.hooks';
+import BasketIcon from '@/shared/icons/basket.svg';
 
 const HomeHeader = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<HomeHeaderNavigationProp>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data } = useBasket();
   const count = data?.data.count ?? 0;
 

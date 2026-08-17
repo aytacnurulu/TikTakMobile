@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { pixelFont, pixelHeight, pixelWidth } from '../utils/metrics';
-import MinusIcon from '../icons/minus.svg';
-import PlusIcon from '../icons/plus.svg';
-import TrashIcon from '../icons/trash.svg';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import MinusIcon from '@/shared/icons/minus.svg';
+import PlusIcon from '@/shared/icons/plus.svg';
+import TrashIcon from '@/shared/icons/trash.svg';
 
 interface QuantityStepperProps {
   value: number;

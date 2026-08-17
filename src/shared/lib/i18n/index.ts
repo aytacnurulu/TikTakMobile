@@ -1,9 +1,9 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { useLocaleStore } from '../../../features/settings/store/locale.store';
-import az from './locales/az.json';
-import en from './locales/en.json';
-import ru from './locales/ru.json';
+import { useLocaleStore } from '@/features/settings/store/locale.store';
+import az from '@/shared/lib/i18n/locales/az.json';
+import en from '@/shared/lib/i18n/locales/en.json';
+import ru from '@/shared/lib/i18n/locales/ru.json';
 
 i18n.use(initReactI18next).init({
   resources: {

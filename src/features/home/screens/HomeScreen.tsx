@@ -1,15 +1,15 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '../../../shared/hooks/useTheme';
-import { pixelWidth } from '../../../shared/utils/metrics';
-import EmptyState from '../../../shared/components/EmptyState';
-import { useCategories } from '../hooks/category.hooks';
-import { Category } from '../types/category.types';
-import HomeHeader from '../components/HomeHeader';
-import DeliveryAddressCard from '../components/DeliveryAddressCard';
-import PromoBanner from '../components/PromoBanner';
-import CategoryCard from '../components/CategoryCard';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelWidth } from '@/shared/utils/metrics';
+import EmptyState from '@/shared/components/EmptyState';
+import { useCategories } from '@/features/home/hooks/category.hooks';
+import { Category } from '@/features/home/types/category.types';
+import HomeHeader from '@/shared/components/HomeHeader';
+import DeliveryAddressCard from '@/features/home/components/DeliveryAddressCard';
+import PromoBanner from '@/features/home/components/PromoBanner';
+import CategoryCard from '@/features/home/components/CategoryCard';
 
 const renderCategory = ({ item }: { item: Category }) => (
   <CategoryCard category={item} />

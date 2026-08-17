@@ -1,7 +1,7 @@
 // api/axios.instance.ts
 import Config from 'react-native-config';
 import axios from 'axios';
-import { useAuthStore } from '../../features/auth/store/auth.store';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 
 export const axiosInstance = axios.create({
   baseURL: Config.API_BASE_URL,

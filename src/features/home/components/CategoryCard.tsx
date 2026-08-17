@@ -2,10 +2,10 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from '../../../app/stack/types';
-import { useTheme } from '../../../shared/hooks/useTheme';
-import { pixelFont, pixelHeight, pixelWidth } from '../../../shared/utils/metrics';
-import { Category } from '../types/category.types';
+import { HomeStackParamList } from '@/app/stack/types';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { Category } from '@/features/home/types/category.types';
 
 type CategoryCardNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,

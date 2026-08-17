@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { basketService } from '../services/basket.service';
-import { useAuthStore } from '../../auth/store/auth.store';
+import { basketService } from '@/features/basket/services/basket.service';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 
 export const useBasket = () => {
   const token = useAuthStore(state => state.token);

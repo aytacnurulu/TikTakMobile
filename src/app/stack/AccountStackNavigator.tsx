@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AccountScreen from '../../features/profile/screens/AccountScreen';
-import AccountInfoScreen from '../../features/profile/screens/AccountInfoScreen';
-import OrderHistoryScreen from '../../features/profile/screens/OrderHistoryScreen';
-import OrderHistoryDetailScreen from '../../features/profile/screens/OrderHistoryDetailScreen';
-import FavoritesScreen from '../../features/favorites/screens/FavoritesScreen';
-import { AccountStackParamList } from './types';
+import AccountScreen from '@/features/profile/screens/AccountScreen';
+import AccountInfoScreen from '@/features/profile/screens/AccountInfoScreen';
+import OrderHistoryScreen from '@/features/profile/screens/OrderHistoryScreen';
+import OrderHistoryDetailScreen from '@/features/profile/screens/OrderHistoryDetailScreen';
+import FavoritesScreen from '@/features/favorites/screens/FavoritesScreen';
+import { AccountStackParamList } from '@/app/stack/types';
 
 const Stack = createNativeStackNavigator<AccountStackParamList>();
 

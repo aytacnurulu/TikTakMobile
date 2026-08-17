@@ -8,11 +8,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import { deviceWidth, gapHorizontal, pixelFont, pixelHeight, pixelWidth } from '../../../shared/utils/metrics';
-import { useTheme } from '../../../shared/hooks/useTheme';
-import { useCampaigns } from '../hooks/campaign.hooks';
-import { Campaign } from '../types/campaign.types';
-import { ThemeColors } from '../../../shared/constants/theme.constants';
+import { deviceWidth, gapHorizontal, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { useCampaigns } from '@/features/home/hooks/campaign.hooks';
+import { Campaign } from '@/features/home/types/campaign.types';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 
 const HORIZONTAL_PADDING = pixelWidth(16);
 const BANNER_WIDTH = deviceWidth - HORIZONTAL_PADDING * 2;

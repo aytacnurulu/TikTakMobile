@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeStackNavigator from './HomeStackNavigator';
-import SearchScreen from '../../features/search/screens/SearchScreen';
-import AccountStackNavigator from './AccountStackNavigator';
-import { MainTabParamList } from './types';
-import HomeIcon from '../../shared/icons/home.svg';
-import SearchIcon from '../../shared/icons/search.svg';
-import AccountIcon from '../../shared/icons/account.svg';
+import HomeStackNavigator from '@/app/stack/HomeStackNavigator';
+import SearchScreen from '@/features/search/screens/SearchScreen';
+import AccountStackNavigator from '@/app/stack/AccountStackNavigator';
+import { MainTabParamList } from '@/app/stack/types';
+import HomeIcon from '@/shared/icons/home.svg';
+import SearchIcon from '@/shared/icons/search.svg';
+import AccountIcon from '@/shared/icons/account.svg';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 

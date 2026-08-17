@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useTheme } from '../../../shared/hooks/useTheme';
-import { gapVertical, pixelFont, pixelWidth } from '../../../shared/utils/metrics';
-import { useAuthStore } from '../../auth/store/auth.store';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { gapVertical, pixelFont, pixelWidth } from '@/shared/utils/metrics';
+import { useAuthStore } from '@/features/auth/store/auth.store';
 
 const DeliveryAddressCard = () => {
   const { colors } = useTheme();

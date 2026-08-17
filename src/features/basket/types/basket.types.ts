@@ -1,4 +1,4 @@
-import { Product } from '../../product/types/product.types';
+import { Product } from '@/features/product/types/product.types';
 
 export interface BasketItem {
   id: number;

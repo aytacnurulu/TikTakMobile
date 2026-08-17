@@ -1,4 +1,4 @@
-import { Category } from '../../home/types/category.types';
+import { Category } from '@/features/home/types/category.types';
 
 export interface Product {
   id: number;
