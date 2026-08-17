@@ -15,7 +15,7 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   leftIcon?: React.ReactNode;
-  variant?: 'primary';
+  variant?: 'primary' | 'text';
   style?: ViewStyle;
 }
 
@@ -25,15 +25,17 @@ const Button = ({
   disabled,
   loading,
   leftIcon,
+  variant = 'primary',
   style,
 }: ButtonProps) => {
   const { colors } = useTheme();
+  const isText = variant === 'text';
 
   return (
     <TouchableOpacity
       style={[
-        styles.container,
-        { backgroundColor: colors.primary },
+        isText ? styles.textContainer : styles.container,
+        !isText && { backgroundColor: colors.primary },
         disabled && styles.disabled,
         style,
       ]}
@@ -42,11 +44,16 @@ const Button = ({
       activeOpacity={0.8}
     >
       {loading ? (
-        <ActivityIndicator color={colors.textOnPrimary} />
+        <ActivityIndicator color={isText ? colors.primary : colors.textOnPrimary} />
       ) : (
         <>
           {leftIcon}
-          <Text style={[styles.title, { color: colors.textOnPrimary }]}>
+          <Text
+            style={[
+              isText ? styles.textTitle : styles.title,
+              { color: isText ? colors.primary : colors.textOnPrimary },
+            ]}
+          >
             {title}
           </Text>
         </>
@@ -65,11 +72,19 @@ const styles = StyleSheet.create({
     borderRadius: pixelWidth(12),
     width: '100%',
   },
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   disabled: {
     opacity: 0.5,
   },
   title: {
     fontSize: pixelFont(15),
+    fontWeight: '600',
+  },
+  textTitle: {
+    fontSize: pixelFont(13),
     fontWeight: '600',
   },
 });

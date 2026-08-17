@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -93,11 +93,11 @@ const LoginScreen = () => {
         <Text style={[styles.footerText, { color: colors.textSecondary }]}>
           Hesabınız yoxdursa{' '}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={[styles.footerLink, { color: colors.primary }]}>
-            Qeydiyyatdan keç
-          </Text>
-        </TouchableOpacity>
+        <Button
+          variant="text"
+          title="Qeydiyyatdan keç"
+          onPress={() => navigation.navigate('Signup')}
+        />
       </View>
     </SafeAreaView>
   );
@@ -106,13 +106,13 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     paddingHorizontal: pixelWidth(24),
   },
   title: {
     fontSize: pixelFont(24),
     fontWeight: '700',
     textAlign: 'center',
-    marginTop: pixelHeight(120),
     marginBottom: pixelHeight(40),
   },
   form: {
@@ -133,10 +133,6 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: pixelFont(13),
-  },
-  footerLink: {
-    fontSize: pixelFont(13),
-    fontWeight: '600',
   },
 });
 
