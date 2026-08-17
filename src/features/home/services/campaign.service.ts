@@ -1,9 +1,9 @@
 import { apiFetch } from '../../../shared/lib/api-fetch';
 import { API } from '../../../shared/constants/api.constants';
 import { ApiResponse } from '../../../shared/types/api-response.type';
-import { Category } from '../types/category.types';
+import { Campaign } from '../types/campaign.types';
 
-export const categoryService = {
-  getCategories: () =>
-    apiFetch<ApiResponse<Category[]>>(API.CLIENT.CATEGORY.LIST),
+export const campaignService = {
+  getCampaigns: () =>
+    apiFetch<ApiResponse<Campaign[]>>(API.CLIENT.CAMPAIGN.LIST),
 };
