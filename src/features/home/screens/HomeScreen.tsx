@@ -1,5 +1,7 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet, Text } from 'react-native';
+import {  FlatList, Pressable, StyleSheet, Text } from 'react-native';
+import Button from '../../../shared/components/Button';
+import { useLogout } from '../../auth/hooks/auth.hooks';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -13,6 +15,7 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 const HomeScreen = () => {
+  const logout = useLogout();
   return (
     <SafeAreaView style={styles.container}>
       <Card>
@@ -21,7 +24,7 @@ const HomeScreen = () => {
       <Card>
         <Text>Sample Card</Text>
       </Card>
-     
+      <Button title="Logout" onPress={logout} />
     </SafeAreaView>
   );
 };
