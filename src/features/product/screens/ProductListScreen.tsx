@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
@@ -11,12 +11,13 @@ import { useProducts } from '@/features/product/hooks/product.hooks';
 import { Product } from '@/features/product/types/product.types';
 import { Category } from '@/shared/types/category.type';
 import ProductCard from '@/features/product/components/ProductCard';
+import ProductDetailSheet, {
+  ProductDetailSheetRef,
+} from '@/features/product/components/ProductDetailSheet';
 import CategoriesBanner from '@/features/product/components/CategoriesBanner';
 import CategoryChips from '@/features/product/components/CategoryChips';
 
 type ProductListScreenRouteProp = RouteProp<HomeStackParamList, 'Products'>;
-
-const renderProduct = ({ item }: { item: Product }) => <ProductCard product={item} />;
 
 const ProductListScreen = () => {
   const { params } = useRoute<ProductListScreenRouteProp>();
@@ -25,11 +26,19 @@ const ProductListScreen = () => {
     id: params.categoryId,
     name: params.categoryName,
   });
+  const sheetRef = useRef<ProductDetailSheetRef>(null);
 
   const { data, isPending, isFetchingNextPage, fetchNextPage, hasNextPage } = useProducts(
     selectedCategory.id,
   );
   const products = data?.pages.flatMap(page => page.data) ?? [];
+
+  const renderProduct = useCallback(
+    ({ item }: { item: Product }) => (
+      <ProductCard product={item} onPress={() => sheetRef.current?.open(item)} />
+    ),
+    [],
+  );
 
   return (
     <SafeAreaView
@@ -64,6 +73,8 @@ const ProductListScreen = () => {
           }
         />
       )}
+
+      <ProductDetailSheet ref={sheetRef} />
     </SafeAreaView>
   );
 };

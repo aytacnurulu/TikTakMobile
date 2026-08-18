@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/features/settings/store/locale.store';
 import { deviceWidth, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
@@ -16,6 +16,7 @@ import { Product } from '@/features/product/types/product.types';
 
 interface ProductCardProps {
   product: Product;
+  onPress?: () => void;
 }
 
 // Fixed 2-column grid: screen padding (16) on each edge + card margin (6) on
@@ -30,7 +31,7 @@ const CARD_HEIGHT = pixelHeight(260);
 // replaces the other.
 const ACTION_HEIGHT = pixelHeight(38);
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const { colors } = useTheme();
   const locale = useLocaleStore(state => state.locale);
   const { data } = useBasket();
@@ -42,17 +43,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Card style={styles.card}>
-      <Image source={{ uri: product.img_url }} style={styles.image} />
-      <Text
-        style={[styles.title, { color: colors.textPrimary }]}
-        numberOfLines={2}
-        ellipsizeMode="tail"
-      >
-        {product.title}
-      </Text>
-      <Text style={[styles.price, { color: colors.textPrimary }]}>
-        {formatPrice(product.price, locale)}
-      </Text>
+      <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+        <Image source={{ uri: product.img_url }} style={styles.image} />
+        <Text
+          style={[styles.title, { color: colors.textPrimary }]}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        >
+          {product.title}
+        </Text>
+        <Text style={[styles.price, { color: colors.textPrimary }]}>
+          {formatPrice(product.price, locale)}
+        </Text>
+      </TouchableOpacity>
 
       {basketItem ? (
         <QuantityStepper
