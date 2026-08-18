@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   action: {
     width: '100%',
     height: ACTION_HEIGHT,
+    paddingVertical: 0,
   },
 });
 
