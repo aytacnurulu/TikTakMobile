@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { gapVertical, pixelFont, pixelWidth } from '../utils/metrics';
-import CloseIcon from '../icons/close.svg';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { gapVertical, pixelFont, pixelWidth } from '@/shared/utils/metrics';
+import CloseIcon from '@/shared/icons/close.svg';
 
 interface EmptyStateProps {
   message: string;

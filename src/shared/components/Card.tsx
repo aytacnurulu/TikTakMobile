@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { pixelWidth } from '../utils/metrics';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelWidth } from '@/shared/utils/metrics';
 
 interface CardProps {
   children: React.ReactNode;

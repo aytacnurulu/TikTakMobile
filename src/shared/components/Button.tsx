@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { pixelFont, pixelHeight, pixelWidth } from '../utils/metrics';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 interface ButtonProps {
   title: string;

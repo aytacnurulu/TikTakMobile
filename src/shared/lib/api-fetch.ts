@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { axiosInstance } from './axios';
+import { axiosInstance } from '@/shared/lib/axios';
 
 export const apiFetch = async <T>(
   url: string,

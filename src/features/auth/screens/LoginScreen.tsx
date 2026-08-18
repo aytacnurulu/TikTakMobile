@@ -6,19 +6,19 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { AuthStackParamList } from '../../../app/stack/types';
-import { useTheme } from '../../../shared/hooks/useTheme';
+import { AuthStackParamList } from '@/app/stack/types';
+import { useTheme } from '@/shared/hooks/useTheme';
 import {
   gapVertical,
   pixelFont,
   pixelHeight,
   pixelWidth,
-} from '../../../shared/utils/metrics';
-import Input from '../../../shared/components/Input';
-import Button from '../../../shared/components/Button';
-import { useLogin } from '../hooks/auth.hooks';
-import { LoginPayload } from '../types/auth.types';
-import { ApiErrorResponse } from '../../../shared/types/api-response.type';
+} from '@/shared/utils/metrics';
+import Input from '@/shared/components/Input';
+import Button from '@/shared/components/Button';
+import { useLogin } from '@/features/auth/hooks/auth.hooks';
+import { LoginPayload } from '@/features/auth/types/auth.types';
+import { ApiErrorResponse } from '@/shared/types/api-response.type';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
   AuthStackParamList,

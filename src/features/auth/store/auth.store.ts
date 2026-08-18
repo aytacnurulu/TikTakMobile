@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { zustandMmkvStorage } from '../../../shared/lib/localStorage';
-import { AuthTokens, User } from '../types/auth.types';
+import { zustandMmkvStorage } from '@/shared/lib/localStorage';
+import { AuthTokens, User } from '@/features/auth/types/auth.types';
 
 interface AuthStore {
   token: string | null;

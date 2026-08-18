@@ -6,8 +6,8 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { gapVertical, pixelFont, pixelHeight, pixelWidth } from '../utils/metrics';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { gapVertical, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 interface InputProps
   extends Pick<

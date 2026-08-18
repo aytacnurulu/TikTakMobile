@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useTheme } from '../hooks/useTheme';
-import { gapHorizontal, pixelFont, pixelHeight, pixelWidth } from '../utils/metrics';
-import ChevronLeftIcon from '../icons/chevron-left.svg';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { gapHorizontal, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import ChevronLeftIcon from '@/shared/icons/chevron-left.svg';
 
 interface ScreenHeaderProps {
   title: string;
