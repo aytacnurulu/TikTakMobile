@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
-import { useTheme } from '@/shared/hooks/useTheme';
-import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { StyleSheet, View, ViewStyle } from 'react-native';
+import { pixelWidth } from '@/shared/utils/metrics';
+import Button from '@/shared/components/Button';
 import MinusIcon from '@/shared/icons/minus.svg';
 import PlusIcon from '@/shared/icons/plus.svg';
 import TrashIcon from '@/shared/icons/trash.svg';
@@ -14,6 +14,10 @@ interface QuantityStepperProps {
   style?: ViewStyle;
 }
 
+const HIT_SLOP = { top: 8, bottom: 8, left: 8, right: 8 };
+const DECREMENT_COLOR = 'rgba(242, 146, 152, 1)';
+const INCREMENT_COLOR = 'rgba(118, 203, 79, 1)';
+
 const QuantityStepper = ({
   value,
   onIncrement,
@@ -21,30 +25,31 @@ const QuantityStepper = ({
   min = 1,
   style,
 }: QuantityStepperProps) => {
-  const { colors } = useTheme();
   const atMin = value === min;
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.primary }, style]}>
-      <TouchableOpacity
+    <View style={[styles.container, style]}>
+      <Button
         onPress={onDecrement}
-        style={styles.button}
-        activeOpacity={0.8}
-      >
-        {atMin ? (
-          <TrashIcon width={pixelWidth(13)} height={pixelWidth(13)} />
-        ) : (
-          <MinusIcon width={pixelWidth(13)} height={pixelWidth(4)} />
-        )}
-      </TouchableOpacity>
-      <Text style={[styles.value, { color: colors.textOnPrimary }]}>{value}</Text>
-      <TouchableOpacity
+        hitSlop={HIT_SLOP}
+        backgroundColor={DECREMENT_COLOR}
+        leftIcon={
+          atMin ? (
+            <TrashIcon width={pixelWidth(13)} height={pixelWidth(13)} />
+          ) : (
+            <MinusIcon width={pixelWidth(13)} height={pixelWidth(4)} />
+          )
+        }
+        style={styles.decrementButton}
+      />
+      <Button
         onPress={onIncrement}
-        style={styles.button}
-        activeOpacity={0.8}
-      >
-        <PlusIcon width={pixelWidth(13)} height={pixelWidth(13)} />
-      </TouchableOpacity>
+        hitSlop={HIT_SLOP}
+        backgroundColor={INCREMENT_COLOR}
+        title={String(value)}
+        leftIcon={<PlusIcon width={pixelWidth(13)} height={pixelWidth(13)} />}
+        style={styles.incrementButton}
+      />
     </View>
   );
 };
@@ -53,20 +58,21 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: pixelWidth(20),
-    paddingHorizontal: pixelWidth(6),
-    paddingVertical: pixelHeight(4),
-    minWidth: pixelWidth(90),
+    gap: pixelWidth(8),
   },
-  button: {
-    paddingHorizontal: pixelWidth(6),
-    alignItems: 'center',
-    justifyContent: 'center',
+  decrementButton: {
+    width: undefined,
+    aspectRatio: 1,
+    height: '100%',
+    paddingVertical: 0,
+    borderRadius: pixelWidth(10),
   },
-  value: {
-    fontSize: pixelFont(14),
-    fontWeight: '600',
+  incrementButton: {
+    width: undefined,
+    flex: 1,
+    height: '100%',
+    paddingVertical: 0,
+    borderRadius: pixelWidth(10),
   },
 });
 
