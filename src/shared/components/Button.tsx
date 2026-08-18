@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  Insets,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,12 +11,14 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 interface ButtonProps {
-  title: string;
+  title?: string;
   onPress: () => void;
   disabled?: boolean;
   loading?: boolean;
   leftIcon?: React.ReactNode;
   variant?: 'primary' | 'text';
+  backgroundColor?: string;
+  hitSlop?: Insets;
   style?: ViewStyle;
 }
 
@@ -26,6 +29,8 @@ const Button = ({
   loading,
   leftIcon,
   variant = 'primary',
+  backgroundColor,
+  hitSlop,
   style,
 }: ButtonProps) => {
   const { colors } = useTheme();
@@ -35,12 +40,13 @@ const Button = ({
     <TouchableOpacity
       style={[
         isText ? styles.textContainer : styles.container,
-        !isText && { backgroundColor: colors.primary },
+        !isText && { backgroundColor: backgroundColor ?? colors.primary },
         disabled && styles.disabled,
         style,
       ]}
       onPress={onPress}
       disabled={disabled || loading}
+      hitSlop={hitSlop}
       activeOpacity={0.8}
     >
       {loading ? (
@@ -48,14 +54,16 @@ const Button = ({
       ) : (
         <>
           {leftIcon}
-          <Text
-            style={[
-              isText ? styles.textTitle : styles.title,
-              { color: isText ? colors.primary : colors.textOnPrimary },
-            ]}
-          >
-            {title}
-          </Text>
+          {title ? (
+            <Text
+              style={[
+                isText ? styles.textTitle : styles.title,
+                { color: isText ? colors.primary : colors.textOnPrimary },
+              ]}
+            >
+              {title}
+            </Text>
+          ) : null}
         </>
       )}
     </TouchableOpacity>

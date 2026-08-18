@@ -10,5 +10,6 @@ export const basketService = {
   removeFromBasket: (productId: number) =>
     apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.REMOVE(productId), { method: 'POST' }),
   removeAllFromBasket: (productId: number) =>
-    apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.REMOVE_ALL(productId), { method: 'POST' }),
+    apiFetch<ApiResponse<Basket>>(API.CLIENT.BASKET.REMOVE_ALL(productId), { method: 'DELETE' }),
 };
+                         
