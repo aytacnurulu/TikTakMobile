@@ -1,12 +1,12 @@
-import { apiFetch } from '../../../shared/lib/api-fetch';
-import { API } from '../../../shared/constants/api.constants';
-import { ApiResponse } from '../../../shared/types/api-response.type';
+import { apiFetch } from '@/shared/lib/api-fetch';
+import { API } from '@/shared/constants/api.constants';
+import { ApiResponse } from '@/shared/types/api-response.type';
 import {
   AuthResponseData,
   AuthTokens,
   LoginPayload,
   SignupPayload,
-} from '../types/auth.types';
+} from '@/features/auth/types/auth.types';
 
 export const authService = {
   login: (payload: LoginPayload) =>
