@@ -8,6 +8,7 @@ interface AuthStore {
   refreshToken: string | null;
   profile: User | null;
   login: (tokens: AuthTokens, profile: User) => void;
+  setTokens: (tokens: AuthTokens) => void;
   logout: () => void;
 }
 
@@ -22,6 +23,11 @@ export const useAuthStore = create<AuthStore>()(
           token: tokens.access_token,
           refreshToken: tokens.refresh_token,
           profile,
+        }),
+      setTokens: tokens =>
+        set({
+          token: tokens.access_token,
+          refreshToken: tokens.refresh_token,
         }),
       logout: () => set({ token: null, refreshToken: null, profile: null }),
     }),
