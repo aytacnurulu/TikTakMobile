@@ -65,7 +65,7 @@ const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
           <>
             <FavoriteButton
               isFavorite={isFavorite}
-              onToggle={() => toggleFavorite.mutate(product.id)}
+              onToggle={() => toggleFavorite.mutate(product)}
               size={22}
               style={styles.favoriteButton}
             />

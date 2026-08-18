@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { favoritesService } from '@/features/favorites/services/favorites.service';
 import { useAuthStore } from '@/features/auth/store/auth.store';
 import { FavoritesListResponse } from '@/features/favorites/types/favorites.types';
+import { Product } from '@/features/product/types/product.types';
 
 const FAVORITES_KEY = ['favorites'];
 
@@ -25,8 +26,8 @@ export const useToggleFavorite = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (productId: number) => favoritesService.toggleFavorite(productId),
-    onMutate: async (productId: number) => {
+    mutationFn: (product: Product) => favoritesService.toggleFavorite(product.id),
+    onMutate: async (product: Product) => {
       await queryClient.cancelQueries({ queryKey: FAVORITES_KEY });
       const previous = queryClient.getQueryData<FavoritesListResponse>(FAVORITES_KEY);
 
@@ -35,20 +36,19 @@ export const useToggleFavorite = () => {
           return current;
         }
 
-        const isFavorite = current.data.some(product => product.id === productId);
-        if (!isFavorite) {
-          return current;
-        }
+        const isFavorite = current.data.some(item => item.id === product.id);
 
         return {
           ...current,
-          data: current.data.filter(product => product.id !== productId),
+          data: isFavorite
+            ? current.data.filter(item => item.id !== product.id)
+            : [product, ...current.data],
         };
       });
 
       return { previous };
     },
-    onError: (_error, _productId, context) => {
+    onError: (_error, _product, context) => {
       if (context?.previous) {
         queryClient.setQueryData(FAVORITES_KEY, context.previous);
       }

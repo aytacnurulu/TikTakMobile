@@ -19,7 +19,7 @@ const FavoriteButton = ({ isFavorite, onToggle, size = 20, style }: FavoriteButt
       <HeartIcon
         width={pixelWidth(size)}
         height={pixelWidth(size)}
-        fill={isFavorite ? colors.primary : colors.textSecondary}
+        color={isFavorite ? colors.primary : colors.textSecondary}
       />
     </TouchableOpacity>
   );
