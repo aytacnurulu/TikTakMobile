@@ -3,7 +3,7 @@ export const API = {
     AUTH: {
       LOGIN: '/api/tiktak/auth/login',
       SIGNUP: '/api/tiktak/auth/signup',
-      VERIFY_OTP: '/api/tiktak/auth/refresh',
+      REFRESH: '/api/tiktak/auth/refresh',
     },
     PRODUCT: {
       LIST: '/api/tiktak/products',
