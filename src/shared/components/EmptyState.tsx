@@ -14,7 +14,7 @@ const EmptyState = ({ message, icon }: EmptyStateProps) => {
 
   return (
     <View style={styles.container}>
-      {icon ?? <CloseIcon width={pixelWidth(64)} height={pixelWidth(64)} />}
+      {icon ?? <CloseIcon width={pixelWidth(260)} height={pixelWidth(200)} />}
       <Text style={[styles.message, { color: colors.textPlaceholder }]}>
         {message}
       </Text>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    gap: gapVertical(12),
+    gap: gapVertical(38),
   },
   message: {
     fontSize: pixelFont(14),

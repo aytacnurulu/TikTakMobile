@@ -9,7 +9,7 @@ export interface Product {
   img_url: string;
   description: string;
   price: string;
-  type: string;
+  type?: string;
   created_at: string;
   category: ProductCategory;
   is_favorite?: boolean;

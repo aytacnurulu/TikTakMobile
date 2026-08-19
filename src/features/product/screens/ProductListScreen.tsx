@@ -16,6 +16,7 @@ import ProductDetailSheet, {
 } from '@/features/product/components/ProductDetailSheet';
 import CategoriesBanner from '@/features/product/components/CategoriesBanner';
 import CategoryChips from '@/features/product/components/CategoryChips';
+import CompleteOrderBanner from '@/features/product/components/CompleteOrderBanner';
 
 type ProductListScreenRouteProp = RouteProp<HomeStackParamList, 'Products'>;
 
@@ -65,7 +66,7 @@ const ProductListScreen = () => {
           contentContainerStyle={styles.listContent}
           onEndReached={() => hasNextPage && fetchNextPage()}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<EmptyState message="Məhsul tapılmadı" />}
+          ListEmptyComponent={<EmptyState  message="Məhsul tapılmadı" />}
           ListFooterComponent={
             isFetchingNextPage ? (
               <ActivityIndicator style={styles.footerLoader} color={colors.primary} />
@@ -75,6 +76,7 @@ const ProductListScreen = () => {
       )}
 
       <ProductDetailSheet ref={sheetRef} />
+      <CompleteOrderBanner />
     </SafeAreaView>
   );
 };
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   listContent: {
-    paddingBottom: pixelWidth(16),
+    paddingBottom: pixelWidth(90),
   },
   footerLoader: {
     marginVertical: pixelWidth(16),

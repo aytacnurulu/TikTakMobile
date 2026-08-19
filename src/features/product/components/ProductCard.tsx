@@ -2,7 +2,12 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/features/settings/store/locale.store';
-import { deviceWidth, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import {
+  deviceWidth,
+  pixelFont,
+  pixelHeight,
+  pixelWidth,
+} from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
 import Card from '@/shared/components/Card';
 import Button from '@/shared/components/Button';
@@ -23,13 +28,13 @@ interface ProductCardProps {
 // all 4 card edges across the row. A flex:1 card would stretch to fill the
 // row when the last row has an odd item out, so width must be computed, not flexible.
 const SCREEN_PADDING = pixelWidth(16);
-const CARD_MARGIN = pixelWidth(6);
+const CARD_MARGIN = pixelWidth(7);
 const CARD_WIDTH = (deviceWidth - SCREEN_PADDING * 2 - CARD_MARGIN * 4) / 2;
-const CARD_HEIGHT = pixelHeight(260);
+const CARD_HEIGHT = pixelHeight(210);
 // Add-to-basket Button and QuantityStepper swap in the same slot, so they
 // share one fixed size — otherwise the row's height/width shifts when one
 // replaces the other.
-const ACTION_HEIGHT = pixelHeight(38);
+const ACTION_HEIGHT = pixelHeight(32);
 
 const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const { colors } = useTheme();
@@ -38,7 +43,9 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const addToBasket = useAddToBasket();
   const removeFromBasket = useRemoveFromBasket();
 
-  const basketItem = data?.data.items.find(item => item.product.id === product.id);
+  const basketItem = data?.data.items.find(
+    item => item.product.id === product.id,
+  );
   const isMutating = addToBasket.isPending || removeFromBasket.isPending;
 
   return (
@@ -60,6 +67,7 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
       {basketItem ? (
         <QuantityStepper
           value={basketItem.quantity}
+          unit={product.type}
           onIncrement={() => addToBasket.mutate({ product })}
           onDecrement={() =>
             removeFromBasket.mutate({
@@ -86,23 +94,24 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     margin: CARD_MARGIN,
+    padding: pixelWidth(8),
   },
   image: {
     width: '100%',
-    height: pixelWidth(120),
+    height: pixelWidth(100),
     borderRadius: pixelWidth(10),
     resizeMode: 'cover',
   },
   title: {
-    height: pixelHeight(34),
-    marginTop: pixelHeight(8),
-    fontSize: pixelFont(13),
+    height: pixelHeight(30),
+    marginTop: pixelHeight(6),
+    fontSize: pixelFont(12),
     fontWeight: '600',
   },
   price: {
-    marginTop: pixelHeight(4),
-    marginBottom: pixelHeight(8),
-    fontSize: pixelFont(14),
+    marginTop: pixelHeight(2),
+    marginBottom: pixelHeight(6),
+    fontSize: pixelFont(13),
     fontWeight: '700',
   },
   action: {

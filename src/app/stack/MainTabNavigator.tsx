@@ -10,11 +10,11 @@ import AccountIcon from '@/shared/icons/account.svg';
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const renderHomeIcon = ({ color, size }: { color: string; size: number }) => (
-  <HomeIcon width={size} height={size} fill={color} />
+  <HomeIcon width={size} height={size} fill={color} color={color} />
 );
 
 const renderSearchIcon = ({ color, size }: { color: string; size: number }) => (
-  <SearchIcon width={size} height={size} fill={color} />
+  <SearchIcon width={size} height={size} fill={color} color={color} />
 );
 
 const renderAccountIcon = ({
@@ -23,7 +23,7 @@ const renderAccountIcon = ({
 }: {
   color: string;
   size: number;
-}) => <AccountIcon width={size} height={size} fill={color} />;
+}) => <AccountIcon width={size} height={size} fill={color} color={color} />;
 
 const MainTabNavigator = () => {
   return (

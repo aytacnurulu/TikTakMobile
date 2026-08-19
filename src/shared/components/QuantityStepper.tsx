@@ -8,6 +8,7 @@ import TrashIcon from '@/shared/icons/trash.svg';
 
 interface QuantityStepperProps {
   value: number;
+  unit?: string;
   onIncrement: () => void;
   onDecrement: () => void;
   min?: number;
@@ -20,12 +21,14 @@ const INCREMENT_COLOR = 'rgba(118, 203, 79, 1)';
 
 const QuantityStepper = ({
   value,
+  unit,
   onIncrement,
   onDecrement,
   min = 1,
   style,
 }: QuantityStepperProps) => {
   const atMin = value === min;
+  const valueLabel = unit ? `${value} ${unit}` : String(value);
 
   return (
     <View style={[styles.container, style]}>
@@ -46,7 +49,7 @@ const QuantityStepper = ({
         onPress={onIncrement}
         hitSlop={HIT_SLOP}
         backgroundColor={INCREMENT_COLOR}
-        title={String(value)}
+        title={valueLabel}
         leftIcon={<PlusIcon width={pixelWidth(13)} height={pixelWidth(13)} />}
         style={styles.incrementButton}
       />
