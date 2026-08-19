@@ -2,7 +2,12 @@ import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/features/settings/store/locale.store';
-import { deviceWidth, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import {
+  deviceWidth,
+  pixelFont,
+  pixelHeight,
+  pixelWidth,
+} from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
 import Card from '@/shared/components/Card';
 import Button from '@/shared/components/Button';
@@ -38,7 +43,9 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const addToBasket = useAddToBasket();
   const removeFromBasket = useRemoveFromBasket();
 
-  const basketItem = data?.data.items.find(item => item.product.id === product.id);
+  const basketItem = data?.data.items.find(
+    item => item.product.id === product.id,
+  );
   const isMutating = addToBasket.isPending || removeFromBasket.isPending;
 
   return (
@@ -60,6 +67,7 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
       {basketItem ? (
         <QuantityStepper
           value={basketItem.quantity}
+          unit={product.type}
           onIncrement={() => addToBasket.mutate({ product })}
           onDecrement={() =>
             removeFromBasket.mutate({

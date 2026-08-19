@@ -118,6 +118,7 @@ const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
               {basketItem ? (
                 <QuantityStepper
                   value={basketItem.quantity}
+                  unit={product.type}
                   onIncrement={() => addToBasket.mutate({ product })}
                   onDecrement={() =>
                     removeFromBasket.mutate({
