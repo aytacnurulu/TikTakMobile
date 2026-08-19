@@ -20,9 +20,9 @@ export type AccountStackParamList = {
 };
 
 export type MainTabParamList = {
-  HomeTab: NavigatorScreenParams<HomeStackParamList>;
-  SearchTab: undefined;
-  AccountTab: NavigatorScreenParams<AccountStackParamList>;
+  Home: NavigatorScreenParams<HomeStackParamList>;
+  Search: undefined;
+  Account: NavigatorScreenParams<AccountStackParamList>;
 };
 
 export type RootStackParamList = {

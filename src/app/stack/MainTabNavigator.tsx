@@ -29,7 +29,7 @@ const MainTabNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="HomeTab"
+        name="Home"
         component={HomeStackNavigator}
         options={{
           tabBarIcon: renderHomeIcon,
@@ -38,7 +38,7 @@ const MainTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="SearchTab"
+        name="Search"
         component={SearchScreen}
         options={{
           tabBarIcon: renderSearchIcon,
@@ -47,7 +47,7 @@ const MainTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="AccountTab"
+        name="Account"
         component={AccountStackNavigator}
         options={{
           tabBarIcon: renderAccountIcon,
