@@ -8,6 +8,7 @@ import TrashIcon from '@/shared/icons/trash.svg';
 
 interface QuantityStepperProps {
   value: number;
+  unit?: string;
   onIncrement: () => void;
   onDecrement: () => void;
   min?: number;

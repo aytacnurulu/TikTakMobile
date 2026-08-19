@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import HeartIcon from '@/shared/icons/heart.svg';
+import HeartIconFilled from '@/shared/icons/heart-filled.svg';
 
 interface FavoriteButtonProps {
   isFavorite: boolean;
@@ -16,11 +17,19 @@ const FavoriteButton = ({ isFavorite, onToggle, size = 20, style }: FavoriteButt
 
   return (
     <TouchableOpacity onPress={onToggle} activeOpacity={0.7} style={[styles.container, style]}>
-      <HeartIcon
-        width={pixelWidth(size)}
-        height={pixelWidth(size)}
-        color={isFavorite ? colors.primary : colors.textSecondary}
-      />
+      {isFavorite ? (
+        <HeartIconFilled
+          width={pixelWidth(size)}
+          height={pixelWidth(size)}
+          color={colors.primary}
+        />
+      ) : (
+        <HeartIcon
+          width={pixelWidth(size)}
+          height={pixelWidth(size)}
+          color={colors.textSecondary}
+        />
+      )}
     </TouchableOpacity>
   );
 };
