@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: pixelWidth(100),
     borderRadius: pixelWidth(10),
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   title: {
     height: pixelHeight(30),
