@@ -65,7 +65,7 @@ const ProductListScreen = () => {
           contentContainerStyle={styles.listContent}
           onEndReached={() => hasNextPage && fetchNextPage()}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<EmptyState message="Məhsul tapılmadı" />}
+          ListEmptyComponent={<EmptyState  message="Məhsul tapılmadı" />}
           ListFooterComponent={
             isFetchingNextPage ? (
               <ActivityIndicator style={styles.footerLoader} color={colors.primary} />
