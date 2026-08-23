@@ -34,7 +34,7 @@ const WelcomeScreen = () => {
       <View style={styles.content}>
         <Text style={[styles.description, { color: colors.textPrimary }]}>
           Sizə daha əlçatan olması üçün qeydiyyatdan keçərək davam edə
-          bilərsiniz 🥰
+          bilərsiniz 
         </Text>
 
         <Button
