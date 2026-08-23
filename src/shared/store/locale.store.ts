@@ -11,4 +11,3 @@ export const useLocaleStore = create<LocaleStore>(() => ({
   locale: 'az',
   setLocale: () => {},
 }));
-  

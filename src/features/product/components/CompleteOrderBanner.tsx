@@ -6,8 +6,8 @@ import { RootStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
-import { useLocaleStore } from '@/features/settings/store/locale.store';
-import { useBasket } from '@/features/basket/hooks/basket.hooks';
+import { useLocaleStore } from '@/shared/store/locale.store';
+import { useBasket } from '@/shared/hooks/basket.hooks';
 
 const CompleteOrderBanner = () => {
   const { colors } = useTheme();

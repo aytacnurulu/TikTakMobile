@@ -19,13 +19,13 @@ import EmptyState from '@/shared/components/EmptyState';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
-import { useLocaleStore } from '@/features/settings/store/locale.store';
+import { useLocaleStore } from '@/shared/store/locale.store';
 import {
   useAddToBasket,
   useBasket,
   useRemoveFromBasket,
-} from '@/features/basket/hooks/basket.hooks';
-import { BasketItem } from '@/features/basket/types/basket.types';
+} from '@/shared/hooks/basket.hooks';
+import { BasketItem } from '@/shared/types/basket.types';
 
 const BasketScreen = () => {
   const { colors } = useTheme();

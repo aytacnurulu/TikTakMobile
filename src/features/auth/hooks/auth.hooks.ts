@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { authService } from '@/features/auth/services/auth.service';
-import { useAuthStore } from '@/features/auth/store/auth.store';
-import { LoginPayload, SignupPayload } from '@/features/auth/types/auth.types';
+import { useAuthStore } from '@/shared/store/auth.store';
+import { LoginPayload, SignupPayload } from '@/shared/types/auth.types';
 
 export const useLogin = () => {
   const login = useAuthStore(state => state.login);

@@ -1,4 +1,4 @@
-import { useThemeStore } from '@/features/settings/store/theme.store';
+import { useThemeStore } from '@/shared/store/theme.store';
 import { lightColors, darkColors } from '@/shared/constants/theme.constants';
 
 export const useTheme = () => {

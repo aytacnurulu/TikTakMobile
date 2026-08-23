@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
-import { useCategories } from '@/features/home/hooks/category.hooks';
+import { useCategories } from '@/shared/hooks/category.hooks';
 import { Category } from '@/shared/types/category.type';
 import HomeHeader from '@/shared/components/HomeHeader';
 import DeliveryAddressCard from '@/features/home/components/DeliveryAddressCard';

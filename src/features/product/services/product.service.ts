@@ -1,7 +1,7 @@
 import { apiFetch } from '@/shared/lib/api-fetch';
 import { API } from '@/shared/constants/api.constants';
 import { ApiResponse } from '@/shared/types/api-response.type';
-import { Product, ProductListResponse } from '@/features/product/types/product.types';
+import { Product, ProductListResponse } from '@/shared/types/product.types';
 
 interface GetProductsParams {
   categoryId: number;

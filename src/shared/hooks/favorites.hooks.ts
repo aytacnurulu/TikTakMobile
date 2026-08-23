@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { favoritesService } from '@/features/favorites/services/favorites.service';
-import { useAuthStore } from '@/features/auth/store/auth.store';
-import { FavoritesListResponse } from '@/features/favorites/types/favorites.types';
-import { Product } from '@/features/product/types/product.types';
+import { favoritesService } from '@/shared/services/favorites.service';
+import { useAuthStore } from '@/shared/store/auth.store';
+import { FavoritesListResponse } from '@/shared/types/favorites.types';
+import { Product } from '@/shared/types/product.types';
 
 const FAVORITES_KEY = ['favorites'];
 
