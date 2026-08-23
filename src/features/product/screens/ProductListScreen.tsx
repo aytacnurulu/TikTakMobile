@@ -8,7 +8,7 @@ import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
 import HomeHeader from '@/shared/components/HomeHeader';
 import { useProducts } from '@/features/product/hooks/product.hooks';
-import { Product } from '@/features/product/types/product.types';
+import { Product } from '@/shared/types/product.types';
 import { Category } from '@/shared/types/category.type';
 import ProductCard from '@/features/product/components/ProductCard';
 import ProductDetailSheet, {

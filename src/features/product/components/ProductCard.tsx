@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { useLocaleStore } from '@/features/settings/store/locale.store';
+import { useLocaleStore } from '@/shared/store/locale.store';
 import {
   deviceWidth,
   pixelFont,
@@ -16,8 +16,8 @@ import {
   useAddToBasket,
   useBasket,
   useRemoveFromBasket,
-} from '@/features/basket/hooks/basket.hooks';
-import { Product } from '@/features/product/types/product.types';
+} from '@/shared/hooks/basket.hooks';
+import { Product } from '@/shared/types/product.types';
 
 interface ProductCardProps {
   product: Product;

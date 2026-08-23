@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { basketService } from '@/features/basket/services/basket.service';
-import { useAuthStore } from '@/features/auth/store/auth.store';
-import { Basket } from '@/features/basket/types/basket.types';
-import { Product } from '@/features/product/types/product.types';
+import { basketService } from '@/shared/services/basket.service';
+import { useAuthStore } from '@/shared/store/auth.store';
+import { Basket } from '@/shared/types/basket.types';
+import { Product } from '@/shared/types/product.types';
 import { ApiResponse } from '@/shared/types/api-response.type';
 
 const BASKET_KEY = ['basket'];

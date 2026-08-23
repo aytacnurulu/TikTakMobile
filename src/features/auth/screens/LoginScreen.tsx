@@ -17,7 +17,7 @@ import {
 import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
 import { useLogin } from '@/features/auth/hooks/auth.hooks';
-import { LoginPayload } from '@/features/auth/types/auth.types';
+import { LoginPayload } from '@/shared/types/auth.types';
 import { ApiErrorResponse } from '@/shared/types/api-response.type';
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<

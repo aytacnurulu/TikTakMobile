@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
-import { useBasket } from '@/features/basket/hooks/basket.hooks';
+import { useBasket } from '@/shared/hooks/basket.hooks';
 import BasketIcon from '@/shared/icons/basket.svg';
 
 const HomeHeader = () => {

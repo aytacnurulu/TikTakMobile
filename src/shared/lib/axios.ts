@@ -1,10 +1,10 @@
 // api/axios.instance.ts
 import Config from 'react-native-config';
 import axios, { AxiosRequestConfig } from 'axios';
-import { useAuthStore } from '@/features/auth/store/auth.store';
+import { useAuthStore } from '@/shared/store/auth.store';
 import { API } from '@/shared/constants/api.constants';
 import { ApiResponse } from '@/shared/types/api-response.type';
-import { AuthTokens } from '@/features/auth/types/auth.types';
+import { AuthTokens } from '@/shared/types/auth.types';
 
 interface RetryableRequestConfig extends AxiosRequestConfig {
   _retry?: boolean;
