@@ -13,7 +13,7 @@ import {
 } from '@gorhom/bottom-sheet';
 // import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { useLocaleStore } from '@/features/settings/store/locale.store';
+import { useLocaleStore } from '@/shared/store/locale.store';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
 import Button from '@/shared/components/Button';
@@ -23,12 +23,12 @@ import {
   useAddToBasket,
   useBasket,
   useRemoveFromBasket,
-} from '@/features/basket/hooks/basket.hooks';
+} from '@/shared/hooks/basket.hooks';
 import {
   useIsFavorite,
   useToggleFavorite,
-} from '@/features/favorites/hooks/favorites.hooks';
-import { Product } from '@/features/product/types/product.types';
+} from '@/shared/hooks/favorites.hooks';
+import { Product } from '@/shared/types/product.types';
 
 export interface ProductDetailSheetRef {
   open: (product: Product) => void;

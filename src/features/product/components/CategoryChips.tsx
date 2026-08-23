@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { gapHorizontal, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
-import { useCategories } from '@/features/home/hooks/category.hooks';
+import { useCategories } from '@/shared/hooks/category.hooks';
 import { Category } from '@/shared/types/category.type';
 
 interface CategoryChipsProps {

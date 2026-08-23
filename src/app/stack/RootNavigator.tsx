@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAuthStore } from '@/features/auth/store/auth.store';
+import { useAuthStore } from '@/shared/store/auth.store';
 import AuthNavigator from '@/app/stack/AuthNavigator';
 import MainTabNavigator from '@/app/stack/MainTabNavigator';
 import BasketScreen from '@/features/basket/screens/BasketScreen';

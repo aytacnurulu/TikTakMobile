@@ -1,4 +1,4 @@
-import { Locale } from '@/features/settings/store/locale.store';
+import { Locale } from '@/shared/store/locale.store';
 
 // Formatted by hand instead of Intl.NumberFormat: Hermes' bundled ICU data is
 // inconsistent across Android builds, so currency symbol/decimal output can't

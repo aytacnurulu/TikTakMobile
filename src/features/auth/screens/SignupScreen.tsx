@@ -17,7 +17,7 @@ import {
 import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
 import { useRegister } from '@/features/auth/hooks/auth.hooks';
-import { SignupPayload } from '@/features/auth/types/auth.types';
+import { SignupPayload } from '@/shared/types/auth.types';
 import { ApiErrorResponse } from '@/shared/types/api-response.type';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<

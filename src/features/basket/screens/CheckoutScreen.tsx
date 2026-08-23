@@ -15,11 +15,11 @@ import { RootStackParamList } from '@/app/stack/types';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import Button from '@/shared/components/Button';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { useAuthStore } from '@/features/auth/store/auth.store';
-import { useBasket } from '@/features/basket/hooks/basket.hooks';
+import { useAuthStore } from '@/shared/store/auth.store';
+import { useBasket } from '@/shared/hooks/basket.hooks';
 import { useCreateOrder } from '@/features/basket/hooks/order.hooks';
 import { PaymentMethod } from '@/features/basket/types/order.types';
-import { useLocaleStore } from '@/features/settings/store/locale.store';
+import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 

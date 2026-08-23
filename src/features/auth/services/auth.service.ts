@@ -6,7 +6,7 @@ import {
   AuthTokens,
   LoginPayload,
   SignupPayload,
-} from '@/features/auth/types/auth.types';
+} from '@/shared/types/auth.types';
 
 export const authService = {
   login: (payload: LoginPayload) =>
