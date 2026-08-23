@@ -16,7 +16,7 @@ const OrderSuccessScreen = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigation.navigate('Main', {
-        screen: 'AccountTab',
+        screen: 'Account',
         params: { screen: 'OrderHistory' },
       });
     }, 3000);

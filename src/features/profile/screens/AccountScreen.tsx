@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useAuthStore } from '@/features/auth/store/auth.store';
+import { useAuthStore } from '@/shared/store/auth.store';
 import { pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import Button from '@/shared/components/Button';
 
