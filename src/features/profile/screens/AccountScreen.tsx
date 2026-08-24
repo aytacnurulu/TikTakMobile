@@ -11,7 +11,6 @@ import { useProfile } from '../hooks/profile.hooks';
 import AccountMenuItem from '../components/AccountMenuItem';
 import { useAuthStore } from '@/shared/store/auth.store';
 
-
 const menuItems = [
   { id: 'info', label: 'Hesab məlumatlarım', Icon: AccountIcon, route: 'AccountInfoScreen' as const },
   { id: 'favorites', label: 'Siyahılarım', Icon: HeartIcon, route: 'FavoritesScreen' as const },
