@@ -10,10 +10,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { gapVertical, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 interface InputProps
-  extends Pick<
-    TextInputProps,
-    'secureTextEntry' | 'multiline' | 'keyboardType' | 'onBlur'
-  > {
+  extends Partial<Pick<TextInputProps, 'secureTextEntry' | 'multiline' | 'keyboardType' | 'onBlur'>> {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
