@@ -15,7 +15,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { createStyles } from '../AccountScreen/AccountScreen.styles';
+import { createStyles } from '../AccountInfoScreen/AccountInfoScreen.styles';
 import { useProfile, useUpdateProfile } from '../../hooks/profile.hooks';
 
 
@@ -98,6 +98,8 @@ const AccountInfoScreen = ({ navigation }: Props) => {
           <Button
             title="Yadda saxla"
             onPress={handleSave}
+            loading={isSaving}
+            disabled={isSaving}
             style={styles.button}
           />
         </ScrollView>
