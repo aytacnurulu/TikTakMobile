@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createStyles } from '../AccountScreen/AccountScreen.styles';
-import { useProfile } from '../../hooks/profile.hooks';
+import { useProfile, useUpdateProfile } from '../../hooks/profile.hooks';
 
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'AccountInfo'>;
