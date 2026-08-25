@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ActivityIndicator,
   Insets,
+  StyleProp,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -19,7 +20,7 @@ interface ButtonProps {
   variant?: 'primary' | 'text';
   backgroundColor?: string;
   hitSlop?: Insets;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 }
 
 const Button = ({
