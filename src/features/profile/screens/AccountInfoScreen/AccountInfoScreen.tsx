@@ -36,9 +36,21 @@ const AccountInfoScreen = ({ navigation }: Props) => {
 
   const { mutate: updateProfile, isPending: isSaving } = useUpdateProfile();
 
-  const handleSave = () => {
-    updateProfile({ full_name: fullName, address, phone });
-  };
+const handleSave = () => {
+  if (password && password !== confirmPassword) {
+    // error state göstər, göndərmə
+    return;
+  }
+
+  updateProfile({
+    full_name: fullName,
+    address,
+    img_url: user?.img_url ?? null,  
+    ...(password
+      ? { password, password_repeat: confirmPassword }
+      : {}),
+  });
+};
 
   if (isPending) {
     return (
