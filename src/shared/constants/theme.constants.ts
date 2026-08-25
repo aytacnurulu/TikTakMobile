@@ -8,6 +8,7 @@ export const lightColors = {
   textPlaceholder: '#BABBC1',
   textOnPrimary: '#FFFFFF',
   border: '#E5E5EA',
+  textLabel: '#101142',
 };
 
 // Estimated by inverting the light palette — not measured from a dark-mode design yet.
@@ -21,6 +22,7 @@ export const darkColors = {
   textPlaceholder: '#6B6E76',
   textOnPrimary: '#FFFFFF',
   border: '#3A3D4A',
+  textLabel: '#101142',
 };
 
 export type ThemeColors = typeof lightColors;

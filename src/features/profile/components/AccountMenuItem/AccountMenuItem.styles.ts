@@ -13,19 +13,18 @@ export const createStyles = (colors: ThemeColors) =>
     left: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: pixelWidth(12),
+      gap: pixelWidth(26),
     },
     iconWrapper: {
-      width: pixelWidth(36),
-      height: pixelWidth(36),
+      width: pixelWidth(26),
+      height: pixelWidth(26),
       borderRadius: pixelWidth(10),
-      backgroundColor: colors.surface,
       alignItems: 'center',
       justifyContent: 'center',
     },
     label: {
       fontSize: pixelFont(14),
       fontWeight: '400',
-      color: colors.textPrimary,
+      color: colors.textLabel,
     },
   });
