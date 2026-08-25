@@ -31,6 +31,7 @@ export const API = {
     },
     PROFILE: {
       GET: '/api/tiktak/profile',
+      UPDATE: '/api/tiktak/profile',
     },
   },
 
