@@ -11,6 +11,7 @@ import {
   BottomSheetModal,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
+import { useTranslation } from 'react-i18next';
 // import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
@@ -45,6 +46,7 @@ const renderBackdrop = (props: BottomSheetBackdropProps) => (
 
 const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   // const tabBarHeight = useBottomTabBarHeight();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -130,7 +132,7 @@ const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
                 />
               ) : (
                 <Button
-                  title="Səbətə əlavə et"
+                  title={t('product.addToBasket')}
                   onPress={() => addToBasket.mutate({ product })}
                   loading={isMutating}
                   style={styles.addButton}

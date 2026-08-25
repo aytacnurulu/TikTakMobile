@@ -18,4 +18,10 @@ i18n.use(initReactI18next).init({
   },
 });
 
+useLocaleStore.subscribe(state => {
+  if (i18n.language !== state.locale) {
+    i18n.changeLanguage(state.locale);
+  }
+});
+
 export default i18n;

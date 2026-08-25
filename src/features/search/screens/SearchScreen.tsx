@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
 import { pixelWidth } from '@/shared/utils/metrics';
@@ -16,6 +17,7 @@ import { Product } from '@/shared/types/product.types';
 
 const SearchScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebouncedValue(query);
   const sheetRef = useRef<ProductDetailSheetRef>(null);
@@ -39,11 +41,11 @@ const SearchScreen = () => {
       <SearchBar
         value={query}
         onChangeText={setQuery}
-        placeholder="Axtar..."
+        placeholder={t('search.placeholder')}
       />
 
       {debouncedQuery.length === 0 ? (
-        <EmptyState message="Axtarmaq üçün məhsul adı yazın" />
+        <EmptyState message={t('search.prompt')} />
       ) : isFetching && !isFetchingNextPage ? (
         <View style={styles.loader}>
           <ActivityIndicator color={colors.primary} />
@@ -56,7 +58,7 @@ const SearchScreen = () => {
           contentContainerStyle={styles.listContent}
           onEndReached={() => hasNextPage && fetchNextPage()}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<EmptyState message="Məhsul tapılmadı" />}
+          ListEmptyComponent={<EmptyState message={t('product.empty')} />}
           ListFooterComponent={
             isFetchingNextPage ? (
               <ActivityIndicator style={styles.footerLoader} color={colors.primary} />

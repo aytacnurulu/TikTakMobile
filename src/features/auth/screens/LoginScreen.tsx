@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
@@ -25,17 +26,18 @@ type LoginScreenNavigationProp = NativeStackNavigationProp<
   'Login'
 >;
 
-const loginSchema = Yup.object({
-  phone: Yup.string().required('Telefon nömrəsi tələb olunur'),
-  password: Yup.string()
-    .min(6, 'Parol ən azı 6 simvol olmalıdır')
-    .required('Parol tələb olunur'),
-});
-
 const LoginScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const { mutate, isPending, error } = useLogin();
+
+  const loginSchema = Yup.object({
+    phone: Yup.string().required(t('auth.login.errors.phoneRequired')),
+    password: Yup.string()
+      .min(6, t('auth.login.errors.passwordMin'))
+      .required(t('auth.login.errors.passwordRequired')),
+  });
 
   const errorMessage = axios.isAxiosError<ApiErrorResponse>(error)
     ? error.response?.data?.message
@@ -50,7 +52,7 @@ const LoginScreen = () => {
         style={[styles.container, { backgroundColor: colors.background }]}
       >
       <Text style={[styles.title, { color: colors.textPrimary }]}>
-        Daxil ol
+        {t('auth.login.title')}
       </Text>
 
       <Formik<LoginPayload>
@@ -61,8 +63,8 @@ const LoginScreen = () => {
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
           <View style={styles.form}>
             <Input
-              label="Telefon"
-              placeholder="telefon"
+              label={t('auth.login.phoneLabel')}
+              placeholder={t('auth.login.phonePlaceholder')}
               value={values.phone}
               onChangeText={handleChange('phone')}
               onBlur={handleBlur('phone')}
@@ -70,8 +72,8 @@ const LoginScreen = () => {
               error={touched.phone ? errors.phone : undefined}
             />
             <Input
-              label="Parol"
-              placeholder="parol"
+              label={t('auth.login.passwordLabel')}
+              placeholder={t('auth.login.passwordPlaceholder')}
               value={values.password}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
@@ -84,7 +86,7 @@ const LoginScreen = () => {
             ) : null}
 
             <Button
-              title="Daxil ol"
+              title={t('auth.login.submit')}
               onPress={() => handleSubmit()}
               loading={isPending}
               style={styles.submitButton}
@@ -95,11 +97,11 @@ const LoginScreen = () => {
 
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          Hesabınız yoxdursa{' '}
+          {t('auth.login.noAccount')}{' '}
         </Text>
         <Button
           variant="text"
-          title="Qeydiyyatdan keç"
+          title={t('auth.login.signup')}
           onPress={() => navigation.navigate('Signup')}
         />
       </View>

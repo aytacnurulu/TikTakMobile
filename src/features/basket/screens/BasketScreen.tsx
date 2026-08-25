@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import QuantityStepper from '@/shared/components/QuantityStepper';
@@ -29,6 +30,7 @@ import { BasketItem } from '@/shared/types/basket.types';
 
 const BasketScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -75,7 +77,7 @@ const BasketScreen = () => {
       <SafeAreaView
         style={[styles.container, { backgroundColor: colors.background }]}
       >
-        <ScreenHeader title="Səbətim" onBackPress={() => navigation.goBack()} />
+        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
         <View style={styles.loader}>
           <ActivityIndicator color={colors.primary} />
         </View>
@@ -88,10 +90,10 @@ const BasketScreen = () => {
       <SafeAreaView
         style={[styles.container, { backgroundColor: colors.background }]}
       >
-        <ScreenHeader title="Səbətim" onBackPress={() => navigation.goBack()} />
-        <EmptyState message="Səbət yüklənmədi" />
+        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
+        <EmptyState message={t('basket.loadError')} />
         <Button
-          title="Yenidən yoxla"
+          title={t('common.retry')}
           onPress={() => refetch()}
           style={styles.retryButton}
         />
@@ -103,10 +105,10 @@ const BasketScreen = () => {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <ScreenHeader title="Səbətim" onBackPress={() => navigation.goBack()} />
+      <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
       {items.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <EmptyState message="Səbətinizdə məhsul yoxdur" />
+          <EmptyState message={t('basket.empty')} />
         </View>
       ) : (
         <View style={styles.content}>
@@ -126,15 +128,15 @@ const BasketScreen = () => {
           <View style={[styles.summary, { borderTopColor: colors.border }]}>
             <View>
               <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                Ümumi: {formatPrice(total, locale)}
+                {t('basket.total')}: {formatPrice(total, locale)}
               </Text>
               <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                Çatdırılma: Pulsuz
+                {t('basket.delivery')}: {t('basket.free')}
               </Text>
             </View>
             <View style={styles.totalBlock}>
               <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-                Yekun məbləğ:
+                {t('basket.grandTotal')}:
               </Text>
               <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
                 {formatPrice(total, locale)}
@@ -142,7 +144,7 @@ const BasketScreen = () => {
             </View>
           </View>
           <Button
-            title="Sifarişi tamamla"
+            title={t('basket.checkout')}
             onPress={() => navigation.navigate('Checkout')}
             disabled={isMutating}
             style={styles.checkoutButton}
