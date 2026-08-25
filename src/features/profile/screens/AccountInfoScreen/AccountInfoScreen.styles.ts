@@ -7,7 +7,7 @@ export const createStyles = (colors: ThemeColors) =>
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingHorizontal: pixelWidth(16),
+      paddingHorizontal: pixelWidth(30),
     },
     header: {
       flexDirection: 'row',
@@ -22,17 +22,17 @@ export const createStyles = (colors: ThemeColors) =>
     },
     title: {
       flex: 1,
-      fontSize: pixelFont(20),
+      fontSize: pixelFont(22),
       fontWeight: '700',
       textAlign: 'center',
-      color: colors.textPrimary,
+      color: '#000',
     },
     form: {
       marginTop: pixelWidth(28),
       gap: pixelWidth(18),
     },
     button: {
-      marginTop: pixelWidth(32),
-      marginBottom: pixelWidth(24),
+      marginTop: pixelWidth(35),
+      marginBottom: pixelWidth(35),
     },
   });
