@@ -6,6 +6,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { createStyles } from './AccountScreen.styles';
 import { useProfile } from '../../hooks/profile.hooks';
 import AccountIcon from '@/shared/icons/account.svg';
+import UserImageIcon from '@/shared/icons/user-image.svg'
 import HeartIcon from '@/shared/icons/heart.svg';
 import BasketIcon from '@/shared/icons/basket.svg';
 import LogoutIcon from '@/shared/icons/logout.svg';
@@ -60,10 +61,10 @@ const AccountScreen = ({ navigation }: Props) => {
 
       <View style={styles.profileHeader}>
         {user?.img_url ? (
-          <Image source={{ uri: user.img_url }} style={styles.avatar} />
+          <Image source={{ uri: user.img_url }} style={styles.avatar}  resizeMode="cover"/>
         ) : (
           <View style={styles.avatarPlaceholder}>
-            <AccountIcon width={pixelWidth(32)} height={pixelWidth(32)} color={colors.textSecondary} />
+            <UserImageIcon width={pixelWidth(152)} height={pixelWidth(152)} color={colors.background ?? '#ffffff'} />
           </View>
         )}
         <Text style={styles.name}>{user?.full_name}</Text>

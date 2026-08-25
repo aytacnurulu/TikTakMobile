@@ -25,7 +25,7 @@ export const createStyles = (colors: ThemeColors) =>
     },
     label: {
       fontSize: pixelFont(14),
-      fontWeight: '500',
+      fontWeight: '400',
       color: colors.textPrimary,
     },
   });
