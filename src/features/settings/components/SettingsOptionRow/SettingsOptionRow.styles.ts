@@ -7,7 +7,6 @@ export const createStyles = (colors: ThemeColors) =>
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
       paddingVertical: pixelWidth(14),
     },
     left: {

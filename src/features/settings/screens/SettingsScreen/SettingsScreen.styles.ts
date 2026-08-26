@@ -9,11 +9,23 @@ export const createStyles = (colors: ThemeColors) =>
       backgroundColor: colors.background,
       paddingHorizontal: pixelWidth(16),
     },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: pixelWidth(8),
+    },
+    backButton: {
+      position: 'absolute',
+      left: 0,
+      zIndex: 1,
+      padding: pixelWidth(4),
+    },
     title: {
+      flex: 1,
       fontSize: pixelFont(20),
       fontWeight: '700',
+      textAlign: 'center',
       color: colors.textPrimary,
-      marginTop: pixelWidth(8),
     },
     optionList: {
       marginTop: pixelWidth(24),

@@ -1,9 +1,10 @@
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
+import BackIcon from '@/shared/icons/chevron-left.svg';
 import LanguageIcon from '@/shared/icons/language.svg';
 import ThemeIcon from '@/shared/icons/theme.svg';
 import SettingsOptionRow from '@/features/settings/components/SettingsOptionRow/SettingsOptionRow';
@@ -11,7 +12,7 @@ import { createStyles } from './SettingsScreen.styles';
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'Settings'>;
 
-const SettingsScreen = (_props: Props) => {
+const SettingsScreen = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -22,7 +23,12 @@ const SettingsScreen = (_props: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Ayarlar</Text>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <BackIcon width={24} height={24} color={colors.textPrimary} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Ayarlar</Text>
+      </View>
 
       <View style={styles.optionList}>
         <SettingsOptionRow
