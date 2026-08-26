@@ -18,6 +18,7 @@ export type AccountStackParamList = {
   OrderHistory: undefined;
   OrderHistoryDetail: { orderId: string };
   Favorites: undefined;
+  Settings: undefined;
 };
 
 export type MainTabParamList = {
