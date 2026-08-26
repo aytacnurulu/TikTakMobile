@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
@@ -23,6 +24,7 @@ type ProductListScreenRouteProp = RouteProp<HomeStackParamList, 'Products'>;
 const ProductListScreen = () => {
   const { params } = useRoute<ProductListScreenRouteProp>();
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<Pick<Category, 'id' | 'name'>>({
     id: params.categoryId,
     name: params.categoryName,
@@ -66,7 +68,7 @@ const ProductListScreen = () => {
           contentContainerStyle={styles.listContent}
           onEndReached={() => hasNextPage && fetchNextPage()}
           onEndReachedThreshold={0.5}
-          ListEmptyComponent={<EmptyState  message="Məhsul tapılmadı" />}
+          ListEmptyComponent={<EmptyState message={t('product.empty')} />}
           ListFooterComponent={
             isFetchingNextPage ? (
               <ActivityIndicator style={styles.footerLoader} color={colors.primary} />

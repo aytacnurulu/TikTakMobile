@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
@@ -31,37 +32,25 @@ type OnboardingNavigationProp = NativeStackNavigationProp<
   'Onboarding'
 >;
 
-const SLIDES: OnboardingSlide[] = [
-  {
-    key: 'discover',
-    variant: 'discover',
-    eyebrow: 'TAZƏ VƏ GENİŞ ÇEŞİD',
-    title: 'Min bir dadı bir toxunuşla kəşf et',
-    description:
-      'Meyvədən elektronikaya qədər minlərlə məhsulu rahatlıqla gəz, sənə uyğun olanı bir neçə saniyəyə tap.',
-  },
-  {
-    key: 'delivery',
-    variant: 'delivery',
-    eyebrow: 'IŞIQ SÜRƏTİNDƏ ÇATDIRILMA',
-    title: 'Sifariş ver, qapına qədər izlə',
-    description:
-      'Sifarişin anbardan çıxan kimi yolda olur — çatdırılmanı canlı izləyərək dəqiqəsinə qədər xəbərdar olursan.',
-  },
-  {
-    key: 'checkout',
-    variant: 'checkout',
-    eyebrow: 'TƏHLÜKƏSİZ VƏ SADƏ ÖDƏNİŞ',
-    title: 'Bir toxunuşla sifarişi tamamla',
-    description:
-      'Səbətini yoxla, ödəniş üsulunu seç, hazırdır! Bütün sifariş tarixçən həmişə əlində.',
-  },
+const SLIDE_VARIANTS: Pick<OnboardingSlide, 'key' | 'variant'>[] = [
+  { key: 'discover', variant: 'discover' },
+  { key: 'delivery', variant: 'delivery' },
+  { key: 'checkout', variant: 'checkout' },
 ];
 
 const OnboardingScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<OnboardingNavigationProp>();
   const completeOnboarding = useOnboardingStore(state => state.completeOnboarding);
+
+  const SLIDES: OnboardingSlide[] = SLIDE_VARIANTS.map(({ key, variant }) => ({
+    key,
+    variant,
+    eyebrow: t(`onboarding.slides.${key}.eyebrow`),
+    title: t(`onboarding.slides.${key}.title`),
+    description: t(`onboarding.slides.${key}.description`),
+  }));
 
   const listRef = useRef<FlatList<OnboardingSlide>>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -96,7 +85,7 @@ const OnboardingScreen = () => {
         <Text style={[styles.wordmark, { color: colors.primary }]}>TikTak</Text>
         <Button
           variant="text"
-          title="Keç"
+          title={t('onboarding.skip')}
           onPress={goToAuth}
           disabled={isLastSlide}
           style={[styles.skipButton, isLastSlide && styles.hidden]}
@@ -175,7 +164,7 @@ const OnboardingScreen = () => {
       <View style={styles.footer}>
         <OnboardingProgress count={SLIDES.length} scrollX={scrollX} slideWidth={deviceWidth} />
         <Button
-          title={isLastSlide ? 'Başlayaq' : 'Növbəti'}
+          title={isLastSlide ? t('onboarding.start') : t('onboarding.next')}
           onPress={handleNext}
           style={styles.nextButton}
         />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { formatPrice } from '@/shared/utils/currency';
@@ -11,6 +12,7 @@ import { styles } from './CompleteOrderBanner.styles';
 
 const CompleteOrderBanner = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -44,7 +46,7 @@ const CompleteOrderBanner = () => {
           </Text>
         </View>
         <Text style={[styles.label, { color: colors.textOnPrimary }]}>
-          Sifarişlər
+          {t('basket.orders')}
         </Text>
       </View>
       <Text style={[styles.price, { color: colors.textOnPrimary }]}>

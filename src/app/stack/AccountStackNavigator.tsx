@@ -4,6 +4,7 @@ import AccountInfoScreen from '@/features/profile/screens/AccountInfoScreen/Acco
 import OrderHistoryScreen from '@/features/profile/screens/OrderHistoryScreen';
 import OrderHistoryDetailScreen from '@/features/profile/screens/OrderHistoryDetailScreen';
 import FavoritesScreen from '@/features/favorites/screens/FavoritesScreen';
+import SettingsScreen from '@/features/settings/screens/SettingsScreen/SettingsScreen';
 import { AccountStackParamList } from '@/app/stack/types';
 
 const Stack = createNativeStackNavigator<AccountStackParamList>();
@@ -19,6 +20,7 @@ const AccountStackNavigator = () => {
         component={OrderHistoryDetailScreen}
       />
       <Stack.Screen name="Favorites" component={FavoritesScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>
   );
 };

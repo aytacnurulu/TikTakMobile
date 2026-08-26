@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
@@ -21,6 +22,7 @@ type WelcomeScreenNavigationProp = NativeStackNavigationProp<
 
 const WelcomeScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
 
   return (
@@ -33,23 +35,22 @@ const WelcomeScreen = () => {
 
       <View style={styles.content}>
         <Text style={[styles.description, { color: colors.textPrimary }]}>
-          Sizə daha əlçatan olması üçün qeydiyyatdan keçərək davam edə
-          bilərsiniz 
+          {t('auth.welcome.description')}
         </Text>
 
         <Button
-          title="Qeydiyyat"
+          title={t('auth.welcome.signup')}
           onPress={() => navigation.navigate('Signup')}
           style={styles.submitButton}
         />
 
         <View style={styles.footer}>
           <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-            Hesabınız varsa{' '}
+            {t('auth.welcome.haveAccount')}{' '}
           </Text>
           <Button
             variant="text"
-            title="Daxil olun"
+            title={t('auth.welcome.login')}
             onPress={() => navigation.navigate('Login')}
           />
         </View>

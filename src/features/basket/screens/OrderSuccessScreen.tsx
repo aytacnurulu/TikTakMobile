@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import { useTheme } from '@/shared/hooks/useTheme';
@@ -10,6 +11,7 @@ import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 const OrderSuccessScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -29,7 +31,7 @@ const OrderSuccessScreen = () => {
       style={[styles.container, { backgroundColor: colors.background }]}
     >
       <ScreenHeader
-        title="Sifarişi tamamla"
+        title={t('basket.checkout')}
         onBackPress={() => navigation.goBack()}
       />
       <View style={styles.content}>
@@ -46,10 +48,10 @@ const OrderSuccessScreen = () => {
           </View>
         </View>
         <Text style={[styles.title, { color: colors.textPrimary }]}>
-          Sifariş uğurla tamamlandı
+          {t('orderSuccess.title')}
         </Text>
         <Text style={[styles.message, { color: colors.textSecondary }]}>
-          Əməkdaşlarımız sizinlə əlaqə saxlayıb sifarişinizi göndərəcəklər.
+          {t('orderSuccess.message')}
         </Text>
       </View>
     </SafeAreaView>

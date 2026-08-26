@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import Button from '@/shared/components/Button';
@@ -25,6 +26,7 @@ import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
 const CheckoutScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const profile = useAuthStore(state => state.profile);
@@ -39,14 +41,14 @@ const CheckoutScreen = () => {
     ? createOrder.error.response?.data?.message ?? createOrder.error.message
     : createOrder.error instanceof Error
     ? createOrder.error.message
-    : 'Sifariş yaradılmadı. Yenidən cəhd edin.';
+    : t('checkout.errorFallback');
 
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
       <ScreenHeader
-        title="Sifarişi tamamla"
+        title={t('basket.checkout')}
         onBackPress={() => navigation.goBack()}
       />
       <ScrollView
@@ -56,10 +58,10 @@ const CheckoutScreen = () => {
       >
         <View style={styles.customerDetails}>
           <Text style={[styles.label, { color: colors.textPrimary }]}>
-            Adınız
+            {t('checkout.nameLabel')}
           </Text>
           <Text style={[styles.value, { color: colors.textSecondary }]}>
-            {profile?.full_name ?? 'Ad daxil edilməyib'}
+            {profile?.full_name ?? t('checkout.namePlaceholder')}
           </Text>
 
           <Text
@@ -69,10 +71,10 @@ const CheckoutScreen = () => {
               { color: colors.textPrimary },
             ]}
           >
-            Ünvanınız
+            {t('checkout.addressLabel')}
           </Text>
           <Text style={[styles.value, { color: colors.textSecondary }]}>
-            {profile?.address ?? 'Ünvan daxil edilməyib'}
+            {profile?.address ?? t('checkout.addressPlaceholder')}
           </Text>
 
           <Text
@@ -82,10 +84,10 @@ const CheckoutScreen = () => {
               { color: colors.textPrimary },
             ]}
           >
-            Telefon
+            {t('checkout.phoneLabel')}
           </Text>
           <Text style={[styles.value, { color: colors.textSecondary }]}>
-            {profile?.phone ?? 'Telefon daxil edilməyib'}
+            {profile?.phone ?? t('checkout.phonePlaceholder')}
           </Text>
         </View>
 
@@ -96,7 +98,7 @@ const CheckoutScreen = () => {
             { color: colors.textPrimary },
           ]}
         >
-          Əlavə qeydiniz
+          {t('checkout.noteLabel')}
         </Text>
         <TextInput
           value={note}
@@ -113,13 +115,13 @@ const CheckoutScreen = () => {
 
         <View style={styles.paymentOptions}>
           <PaymentOption
-            label="Qapıda nağd"
+            label={t('checkout.cash')}
             selected={paymentMethod === 'cash'}
             color={colors.primary}
             onPress={() => setPaymentMethod('cash')}
           />
           <PaymentOption
-            label="Qapıda kart"
+            label={t('checkout.card')}
             selected={paymentMethod === 'card'}
             color={colors.primary}
             onPress={() => setPaymentMethod('card')}
@@ -146,15 +148,15 @@ const CheckoutScreen = () => {
           <View style={styles.summaryRow}>
             <View>
               <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                Ümumi: {formatPrice(total, locale)}
+                {t('basket.total')}: {formatPrice(total, locale)}
               </Text>
               <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                Çatdırılma: Pulsuz
+                {t('basket.delivery')}: {t('basket.free')}
               </Text>
             </View>
             <View style={styles.totalBlock}>
               <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-                Yekun məbləğ:
+                {t('basket.grandTotal')}:
               </Text>
               <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
                 {formatPrice(total, locale)}
@@ -164,7 +166,7 @@ const CheckoutScreen = () => {
         </View>
 
         <Button
-          title="Sifarişi tamamla"
+          title={t('basket.checkout')}
           onPress={() =>
             createOrder.mutate(
               {

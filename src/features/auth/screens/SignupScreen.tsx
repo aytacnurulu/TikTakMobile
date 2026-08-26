@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
@@ -25,18 +26,19 @@ type SignupScreenNavigationProp = NativeStackNavigationProp<
   'Signup'
 >;
 
-const signupSchema = Yup.object({
-  full_name: Yup.string().required('Ad, soyad tələb olunur'),
-  phone: Yup.string().required('Telefon nömrəsi tələb olunur'),
-  password: Yup.string()
-    .min(6, 'Parol ən azı 6 simvol olmalıdır')
-    .required('Parol tələb olunur'),
-});
-
 const SignupScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation<SignupScreenNavigationProp>();
   const { mutate, isPending, error } = useRegister();
+
+  const signupSchema = Yup.object({
+    full_name: Yup.string().required(t('auth.signup.errors.fullNameRequired')),
+    phone: Yup.string().required(t('auth.signup.errors.phoneRequired')),
+    password: Yup.string()
+      .min(6, t('auth.signup.errors.passwordMin'))
+      .required(t('auth.signup.errors.passwordRequired')),
+  });
 
   const errorMessage = axios.isAxiosError<ApiErrorResponse>(error)
     ? error.response?.data?.message
@@ -51,7 +53,7 @@ const SignupScreen = () => {
         style={[styles.container, { backgroundColor: colors.background }]}
       >
       <Text style={[styles.title, { color: colors.textPrimary }]}>
-        Qeydiyyatdan keç
+        {t('auth.signup.title')}
       </Text>
 
       <Formik<SignupPayload>
@@ -62,16 +64,16 @@ const SignupScreen = () => {
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
           <View style={styles.form}>
             <Input
-              label="Ad, soyad"
-              placeholder="ad soyad"
+              label={t('auth.signup.fullNameLabel')}
+              placeholder={t('auth.signup.fullNamePlaceholder')}
               value={values.full_name}
               onChangeText={handleChange('full_name')}
               onBlur={handleBlur('full_name')}
               error={touched.full_name ? errors.full_name : undefined}
             />
             <Input
-              label="Telefon"
-              placeholder="telefon"
+              label={t('auth.signup.phoneLabel')}
+              placeholder={t('auth.signup.phonePlaceholder')}
               value={values.phone}
               onChangeText={handleChange('phone')}
               onBlur={handleBlur('phone')}
@@ -79,8 +81,8 @@ const SignupScreen = () => {
               error={touched.phone ? errors.phone : undefined}
             />
             <Input
-              label="Parol"
-              placeholder="parol"
+              label={t('auth.signup.passwordLabel')}
+              placeholder={t('auth.signup.passwordPlaceholder')}
               value={values.password}
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
@@ -93,7 +95,7 @@ const SignupScreen = () => {
             ) : null}
 
             <Button
-              title="Qeydiyyat"
+              title={t('auth.signup.submit')}
               onPress={() => handleSubmit()}
               loading={isPending}
               style={styles.submitButton}
@@ -104,11 +106,11 @@ const SignupScreen = () => {
 
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          Hesabınız varsa{' '}
+          {t('auth.signup.haveAccount')}{' '}
         </Text>
         <Button
           variant="text"
-          title="Daxil olun"
+          title={t('auth.signup.login')}
           onPress={() => navigation.navigate('Login')}
         />
       </View>

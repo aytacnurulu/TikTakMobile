@@ -1,1 +1,113 @@
-{}
+{
+  "common": {
+    "retry": "Retry"
+  },
+  "auth": {
+    "welcome": {
+      "description": "To make things easier for you, you can continue by signing up",
+      "signup": "Sign up",
+      "haveAccount": "If you have an account",
+      "login": "Log in"
+    },
+    "login": {
+      "title": "Log in",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "phone",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "password",
+      "submit": "Log in",
+      "noAccount": "If you don't have an account",
+      "signup": "Sign up",
+      "errors": {
+        "phoneRequired": "Phone number is required",
+        "passwordMin": "Password must be at least 6 characters",
+        "passwordRequired": "Password is required"
+      }
+    },
+    "signup": {
+      "title": "Sign up",
+      "fullNameLabel": "Full name",
+      "fullNamePlaceholder": "full name",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "phone",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "password",
+      "submit": "Sign up",
+      "haveAccount": "If you have an account",
+      "login": "Log in",
+      "errors": {
+        "fullNameRequired": "Full name is required",
+        "phoneRequired": "Phone number is required",
+        "passwordMin": "Password must be at least 6 characters",
+        "passwordRequired": "Password is required"
+      }
+    }
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Get started",
+    "slides": {
+      "discover": {
+        "eyebrow": "FRESH & WIDE SELECTION",
+        "title": "Discover a thousand flavors with one tap",
+        "description": "Browse thousands of products, from fruit to electronics, and find exactly what you need in seconds."
+      },
+      "delivery": {
+        "eyebrow": "LIGHTNING-FAST DELIVERY",
+        "title": "Order it, track it to your door",
+        "description": "The moment your order leaves the warehouse, it's on its way — track delivery live and know exactly when it'll arrive."
+      },
+      "checkout": {
+        "eyebrow": "SECURE & SIMPLE CHECKOUT",
+        "title": "Complete your order in one tap",
+        "description": "Check your basket, pick a payment method, done! Your full order history is always at hand."
+      }
+    }
+  },
+  "home": {
+    "deliveryAddress": "Delivery address:",
+    "categoriesEmpty": "No categories found"
+  },
+  "product": {
+    "browseCategories": "Browse all categories",
+    "addToBasket": "Add to basket",
+    "empty": "No products found"
+  },
+  "basket": {
+    "title": "My basket",
+    "loadError": "Failed to load basket",
+    "empty": "Your basket is empty",
+    "total": "Subtotal",
+    "delivery": "Delivery",
+    "free": "Free",
+    "grandTotal": "Total amount",
+    "checkout": "Complete order",
+    "orders": "Orders"
+  },
+  "checkout": {
+    "nameLabel": "Your name",
+    "namePlaceholder": "Name not provided",
+    "addressLabel": "Your address",
+    "addressPlaceholder": "Address not provided",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "Phone not provided",
+    "noteLabel": "Additional note",
+    "cash": "Cash on delivery",
+    "card": "Card on delivery",
+    "errorFallback": "Order could not be created. Please try again."
+  },
+  "orderSuccess": {
+    "title": "Order placed successfully",
+    "message": "Our team will contact you and get your order on its way."
+  },
+  "search": {
+    "placeholder": "Search...",
+    "prompt": "Type a product name to search"
+  },
+  "account": {
+    "title": "My account",
+    "language": "Language",
+    "logout": "Log out"
+  }
+}

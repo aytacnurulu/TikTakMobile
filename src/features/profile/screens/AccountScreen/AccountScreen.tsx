@@ -4,12 +4,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { createStyles } from './AccountScreen.styles';
-import { useProfile } from '../../hooks/profile.hooks';
+import { useProfile } from '@/shared/hooks/profile.hooks';
 import AccountIcon from '@/shared/icons/account.svg';
 import UserImageIcon from '@/shared/icons/user-image.svg'
 import HeartIcon from '@/shared/icons/heart.svg';
 import BasketIcon from '@/shared/icons/basket.svg';
 import LogoutIcon from '@/shared/icons/logout.svg';
+import SettingsIcon from '@/shared/icons/settings.svg';
 import AccountMenuItem from '../../components/AccountMenuItem/AccountMenuItem';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { ActivityIndicator, Image, Text, View } from 'react-native';
@@ -27,6 +28,7 @@ const menuItems: {
   { id: 'info', label: 'Hesab məlumatlarım', Icon: AccountIcon, route: 'AccountInfo' },
   { id: 'favorites', label: 'Siyahılarım', Icon: HeartIcon, route: 'Favorites' },
   { id: 'orders', label: 'Sifariş tarixçəsi', Icon: BasketIcon, route: 'OrderHistory' },
+  { id: 'settings', label: 'Ayarlar', Icon: SettingsIcon, route: 'Settings' },
   { id: 'logout', label: 'Çıxış', Icon: LogoutIcon, route: null },
 ];
 

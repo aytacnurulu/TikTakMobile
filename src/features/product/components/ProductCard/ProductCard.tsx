@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
@@ -21,6 +22,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const { data } = useBasket();
   const addToBasket = useAddToBasket();
@@ -62,7 +64,7 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
         />
       ) : (
         <Button
-          title="Səbətə əlavə et"
+          title={t('product.addToBasket')}
           onPress={() => addToBasket.mutate({ product })}
           loading={isMutating}
           style={styles.action}

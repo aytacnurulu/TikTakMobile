@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
@@ -25,6 +26,7 @@ const ListHeader = () => (
 
 const HomeScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const { data, isPending } = useCategories();
   const categories = data?.data ?? [];
 
@@ -45,7 +47,7 @@ const HomeScreen = () => {
           ListHeaderComponent={ListHeader}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={
-            <EmptyState message="Kateqoriya tapılmadı" />
+            <EmptyState message={t('home.categoriesEmpty')} />
           }
         />
       )}

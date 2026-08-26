@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { zustandMmkvStorage } from '@/shared/lib/localStorage';
 
 export type Locale = 'az' | 'ru' | 'en';
 
@@ -7,7 +9,15 @@ interface LocaleStore {
   setLocale: (locale: Locale) => void;
 }
 
-export const useLocaleStore = create<LocaleStore>(() => ({
-  locale: 'az',
-  setLocale: () => {},
-}));
+export const useLocaleStore = create<LocaleStore>()(
+  persist(
+    set => ({
+      locale: 'az',
+      setLocale: locale => set({ locale }),
+    }),
+    {
+      name: 'locale-storage',
+      storage: createJSONStorage(() => zustandMmkvStorage),
+    },
+  ),
+);

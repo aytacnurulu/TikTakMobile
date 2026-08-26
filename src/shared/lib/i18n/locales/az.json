@@ -1,1 +1,113 @@
-{}
+{
+  "common": {
+    "retry": "Yenidən yoxla"
+  },
+  "auth": {
+    "welcome": {
+      "description": "Sizə daha əlçatan olması üçün qeydiyyatdan keçərək davam edə bilərsiniz",
+      "signup": "Qeydiyyat",
+      "haveAccount": "Hesabınız varsa",
+      "login": "Daxil olun"
+    },
+    "login": {
+      "title": "Daxil ol",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "telefon",
+      "passwordLabel": "Parol",
+      "passwordPlaceholder": "parol",
+      "submit": "Daxil ol",
+      "noAccount": "Hesabınız yoxdursa",
+      "signup": "Qeydiyyatdan keç",
+      "errors": {
+        "phoneRequired": "Telefon nömrəsi tələb olunur",
+        "passwordMin": "Parol ən azı 6 simvol olmalıdır",
+        "passwordRequired": "Parol tələb olunur"
+      }
+    },
+    "signup": {
+      "title": "Qeydiyyatdan keç",
+      "fullNameLabel": "Ad, soyad",
+      "fullNamePlaceholder": "ad soyad",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "telefon",
+      "passwordLabel": "Parol",
+      "passwordPlaceholder": "parol",
+      "submit": "Qeydiyyat",
+      "haveAccount": "Hesabınız varsa",
+      "login": "Daxil olun",
+      "errors": {
+        "fullNameRequired": "Ad, soyad tələb olunur",
+        "phoneRequired": "Telefon nömrəsi tələb olunur",
+        "passwordMin": "Parol ən azı 6 simvol olmalıdır",
+        "passwordRequired": "Parol tələb olunur"
+      }
+    }
+  },
+  "onboarding": {
+    "skip": "Keç",
+    "next": "Növbəti",
+    "start": "Başlayaq",
+    "slides": {
+      "discover": {
+        "eyebrow": "TAZƏ VƏ GENİŞ ÇEŞİD",
+        "title": "Min bir dadı bir toxunuşla kəşf et",
+        "description": "Meyvədən elektronikaya qədər minlərlə məhsulu rahatlıqla gəz, sənə uyğun olanı bir neçə saniyəyə tap."
+      },
+      "delivery": {
+        "eyebrow": "IŞIQ SÜRƏTİNDƏ ÇATDIRILMA",
+        "title": "Sifariş ver, qapına qədər izlə",
+        "description": "Sifarişin anbardan çıxan kimi yolda olur — çatdırılmanı canlı izləyərək dəqiqəsinə qədər xəbərdar olursan."
+      },
+      "checkout": {
+        "eyebrow": "TƏHLÜKƏSİZ VƏ SADƏ ÖDƏNİŞ",
+        "title": "Bir toxunuşla sifarişi tamamla",
+        "description": "Səbətini yoxla, ödəniş üsulunu seç, hazırdır! Bütün sifariş tarixçən həmişə əlində."
+      }
+    }
+  },
+  "home": {
+    "deliveryAddress": "Çatdırılma ünvanı:",
+    "categoriesEmpty": "Kateqoriya tapılmadı"
+  },
+  "product": {
+    "browseCategories": "Əsas kateqoriyalara bax",
+    "addToBasket": "Səbətə əlavə et",
+    "empty": "Məhsul tapılmadı"
+  },
+  "basket": {
+    "title": "Səbətim",
+    "loadError": "Səbət yüklənmədi",
+    "empty": "Səbətinizdə məhsul yoxdur",
+    "total": "Ümumi",
+    "delivery": "Çatdırılma",
+    "free": "Pulsuz",
+    "grandTotal": "Yekun məbləğ",
+    "checkout": "Sifarişi tamamla",
+    "orders": "Sifarişlər"
+  },
+  "checkout": {
+    "nameLabel": "Adınız",
+    "namePlaceholder": "Ad daxil edilməyib",
+    "addressLabel": "Ünvanınız",
+    "addressPlaceholder": "Ünvan daxil edilməyib",
+    "phoneLabel": "Telefon",
+    "phonePlaceholder": "Telefon daxil edilməyib",
+    "noteLabel": "Əlavə qeydiniz",
+    "cash": "Qapıda nağd",
+    "card": "Qapıda kart",
+    "errorFallback": "Sifariş yaradılmadı. Yenidən cəhd edin."
+  },
+  "orderSuccess": {
+    "title": "Sifariş uğurla tamamlandı",
+    "message": "Əməkdaşlarımız sizinlə əlaqə saxlayıb sifarişinizi göndərəcəklər."
+  },
+  "search": {
+    "placeholder": "Axtar...",
+    "prompt": "Axtarmaq üçün məhsul adı yazın"
+  },
+  "account": {
+    "title": "Hesabım",
+    "language": "Dil",
+    "logout": "Çıxış et"
+  }
+}
