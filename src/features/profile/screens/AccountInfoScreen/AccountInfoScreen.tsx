@@ -3,7 +3,7 @@ import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BackIcon from '@/shared/icons/chevron-left.svg';
 import {
   ActivityIndicator,
@@ -11,18 +11,19 @@ import {
   Platform,
   ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createStyles } from '../AccountInfoScreen/AccountInfoScreen.styles';
-import { useProfile, useUpdateProfile } from '../../hooks/profile.hooks';
+import { useProfile, useUpdateProfile } from '@/shared/hooks/profile.hooks';
 
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'AccountInfo'>;
 
 
-const AccountInfoScreen = ({ navigation }: Props) => {
+const AccountInfoScreen = ({ navigation, route }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const { data, isPending } = useProfile();
@@ -33,6 +34,16 @@ const AccountInfoScreen = ({ navigation }: Props) => {
   const [phone, setPhone] = useState(user?.phone ?? '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const addressInputRef = useRef<TextInput>(null);
+  const focusField = route.params?.focusField;
+
+  useEffect(() => {
+    if (focusField === 'address' && !isPending) {
+      const timeout = setTimeout(() => addressInputRef.current?.focus(), 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [focusField, isPending]);
 
   const { mutate: updateProfile, isPending: isSaving } = useUpdateProfile();
 
@@ -81,6 +92,7 @@ const handleSave = () => {
               placeholder="Ad, Soyad"
             />
             <Input
+              ref={addressInputRef}
               label="Ünvan"
               value={address ?? ''}
               onChangeText={setAddress}

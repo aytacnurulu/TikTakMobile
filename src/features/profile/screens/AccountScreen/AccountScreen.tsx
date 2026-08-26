@@ -4,7 +4,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { createStyles } from './AccountScreen.styles';
-import { useProfile } from '../../hooks/profile.hooks';
+import { useProfile } from '@/shared/hooks/profile.hooks';
 import AccountIcon from '@/shared/icons/account.svg';
 import UserImageIcon from '@/shared/icons/user-image.svg'
 import HeartIcon from '@/shared/icons/heart.svg';

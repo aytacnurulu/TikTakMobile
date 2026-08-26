@@ -1,10 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+
+const NUM_COLUMNS = 3;
+const CARD_MARGIN = pixelWidth(6);
+// Must mirror HomeScreen's container paddingHorizontal (pixelWidth(16) on each side).
+const LIST_HORIZONTAL_PADDING = pixelWidth(16) * 2;
+
+// Fixed width instead of flex: 1 — with numColumns, flex items in an
+// incomplete last row stretch to fill the row, which is not what we want.
+const CARD_WIDTH =
+  (Dimensions.get('window').width -
+    LIST_HORIZONTAL_PADDING -
+    CARD_MARGIN * 2 * NUM_COLUMNS) /
+  NUM_COLUMNS;
+
+// Image scales with the card instead of a fixed size, so it fills most of
+// the card width; the name gets its own inset so it doesn't touch the border.
+const IMAGE_SIZE = CARD_WIDTH - pixelWidth(20);
+const NAME_WIDTH = CARD_WIDTH - pixelWidth(16);
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: pixelWidth(6),
+    width: CARD_WIDTH,
+    margin: CARD_MARGIN,
     borderRadius: pixelWidth(12),
     borderWidth: 1,
     paddingVertical: pixelHeight(12),
@@ -12,14 +30,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: pixelWidth(56),
-    height: pixelWidth(56),
+    width: IMAGE_SIZE,
+    height: IMAGE_SIZE,
     borderRadius: pixelWidth(8),
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   name: {
+    width: NAME_WIDTH,
     marginTop: pixelHeight(8),
     fontSize: pixelFont(12),
     fontWeight: '500',
+    textAlign: 'center',
   },
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { styles } from './Input.styles';
@@ -15,43 +15,49 @@ interface InputProps
   error?: string;
 }
 
-const Input = ({
-  label,
-  value,
-  onChangeText,
-  placeholder,
-  secureTextEntry,
-  multiline,
-  keyboardType,
-  onBlur,
-  error,
-}: InputProps) => {
-  const { colors } = useTheme();
+const Input = forwardRef<TextInput, InputProps>(
+  (
+    {
+      label,
+      value,
+      onChangeText,
+      placeholder,
+      secureTextEntry,
+      multiline,
+      keyboardType,
+      onBlur,
+      error,
+    },
+    ref,
+  ) => {
+    const { colors } = useTheme();
 
-  return (
-    <View style={styles.container}>
-      <Text style={[styles.label, { color: colors.textPrimary }]}>{label}</Text>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        placeholderTextColor={colors.textPlaceholder}
-        secureTextEntry={secureTextEntry}
-        multiline={multiline}
-        keyboardType={keyboardType}
-        style={[
-          styles.input,
-          { backgroundColor: colors.surface, color: colors.textPrimary },
-          multiline && styles.multiline,
-          error && { borderColor: '#E5484D', borderWidth: 1 },
-        ]}
-      />
-      {error ? (
-        <Text style={styles.error}>{error}</Text>
-      ) : null}
-    </View>
-  );
-};
+    return (
+      <View style={styles.container}>
+        <Text style={[styles.label, { color: colors.textPrimary }]}>{label}</Text>
+        <TextInput
+          ref={ref}
+          value={value}
+          onChangeText={onChangeText}
+          onBlur={onBlur}
+          placeholder={placeholder}
+          placeholderTextColor={colors.textPlaceholder}
+          secureTextEntry={secureTextEntry}
+          multiline={multiline}
+          keyboardType={keyboardType}
+          style={[
+            styles.input,
+            { backgroundColor: colors.surface, color: colors.textPrimary },
+            multiline && styles.multiline,
+            error && { borderColor: '#E5484D', borderWidth: 1 },
+          ]}
+        />
+        {error ? (
+          <Text style={styles.error}>{error}</Text>
+        ) : null}
+      </View>
+    );
+  },
+);
 
 export default Input;

@@ -14,4 +14,8 @@ export const styles = StyleSheet.create({
   address: {
     fontSize: pixelFont(13),
   },
+  addButton: {
+    alignItems: 'flex-start',
+    paddingHorizontal: 0,
+  },
 });
