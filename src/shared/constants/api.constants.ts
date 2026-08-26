@@ -29,6 +29,10 @@ export const API = {
       CREATE: '/api/tiktak/orders/user',
       LIST: '/api/tiktak/orders/user',
     },
+    PROFILE: {
+      GET: '/api/tiktak/profile',
+      UPDATE: '/api/tiktak/profile',
+    },
   },
 
   UPLOAD: '/api/tiktak/upload',
