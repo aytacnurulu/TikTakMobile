@@ -27,9 +27,18 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
   const handleOrderPress = (id: number) => {
     navigation.navigate('OrderHistoryDetail' as any, { id } as any);
   };
+
+const handleBackPress = () => {
+  if (navigation.canGoBack()) {
+    navigation.goBack();
+  } else {
+    navigation.navigate('Account' as any);
+  }
+};
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader title="Sifariş tarixçəsi" onBack={() => navigation.goBack()} />
+      <ScreenHeader title="Sifariş tarixçəsi" onBackPress={handleBackPress} />
  
       {isPending ? (
         <View style={styles.loader}>
