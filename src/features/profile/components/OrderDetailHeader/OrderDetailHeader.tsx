@@ -4,7 +4,6 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { Locale } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
 import { OrderHistoryItem } from '@/shared/types/order.types';
-import { styles as sheetStyles } from './../OrderDetailSheet/OrderDetailSheet.styles';
 import { styles } from './OrderDetailHeader.styles';
 
 
@@ -103,7 +102,7 @@ const OrderDetailHeader = ({
       </View>
 
       <View
-        style={[sheetStyles.divider, { backgroundColor: colors.border }]}
+        style={[styles.divider, { backgroundColor: colors.border }]}
       />
     </>
   );

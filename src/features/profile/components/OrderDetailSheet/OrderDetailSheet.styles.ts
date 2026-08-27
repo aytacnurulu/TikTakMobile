@@ -15,9 +15,4 @@ export const styles = StyleSheet.create({
     paddingTop: pixelHeight(8),
     paddingBottom: pixelHeight(32),
   },
-  divider: {
-    height: 1,
-    width: '100%',
-    marginBottom: pixelHeight(16),
-  }
 });

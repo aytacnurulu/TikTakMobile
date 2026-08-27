@@ -18,4 +18,9 @@ export const styles = StyleSheet.create({
     fontSize: pixelFont(14),
     fontWeight: '600',
   },
+  divider: {
+  height: 1,
+  width: '100%',
+  marginBottom: pixelHeight(16),
+},
 });
