@@ -16,7 +16,6 @@ export type AccountStackParamList = {
   Account: undefined;
   AccountInfo: { focusField?: 'address' } | undefined;
   OrderHistory: undefined;
-  OrderHistoryDetail: { orderId: string };
   Favorites: undefined;
   Settings: undefined;
 };
