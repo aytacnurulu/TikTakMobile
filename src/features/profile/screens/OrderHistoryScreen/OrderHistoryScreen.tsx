@@ -4,7 +4,7 @@ import { ActivityIndicator, FlatList, View } from 'react-native';
 import OrderHistoryItem from '../../components/OrderHistoryItem/OrderHistoryItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { createStyles } from '../AccountInfoScreen/AccountInfoScreen.styles';
+import { createStyles } from './OrderHistoryScreen.styles';
 import { useOrderHistory } from '../../hooks/order-history.hooks';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
