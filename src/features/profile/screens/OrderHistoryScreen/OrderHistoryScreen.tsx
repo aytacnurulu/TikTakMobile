@@ -9,6 +9,8 @@ import { useOrderHistory } from '../../hooks/order-history.hooks';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
 import EmptyState from '@/shared/components/EmptyState';
+import { useRef } from 'react';
+import OrderDetailSheet, { OrderDetailSheetRef } from '../../components/OrderDetailSheet/OrderDetailSheet';
 
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'OrderHistory'>;
@@ -23,23 +25,28 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
   const styles = createStyles(colors);
   const { data, isPending } = useOrderHistory();
   const orders = data ?? [];
+  const detailSheetRef = useRef<OrderDetailSheetRef>(null);
+
 
   const handleOrderPress = (id: number) => {
-    navigation.navigate('OrderHistoryDetail' as any, { id } as any);
+    const order = orders.find(o => o.id === id);
+    if (order) {
+      detailSheetRef.current?.open(order);
+    }
   };
 
-const handleBackPress = () => {
-  if (navigation.canGoBack()) {
-    navigation.goBack();
-  } else {
-    navigation.navigate('Account' as any);
-  }
-};
+  const handleBackPress = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate('Account' as any);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScreenHeader title="Sifariş tarixçəsi" onBackPress={handleBackPress} />
- 
+
       {isPending ? (
         <View style={styles.loader}>
           <ActivityIndicator color={colors.primary} />
@@ -53,6 +60,7 @@ const handleBackPress = () => {
           ListEmptyComponent={<EmptyState message="Sifariş tapılmadı" />}
         />
       )}
+      <OrderDetailSheet ref={detailSheetRef} />
     </SafeAreaView>
 
   );
