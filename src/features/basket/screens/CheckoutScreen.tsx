@@ -19,7 +19,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { useAuthStore } from '@/shared/store/auth.store';
 import { useBasket } from '@/shared/hooks/basket.hooks';
 import { useCreateOrder } from '@/features/basket/hooks/order.hooks';
-import { PaymentMethod } from '@/features/basket/types/order.types';
+import { PaymentMethod } from '@/shared/types/order.types';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
