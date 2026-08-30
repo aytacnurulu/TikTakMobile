@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
+import { useThemeStore } from '@/shared/store/theme.store';
 import BackIcon from '@/shared/icons/chevron-left.svg';
 import LanguageIcon from '@/shared/icons/language.svg';
 import ThemeIcon from '@/shared/icons/theme.svg';
@@ -19,10 +20,12 @@ const SettingsScreen = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const languageSheetRef = useRef<LanguageSelectSheetRef>(null);
+  const theme = useThemeStore(state => state.theme);
+  const setTheme = useThemeStore(state => state.setTheme);
+  const isDarkMode = theme === 'dark';
 
   const handleLanguagePress = () => languageSheetRef.current?.open();
-  // TODO(bottom-sheet team): open ThemeSelectSheet
-  const handleThemePress = () => {};
+  const handleThemeToggle = () => setTheme(isDarkMode ? 'light' : 'dark');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,10 +42,21 @@ const SettingsScreen = ({ navigation }: Props) => {
           label="Dil"
           onPress={handleLanguagePress}
         />
+
+        <View style={styles.divider} />
+
         <SettingsOptionRow
           Icon={ThemeIcon}
           label="Tema"
-          onPress={handleThemePress}
+          onPress={handleThemeToggle}
+          rightElement={
+            <Switch
+              value={isDarkMode}
+              onValueChange={handleThemeToggle}
+              trackColor={{ false: colors.border, true: colors.primary }}
+              thumbColor={colors.background}
+            />
+          }
         />
       </View>
 

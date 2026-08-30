@@ -8,10 +8,11 @@ import { createStyles } from './SettingsOptionRow.styles';
 interface SettingsOptionRowProps {
   Icon: React.FC<SvgProps>;
   label: string;
-  onPress: () => void;
+  onPress?: () => void;
+  rightElement?: React.ReactNode;
 }
 
-const SettingsOptionRow = ({ Icon, label, onPress }: SettingsOptionRowProps) => {
+const SettingsOptionRow = ({ Icon, label, onPress, rightElement }: SettingsOptionRowProps) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -19,7 +20,8 @@ const SettingsOptionRow = ({ Icon, label, onPress }: SettingsOptionRowProps) => 
     <TouchableOpacity
       style={styles.container}
       onPress={onPress}
-      activeOpacity={0.8}
+      activeOpacity={onPress ? 0.8 : 1}
+      disabled={!onPress}
     >
       <View style={styles.left}>
         <View style={styles.iconWrapper}>
@@ -27,6 +29,7 @@ const SettingsOptionRow = ({ Icon, label, onPress }: SettingsOptionRowProps) => 
         </View>
         <Text style={styles.label}>{label}</Text>
       </View>
+      {rightElement}
     </TouchableOpacity>
   );
 };
