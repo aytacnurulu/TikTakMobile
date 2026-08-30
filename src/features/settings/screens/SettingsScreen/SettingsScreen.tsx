@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -8,6 +8,9 @@ import BackIcon from '@/shared/icons/chevron-left.svg';
 import LanguageIcon from '@/shared/icons/language.svg';
 import ThemeIcon from '@/shared/icons/theme.svg';
 import SettingsOptionRow from '@/features/settings/components/SettingsOptionRow/SettingsOptionRow';
+import LanguageSelectSheet, {
+  LanguageSelectSheetRef,
+} from '@/features/settings/components/LanguageSelectSheet';
 import { createStyles } from './SettingsScreen.styles';
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'Settings'>;
@@ -15,9 +18,9 @@ type Props = NativeStackScreenProps<AccountStackParamList, 'Settings'>;
 const SettingsScreen = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
+  const languageSheetRef = useRef<LanguageSelectSheetRef>(null);
 
-  // TODO(bottom-sheet team): open LanguageSelectSheet
-  const handleLanguagePress = () => {};
+  const handleLanguagePress = () => languageSheetRef.current?.open();
   // TODO(bottom-sheet team): open ThemeSelectSheet
   const handleThemePress = () => {};
 
@@ -42,6 +45,8 @@ const SettingsScreen = ({ navigation }: Props) => {
           onPress={handleThemePress}
         />
       </View>
+
+      <LanguageSelectSheet ref={languageSheetRef} />
     </SafeAreaView>
   );
 };
