@@ -5,6 +5,7 @@ import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useThemeStore } from '@/shared/store/theme.store';
+import { pixelWidth } from '@/shared/utils/metrics';
 import BackIcon from '@/shared/icons/chevron-left.svg';
 import LanguageIcon from '@/shared/icons/language.svg';
 import ThemeIcon from '@/shared/icons/theme.svg';
@@ -31,7 +32,7 @@ const SettingsScreen = ({ navigation }: Props) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <BackIcon width={24} height={24} color={colors.textPrimary} />
+          <BackIcon width={pixelWidth(18)} height={pixelWidth(11)} color={colors.textPrimary} />
         </TouchableOpacity>
         <Text style={styles.title}>Ayarlar</Text>
       </View>
