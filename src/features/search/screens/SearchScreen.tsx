@@ -45,7 +45,7 @@ const SearchScreen = () => {
       />
 
       {debouncedQuery.length === 0 ? (
-        <EmptyState message={t('search.prompt')} />
+        <EmptyState message={t('search.prompt')} icon={null} />
       ) : isFetching && !isFetchingNextPage ? (
         <View style={styles.loader}>
           <ActivityIndicator color={colors.primary} />
