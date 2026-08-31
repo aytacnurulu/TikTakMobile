@@ -2,6 +2,7 @@ import { AccountStackParamList } from '@/app/stack/types';
 import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import { useTheme } from '@/shared/hooks/useTheme';
+import { pixelWidth } from '@/shared/utils/metrics';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
 import BackIcon from '@/shared/icons/chevron-left.svg';
@@ -74,7 +75,7 @@ const handleSave = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <BackIcon width={24} height={24} color={colors.textPrimary} />
+          <BackIcon width={pixelWidth(18)} height={pixelWidth(11)} color={colors.textPrimary} />
         </TouchableOpacity>
         <Text style={styles.title}>Hesab</Text>
       </View>

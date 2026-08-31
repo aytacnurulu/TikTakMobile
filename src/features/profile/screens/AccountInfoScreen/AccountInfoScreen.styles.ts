@@ -25,7 +25,7 @@ export const createStyles = (colors: ThemeColors) =>
       fontSize: pixelFont(22),
       fontWeight: '700',
       textAlign: 'center',
-      color: '#000',
+      color: colors.textPrimary,
     },
     form: {
       marginTop: pixelWidth(28),

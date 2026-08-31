@@ -27,7 +27,7 @@ const HomeHeader = () => {
         <BasketIcon
           width={pixelWidth(22)}
           height={pixelWidth(22)}
-          fill={colors.textPrimary}
+          color={colors.textPrimary}
         />
         {count > 0 && (
           <View style={[styles.badge, { backgroundColor: colors.primary }]}>

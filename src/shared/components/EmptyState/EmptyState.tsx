@@ -15,7 +15,8 @@ const EmptyState = ({ message, icon }: EmptyStateProps) => {
 
   return (
     <View style={styles.container}>
-      {icon ?? <CloseIcon width={pixelWidth(260)} height={pixelWidth(200)} />}
+      {icon !== null &&
+        (icon ?? <CloseIcon width={pixelWidth(260)} height={pixelWidth(200)} />)}
       <Text style={[styles.message, { color: colors.textPlaceholder }]}>
         {message}
       </Text>

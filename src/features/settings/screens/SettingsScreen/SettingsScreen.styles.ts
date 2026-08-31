@@ -31,4 +31,8 @@ export const createStyles = (colors: ThemeColors) =>
       marginTop: pixelWidth(24),
       gap: pixelWidth(4),
     },
+    divider: {
+      height: StyleSheet.hairlineWidth,
+      backgroundColor: colors.border,
+    },
   });

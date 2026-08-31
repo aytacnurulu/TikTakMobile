@@ -20,7 +20,7 @@ const ScreenHeader = ({ title, onBackPress, rightElement }: ScreenHeaderProps) =
         <ChevronLeftIcon
           width={pixelWidth(18)}
           height={pixelWidth(11)}
-          fill={colors.textPrimary}
+          color={colors.textPrimary}
         />
       </TouchableOpacity>
       <Text style={[styles.title, { color: colors.textPrimary }]} numberOfLines={1}>
