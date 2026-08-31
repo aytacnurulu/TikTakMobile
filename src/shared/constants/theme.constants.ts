@@ -22,7 +22,7 @@ export const darkColors = {
   textPlaceholder: '#6B6E76',
   textOnPrimary: '#FFFFFF',
   border: '#3A3D4A',
-  textLabel: '#101142',
+  textLabel: '#F5F5F7',
 };
 
 export type ThemeColors = typeof lightColors;

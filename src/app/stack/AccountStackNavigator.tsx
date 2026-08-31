@@ -1,8 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AccountScreen from '@/features/profile/screens/AccountScreen/AccountScreen';
 import AccountInfoScreen from '@/features/profile/screens/AccountInfoScreen/AccountInfoScreen';
-import OrderHistoryScreen from '@/features/profile/screens/OrderHistoryScreen';
-import OrderHistoryDetailScreen from '@/features/profile/screens/OrderHistoryDetailScreen';
+import OrderHistoryScreen from '@/features/profile/screens/OrderHistoryScreen/OrderHistoryScreen';
 import FavoritesScreen from '@/features/favorites/screens/FavoritesScreen';
 import SettingsScreen from '@/features/settings/screens/SettingsScreen/SettingsScreen';
 import { AccountStackParamList } from '@/app/stack/types';
@@ -15,10 +14,6 @@ const AccountStackNavigator = () => {
       <Stack.Screen name="Account" component={AccountScreen} />
       <Stack.Screen name="AccountInfo" component={AccountInfoScreen} />
       <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} />
-      <Stack.Screen
-        name="OrderHistoryDetail"
-        component={OrderHistoryDetailScreen}
-      />
       <Stack.Screen name="Favorites" component={FavoritesScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
     </Stack.Navigator>

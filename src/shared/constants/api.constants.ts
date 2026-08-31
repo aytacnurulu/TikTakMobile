@@ -26,8 +26,9 @@ export const API = {
       CLEAR: '/api/tiktak/basket/clear',
     },
     ORDERS: {
-      CREATE: '/api/tiktak/orders/user',
+      CREATE: '/api/tiktak/orders',
       LIST: '/api/tiktak/orders/user',
+      DETAIL: (id: number) => `/api/tiktak/orders/user/${id}`,
     },
     PROFILE: {
       GET: '/api/tiktak/profile',
