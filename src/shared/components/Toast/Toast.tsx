@@ -3,8 +3,8 @@ import { AccessibilityInfo, Animated, Pressable, Text, View } from 'react-native
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { useFeedbackStore } from '@/shared/feedback/feedback.store';
-import type { FeedbackType } from '@/shared/feedback/feedback.store';
+import { useFeedbackStore } from '@/shared/store/feedback.store';
+import type { FeedbackType } from '@/shared/store/feedback.store';
 import { styles } from './Toast.styles';
 
 const GLYPH: Record<FeedbackType, string> = {

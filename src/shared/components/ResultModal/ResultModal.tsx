@@ -2,8 +2,8 @@ import React from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { useResultModalStore } from '@/shared/feedback/resultModal.store';
-import type { ResultModalAction } from '@/shared/feedback/resultModal.store';
+import { useResultModalStore } from '@/shared/store/resultModal.store';
+import type { ResultModalAction } from '@/shared/store/resultModal.store';
 import { styles } from './ResultModal.styles';
 
 const GLYPH = { success: '✓', error: '✕' } as const;
