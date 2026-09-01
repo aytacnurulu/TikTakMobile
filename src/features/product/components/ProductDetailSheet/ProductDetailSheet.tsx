@@ -12,7 +12,6 @@ import {
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import { useTranslation } from 'react-i18next';
-// import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
@@ -29,7 +28,7 @@ import {
   useToggleFavorite,
 } from '@/shared/hooks/favorites.hooks';
 import { Product } from '@/shared/types/product.types';
-import { styles } from './ProductDetailSheet.styles';
+import { createStyles } from './ProductDetailSheet.styles';
 
 export interface ProductDetailSheetRef {
   open: (product: Product) => void;
@@ -46,9 +45,9 @@ const renderBackdrop = (props: BottomSheetBackdropProps) => (
 
 const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
-  // const tabBarHeight = useBottomTabBarHeight();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [product, setProduct] = useState<Product | null>(null);
 
@@ -78,11 +77,8 @@ const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
       enablePanDownToClose
       bottomInset={0}
       backdropComponent={renderBackdrop}
-      backgroundStyle={{ backgroundColor: colors.background }}
-      handleIndicatorStyle={[
-        styles.handleIndicator,
-        { backgroundColor: colors.textPlaceholder },
-      ]}
+      backgroundStyle={styles.sheetBackground}
+      handleIndicatorStyle={styles.handleIndicator}
       containerStyle={styles.sheetContainer}
     >
       <BottomSheetScrollView
@@ -95,24 +91,14 @@ const ProductDetailSheet = forwardRef<ProductDetailSheetRef>((_props, ref) => {
               isFavorite={isFavorite}
               onToggle={() => toggleFavorite.mutate(product)}
               size={22}
-              style={{
-                ...styles.favoriteButton,
-                backgroundColor: colors.surface,
-                shadowColor: colors.textPrimary,
-              }}
+              style={{ ...styles.favoriteButton }}
             />
-            <View
-              style={[styles.imageWrapper, { backgroundColor: colors.surface }]}
-            >
+            <View style={styles.imageWrapper}>
               <Image source={{ uri: product.img_url }} style={styles.image} />
             </View>
-            <Text style={[styles.title, { color: colors.textPrimary }]}>
-              {product.title}
-            </Text>
-            <Text style={[styles.description, { color: colors.textSecondary }]}>
-              {product.description}
-            </Text>
-            <Text style={[styles.price, { color: colors.textPrimary }]}>
+            <Text style={styles.title}>{product.title}</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Text style={styles.price}>
               {formatPrice(product.price, locale)}
             </Text>
 
