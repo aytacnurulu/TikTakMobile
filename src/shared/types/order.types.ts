@@ -1,9 +1,10 @@
-export type PaymentMethod = 'cash' | 'card';
+export type PaymentMethod = 'CARD' | 'CASH';
 
 export interface CreateOrderPayload {
   address: string;
+  phone: string;
   note?: string;
-  payment_method: PaymentMethod;
+  paymentMethod: PaymentMethod;
 }
 
 export interface Order {

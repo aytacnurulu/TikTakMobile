@@ -3,6 +3,7 @@ import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useFavorites } from '@/shared/hooks/favorites.hooks';
@@ -18,6 +19,7 @@ import { pixelWidth } from '@/shared/utils/metrics';
 
 const FavoritesScreen = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<AccountStackParamList>>();
   const sheetRef = useRef<ProductDetailSheetRef>(null);
@@ -41,7 +43,7 @@ const FavoritesScreen = () => {
         style={[styles.container, { backgroundColor: colors.background }]}
       >
         <ScreenHeader
-          title="Siyahılarım"
+          title={t('favorites.title')}
           onBackPress={() => navigation.goBack()}
         />
         <View style={styles.loader}>
@@ -56,13 +58,13 @@ const FavoritesScreen = () => {
       style={[styles.container, { backgroundColor: colors.background }]}
     >
       <ScreenHeader
-        title="Siyahılarım"
+        title={t('favorites.title')}
         onBackPress={() => navigation.goBack()}
       />
 
       {products.length === 0 ? (
         <View style={styles.emptyState}>
-          <EmptyState message="Siyahıda məhsul yoxdur" />
+          <EmptyState message={t('favorites.empty')} />
         </View>
       ) : (
         <FlatList

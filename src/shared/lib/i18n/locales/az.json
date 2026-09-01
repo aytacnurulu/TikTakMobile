@@ -105,9 +105,62 @@
     "placeholder": "Axtar...",
     "prompt": "Axtarmaq üçün məhsul adı yazın"
   },
+  "tabs": {
+    "home": "Ana səhifə",
+    "search": "Axtarış",
+    "account": "Hesab"
+  },
   "account": {
     "title": "Hesabım",
     "language": "Dil",
-    "logout": "Çıxış et"
+    "logout": "Çıxış et",
+    "menu": {
+      "info": "Hesab məlumatlarım",
+      "favorites": "Siyahılarım",
+      "orders": "Sifariş tarixçəsi",
+      "settings": "Ayarlar",
+      "logout": "Çıxış"
+    }
+  },
+  "accountInfo": {
+    "title": "Hesab",
+    "fullNameLabel": "Ad Soyad",
+    "fullNamePlaceholder": "Ad, Soyad",
+    "addressLabel": "Ünvan",
+    "addressPlaceholder": "Ünvan",
+    "phoneLabel": "Telefon nömrəsi",
+    "phonePlaceholder": "(+994) __ / __ / __ / __",
+    "passwordLabel": "Şifrə",
+    "passwordRepeatLabel": "Şifrənin təkrarı",
+    "save": "Yadda saxla",
+    "saveSuccess": "Uğurla yadda saxlanıldı",
+    "saveError": "Yadda saxlanılarkən xəta baş verdi",
+    "passwordMismatch": "Şifrələr uyğun gəlmir"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "language": "Dil",
+    "theme": "Tema"
+  },
+  "favorites": {
+    "title": "Siyahılarım",
+    "empty": "Siyahıda məhsul yoxdur"
+  },
+  "orderHistory": {
+    "title": "Sifariş tarixçəsi",
+    "empty": "Sifariş tapılmadı",
+    "orderNo": "No",
+    "date": "Tarix",
+    "deliveryAddress": "Çatdırılma ünvanı",
+    "itemsCount": "Məhsul sayı",
+    "status": "Status",
+    "subtotalDelivery": "Subtotal/Çatdırılma",
+    "free": "pulsuz",
+    "statuses": {
+      "pending": "Sifariş qəbul edilib",
+      "accepted": "Sifariş qəbul edilib",
+      "delivered": "Çatdırılıb",
+      "cancelled": "Ləğv edilib"
+    }
   }
 }

@@ -105,9 +105,62 @@
     "placeholder": "Поиск...",
     "prompt": "Введите название товара для поиска"
   },
+  "tabs": {
+    "home": "Главная",
+    "search": "Поиск",
+    "account": "Аккаунт"
+  },
   "account": {
     "title": "Мой аккаунт",
     "language": "Язык",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "menu": {
+      "info": "Данные аккаунта",
+      "favorites": "Мои списки",
+      "orders": "История заказов",
+      "settings": "Настройки",
+      "logout": "Выйти"
+    }
+  },
+  "accountInfo": {
+    "title": "Аккаунт",
+    "fullNameLabel": "Имя и фамилия",
+    "fullNamePlaceholder": "Имя, фамилия",
+    "addressLabel": "Адрес",
+    "addressPlaceholder": "Адрес",
+    "phoneLabel": "Номер телефона",
+    "phonePlaceholder": "(+994) __ / __ / __ / __",
+    "passwordLabel": "Пароль",
+    "passwordRepeatLabel": "Повторите пароль",
+    "save": "Сохранить",
+    "saveSuccess": "Успешно сохранено",
+    "saveError": "Произошла ошибка при сохранении",
+    "passwordMismatch": "Пароли не совпадают"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "theme": "Тема"
+  },
+  "favorites": {
+    "title": "Мои списки",
+    "empty": "В списке нет товаров"
+  },
+  "orderHistory": {
+    "title": "История заказов",
+    "empty": "Заказы не найдены",
+    "orderNo": "№",
+    "date": "Дата",
+    "deliveryAddress": "Адрес доставки",
+    "itemsCount": "Кол-во товаров",
+    "status": "Статус",
+    "subtotalDelivery": "Подытог/Доставка",
+    "free": "бесплатно",
+    "statuses": {
+      "pending": "Заказ принят",
+      "accepted": "Заказ принят",
+      "delivered": "Доставлен",
+      "cancelled": "Отменён"
+    }
   }
 }

@@ -6,6 +6,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { DevToolsBubble } from 'react-native-react-query-devtools';
 import { queryClient } from '@/shared/lib/query-client';
+import StatusModal from '@/shared/components/StatusModal';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ const AppProviders = ({ children }: AppProvidersProps) => {
       <SafeAreaProvider>
         <QueryClientProvider client={queryClient}>
           <BottomSheetModalProvider>{children}</BottomSheetModalProvider>
+          <StatusModal />
           {__DEV__ && (
             <DevToolsBubble onCopy={onCopy} queryClient={queryClient} />
           )}

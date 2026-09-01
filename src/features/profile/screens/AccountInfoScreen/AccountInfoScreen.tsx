@@ -5,6 +5,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import BackIcon from '@/shared/icons/chevron-left.svg';
 import {
   ActivityIndicator,
@@ -26,18 +27,30 @@ type Props = NativeStackScreenProps<AccountStackParamList, 'AccountInfo'>;
 
 const AccountInfoScreen = ({ navigation, route }: Props) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = createStyles(colors);
   const { data, isPending } = useProfile();
   const user = data?.data;
 
-  const [fullName, setFullName] = useState(user?.full_name ?? '');
-  const [address, setAddress] = useState(user?.address ?? '');
-  const [phone, setPhone] = useState(user?.phone ?? '');
+  const [fullName, setFullName] = useState('');
+  const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const addressInputRef = useRef<TextInput>(null);
+  const hydratedRef = useRef(false);
   const focusField = route.params?.focusField;
+
+  // Populate the form once the profile has loaded. Guarded so a background
+  // refetch (e.g. after saving) doesn't overwrite the user's in-progress edits.
+  useEffect(() => {
+    if (user && !hydratedRef.current) {
+      setFullName(user.full_name ?? '');
+      setAddress(user.address ?? '');
+      hydratedRef.current = true;
+    }
+  }, [user]);
 
   useEffect(() => {
     if (focusField === 'address' && !isPending) {
@@ -48,21 +61,30 @@ const AccountInfoScreen = ({ navigation, route }: Props) => {
 
   const { mutate: updateProfile, isPending: isSaving } = useUpdateProfile();
 
-const handleSave = () => {
-  if (password && password !== confirmPassword) {
-    // error state göstər, göndərmə
-    return;
-  }
+  const handleSave = () => {
+    if (password && password !== confirmPassword) {
+      setPasswordError(t('accountInfo.passwordMismatch'));
+      return;
+    }
+    setPasswordError('');
 
-  updateProfile({
-    full_name: fullName,
-    address,
-    img_url: user?.img_url ?? null,  
-    ...(password
-      ? { password, password_repeat: confirmPassword }
-      : {}),
-  });
-};
+    updateProfile(
+      {
+        full_name: fullName,
+        address,
+        img_url: user?.img_url ?? null,
+        ...(password
+          ? { password, password_repeat: confirmPassword }
+          : {}),
+      },
+      {
+        onSuccess: () => {
+          setPassword('');
+          setConfirmPassword('');
+        },
+      },
+    );
+  };
 
   if (isPending) {
     return (
@@ -77,7 +99,7 @@ const handleSave = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <BackIcon width={pixelWidth(18)} height={pixelWidth(11)} color={colors.textPrimary} />
         </TouchableOpacity>
-        <Text style={styles.title}>Hesab</Text>
+        <Text style={styles.title}>{t('accountInfo.title')}</Text>
       </View>
 
       <KeyboardAvoidingView
@@ -87,41 +109,45 @@ const handleSave = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.form}>
             <Input
-              label="Ad Soyad"
+              label={t('accountInfo.fullNameLabel')}
               value={fullName}
               onChangeText={setFullName}
-              placeholder="Ad, Soyad"
+              placeholder={t('accountInfo.fullNamePlaceholder')}
             />
             <Input
               ref={addressInputRef}
-              label="Ünvan"
-              value={address ?? ''}
+              label={t('accountInfo.addressLabel')}
+              value={address}
               onChangeText={setAddress}
-              placeholder="Ünvan"
+              placeholder={t('accountInfo.addressPlaceholder')}
             />
             <Input
-              label="Telefon nömrəsi"
-              value={phone}
-              onChangeText={setPhone}
-              placeholder="(+994) __ / __ / __ / __"
+              label={t('accountInfo.phoneLabel')}
+              value={user?.phone ?? ''}
+              placeholder={t('accountInfo.phonePlaceholder')}
               keyboardType="phone-pad"
+              editable={false}
             />
             <Input
-              label="Şifrə"
+              label={t('accountInfo.passwordLabel')}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
             />
             <Input
-              label="Şifrənin təkrarı"
+              label={t('accountInfo.passwordRepeatLabel')}
               value={confirmPassword}
-              onChangeText={setConfirmPassword}
+              onChangeText={text => {
+                setConfirmPassword(text);
+                if (passwordError) setPasswordError('');
+              }}
               secureTextEntry
+              error={passwordError}
             />
           </View>
 
           <Button
-            title="Yadda saxla"
+            title={t('accountInfo.save')}
             onPress={handleSave}
             loading={isSaving}
             disabled={isSaving}
