@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useFeedbackStore } from '@/shared/store/feedback.store';
 import type { FeedbackType } from '@/shared/store/feedback.store';
-import { styles } from './Toast.styles';
+import { createStyles } from './Toast.styles';
 
 const GLYPH: Record<FeedbackType, string> = {
   success: '✓',
@@ -25,6 +25,7 @@ const HIDDEN_OFFSET = -120;
 const Toast = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const insets = useSafeAreaInsets();
 
   const item = useFeedbackStore(state => state.current);
@@ -122,19 +123,13 @@ const Toast = () => {
         accessibilityRole="alert"
         accessibilityLiveRegion="polite"
         onPress={() => hide(item.id)}
-        style={[
-          styles.card,
-          { backgroundColor: colors.background, borderColor: colors.border },
-        ]}
+        style={styles.card}
       >
         <View style={[styles.glyph, { backgroundColor: accent }]}>
           <Text style={styles.glyphText}>{GLYPH[item.type]}</Text>
         </View>
 
-        <Text
-          numberOfLines={3}
-          style={[styles.message, { color: colors.textPrimary }]}
-        >
+        <Text numberOfLines={3} style={styles.message}>
           {label}
         </Text>
 

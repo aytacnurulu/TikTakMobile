@@ -7,17 +7,19 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { useBasket } from '@/shared/hooks/basket.hooks';
 import BasketIcon from '@/shared/icons/basket.svg';
-import { styles } from './HomeHeader.styles';
+import { createStyles } from './HomeHeader.styles';
 
 const HomeHeader = () => {
   const { colors } = useTheme();
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const styles = createStyles(colors);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data } = useBasket();
   const count = data?.data.count ?? 0;
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.logo, { color: colors.textPrimary }]}>TIK TAK</Text>
+      <Text style={styles.logo}>TIK TAK</Text>
 
       <TouchableOpacity
         style={styles.basketButton}
@@ -30,10 +32,8 @@ const HomeHeader = () => {
           color={colors.textPrimary}
         />
         {count > 0 && (
-          <View style={[styles.badge, { backgroundColor: colors.primary }]}>
-            <Text style={[styles.badgeText, { color: colors.textOnPrimary }]}>
-              {count}
-            </Text>
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{count}</Text>
           </View>
         )}
       </TouchableOpacity>
