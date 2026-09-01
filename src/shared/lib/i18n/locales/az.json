@@ -1,6 +1,7 @@
 {
   "common": {
-    "retry": "Yenidən yoxla"
+    "retry": "Yenidən yoxla",
+    "ok": "Bağla"
   },
   "auth": {
     "welcome": {
@@ -161,6 +162,43 @@
       "accepted": "Sifariş qəbul edilib",
       "delivered": "Çatdırılıb",
       "cancelled": "Ləğv edilib"
+    }
+  },
+  "feedback": {
+    "order": {
+      "completed": "Sifariş uğurla tamamlandı",
+      "failed": "Sifariş yaradılmadı. Yenidən cəhd edin."
+    },
+    "basket": {
+      "itemAdded_one": "Məhsul səbətə əlavə olundu",
+      "itemAdded_other": "{{count}} məhsul səbətə əlavə olundu",
+      "itemRemoved_one": "Məhsul səbətdən silindi",
+      "itemRemoved_other": "{{count}} məhsul səbətdən silindi",
+      "updateFailed": "Səbət yenilənmədi"
+    },
+    "favorites": {
+      "updateFailed": "Sevimlilər yenilənmədi"
+    },
+    "profile": {
+      "saved": "Məlumatlar yadda saxlanıldı",
+      "saveFailed": "Yadda saxlanılarkən xəta baş verdi"
+    },
+    "address": {
+      "saved": "Ünvan yadda saxlanıldı",
+      "deleted": "Ünvan silindi"
+    },
+    "auth": {
+      "registered": "Qeydiyyat tamamlandı",
+      "sessionExpired": "Sessiya bitdi, yenidən daxil olun"
+    },
+    "common": {
+      "genericError": "Xəta baş verdi. Yenidən cəhd edin.",
+      "copied": "Kopyalandı",
+      "offline": "İnternet bağlantısı yoxdur"
+    },
+    "action": {
+      "undo": "Geri al",
+      "viewOrders": "Sifarişlərə bax"
     }
   }
 }

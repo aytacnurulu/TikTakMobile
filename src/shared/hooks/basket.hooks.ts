@@ -4,6 +4,7 @@ import { useAuthStore } from '@/shared/store/auth.store';
 import { Basket } from '@/shared/types/basket.types';
 import { Product } from '@/shared/types/product.types';
 import { ApiResponse } from '@/shared/types/api-response.type';
+import { FEEDBACK, showFeedback } from '@/shared/feedback';
 
 const BASKET_KEY = ['basket'];
 
@@ -52,10 +53,14 @@ export const useAddToBasket = () => {
 
       return { previous };
     },
+    onSuccess: () => {
+      showFeedback('success', FEEDBACK.BASKET.ITEM_ADDED);
+    },
     onError: (_error, _variables, context) => {
       if (context?.previous) {
         queryClient.setQueryData(BASKET_KEY, context.previous);
       }
+      showFeedback('error', FEEDBACK.BASKET.UPDATE_FAILED);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: BASKET_KEY });
@@ -102,10 +107,14 @@ export const useRemoveFromBasket = () => {
 
       return { previous };
     },
+    onSuccess: () => {
+      showFeedback('info', FEEDBACK.BASKET.ITEM_REMOVED);
+    },
     onError: (_error, _variables, context) => {
       if (context?.previous) {
         queryClient.setQueryData(BASKET_KEY, context.previous);
       }
+      showFeedback('error', FEEDBACK.BASKET.UPDATE_FAILED);
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: BASKET_KEY });

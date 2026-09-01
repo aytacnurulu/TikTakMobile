@@ -1,6 +1,7 @@
 {
   "common": {
-    "retry": "Повторить"
+    "retry": "Повторить",
+    "ok": "Закрыть"
   },
   "auth": {
     "welcome": {
@@ -161,6 +162,47 @@
       "accepted": "Заказ принят",
       "delivered": "Доставлен",
       "cancelled": "Отменён"
+    }
+  },
+  "feedback": {
+    "order": {
+      "completed": "Заказ успешно оформлен",
+      "failed": "Не удалось создать заказ. Попробуйте снова."
+    },
+    "basket": {
+      "itemAdded_one": "Товар добавлен в корзину",
+      "itemAdded_few": "{{count}} товара добавлено в корзину",
+      "itemAdded_many": "{{count}} товаров добавлено в корзину",
+      "itemAdded_other": "{{count}} товаров добавлено в корзину",
+      "itemRemoved_one": "Товар удалён из корзины",
+      "itemRemoved_few": "{{count}} товара удалено из корзины",
+      "itemRemoved_many": "{{count}} товаров удалено из корзины",
+      "itemRemoved_other": "{{count}} товаров удалено из корзины",
+      "updateFailed": "Не удалось обновить корзину"
+    },
+    "favorites": {
+      "updateFailed": "Не удалось обновить избранное"
+    },
+    "profile": {
+      "saved": "Данные сохранены",
+      "saveFailed": "Не удалось сохранить"
+    },
+    "address": {
+      "saved": "Адрес сохранён",
+      "deleted": "Адрес удалён"
+    },
+    "auth": {
+      "registered": "Регистрация завершена",
+      "sessionExpired": "Сессия истекла, войдите снова"
+    },
+    "common": {
+      "genericError": "Произошла ошибка. Попробуйте снова.",
+      "copied": "Скопировано",
+      "offline": "Нет подключения к интернету"
+    },
+    "action": {
+      "undo": "Отменить",
+      "viewOrders": "К заказам"
     }
   }
 }

@@ -1,6 +1,7 @@
 {
   "common": {
-    "retry": "Retry"
+    "retry": "Retry",
+    "ok": "Close"
   },
   "auth": {
     "welcome": {
@@ -161,6 +162,43 @@
       "accepted": "Order received",
       "delivered": "Delivered",
       "cancelled": "Cancelled"
+    }
+  },
+  "feedback": {
+    "order": {
+      "completed": "Order placed successfully",
+      "failed": "Order could not be created. Please try again."
+    },
+    "basket": {
+      "itemAdded_one": "Item added to basket",
+      "itemAdded_other": "{{count}} items added to basket",
+      "itemRemoved_one": "Item removed from basket",
+      "itemRemoved_other": "{{count}} items removed from basket",
+      "updateFailed": "Could not update the basket"
+    },
+    "favorites": {
+      "updateFailed": "Could not update favorites"
+    },
+    "profile": {
+      "saved": "Changes saved",
+      "saveFailed": "Something went wrong while saving"
+    },
+    "address": {
+      "saved": "Address saved",
+      "deleted": "Address deleted"
+    },
+    "auth": {
+      "registered": "Registration complete",
+      "sessionExpired": "Session expired, please log in again"
+    },
+    "common": {
+      "genericError": "Something went wrong. Please try again.",
+      "copied": "Copied",
+      "offline": "No internet connection"
+    },
+    "action": {
+      "undo": "Undo",
+      "viewOrders": "View orders"
     }
   }
 }

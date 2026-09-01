@@ -9,6 +9,11 @@ export const lightColors = {
   textOnPrimary: '#FFFFFF',
   border: '#E5E5EA',
   textLabel: '#101142',
+  // Semantic status colors (feedback toasts / result modal)
+  success: '#3B9E2D',
+  danger: '#E5484D',
+  warning: '#F5A623',
+  info: '#3E63DD',
 };
 
 // Estimated by inverting the light palette — not measured from a dark-mode design yet.
@@ -23,6 +28,11 @@ export const darkColors = {
   textOnPrimary: '#FFFFFF',
   border: '#3A3D4A',
   textLabel: '#F5F5F7',
+  // Semantic status colors (feedback toasts / result modal)
+  success: '#4CAF50',
+  danger: '#FF6369',
+  warning: '#FFB224',
+  info: '#7A9BFF',
 };
 
 export type ThemeColors = typeof lightColors;
