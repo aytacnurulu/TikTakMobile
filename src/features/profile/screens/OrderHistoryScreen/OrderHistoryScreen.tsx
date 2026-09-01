@@ -1,5 +1,6 @@
 import { AccountStackParamList } from '@/app/stack/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, View } from 'react-native';
 import OrderHistoryItem from '../../components/OrderHistoryItem/OrderHistoryItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,6 +23,7 @@ const renderOrder = (
 
 const OrderHistoryScreen = ({ navigation }: Props) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = createStyles(colors);
   const { data, isPending } = useOrderHistory();
   const orders = data ?? [];
@@ -45,7 +47,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader title="Sifariş tarixçəsi" onBackPress={handleBackPress} />
+      <ScreenHeader title={t('orderHistory.title')} onBackPress={handleBackPress} />
 
       {isPending ? (
         <View style={styles.loader}>
@@ -57,7 +59,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
           keyExtractor={item => String(item.id)}
           renderItem={props => renderOrder(props, handleOrderPress)}
           contentContainerStyle={styles.listContent}
-          ListEmptyComponent={<EmptyState message="Sifariş tapılmadı" />}
+          ListEmptyComponent={<EmptyState message={t('orderHistory.empty')} />}
         />
       )}
       <OrderDetailSheet ref={detailSheetRef} />

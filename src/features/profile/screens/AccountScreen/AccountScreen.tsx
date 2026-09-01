@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/shared/store/auth.store';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AccountStackParamList } from '@/app/stack/types';
@@ -21,19 +22,20 @@ type Props = NativeStackScreenProps<AccountStackParamList, 'Account'>;
 
 const menuItems: {
   id: string;
-  label: string;
+  labelKey: string;
   Icon: React.FC<any>;
   route: keyof AccountStackParamList | null;
 }[] = [
-  { id: 'info', label: 'Hesab məlumatlarım', Icon: AccountIcon, route: 'AccountInfo' },
-  { id: 'favorites', label: 'Siyahılarım', Icon: HeartIcon, route: 'Favorites' },
-  { id: 'orders', label: 'Sifariş tarixçəsi', Icon: BasketIcon, route: 'OrderHistory' },
-  { id: 'settings', label: 'Ayarlar', Icon: SettingsIcon, route: 'Settings' },
-  { id: 'logout', label: 'Çıxış', Icon: LogoutIcon, route: null },
+  { id: 'info', labelKey: 'account.menu.info', Icon: AccountIcon, route: 'AccountInfo' },
+  { id: 'favorites', labelKey: 'account.menu.favorites', Icon: HeartIcon, route: 'Favorites' },
+  { id: 'orders', labelKey: 'account.menu.orders', Icon: BasketIcon, route: 'OrderHistory' },
+  { id: 'settings', labelKey: 'account.menu.settings', Icon: SettingsIcon, route: 'Settings' },
+  { id: 'logout', labelKey: 'account.menu.logout', Icon: LogoutIcon, route: null },
 ];
 
 const AccountScreen = ({ navigation }: Props) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = createStyles(colors);
   const { data, isPending } = useProfile();
   const user = data?.data;
@@ -59,7 +61,7 @@ const AccountScreen = ({ navigation }: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Hesabım</Text>
+      <Text style={styles.title}>{t('account.title')}</Text>
 
       <View style={styles.profileHeader}>
         {user?.img_url ? (
@@ -78,7 +80,7 @@ const AccountScreen = ({ navigation }: Props) => {
           <AccountMenuItem
             key={item.id}
             Icon={item.Icon}
-            label={item.label}
+            label={t(item.labelKey)}
             onPress={() => handleItemPress(item.route)}
           />
         ))}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { Locale } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
@@ -8,13 +9,6 @@ import { styles } from './OrderDetailHeader.styles';
 
 
 type ThemeColors = ReturnType<typeof useTheme>['colors'];
-
-const statusLabels: Record<string, string> = {
-  pending: 'Sifariş qəbul edilib',
-  accepted: 'Sifariş qəbul edilib',
-  delivered: 'Çatdırılıb',
-  cancelled: 'Ləğv edilib',
-};
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -36,12 +30,17 @@ const OrderDetailHeader = ({
   colors,
   locale,
 }: OrderDetailHeaderProps) => {
+  const { t } = useTranslation();
+
+  const statusLabel =
+    t(`orderHistory.statuses.${order.status}`, { defaultValue: order.status });
+
   return (
     <>
       <View style={styles.infoRow}>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            Tarix
+            {t('orderHistory.date')}
           </Text>
           <Text style={[styles.value, { color: colors.textPrimary }]}>
             {formatDate(order.createdAt)}
@@ -49,7 +48,7 @@ const OrderDetailHeader = ({
         </View>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            No
+            {t('orderHistory.orderNo')}
           </Text>
           <Text style={[styles.value, { color: colors.textPrimary }]}>
             #{order.orderNumber}
@@ -60,7 +59,7 @@ const OrderDetailHeader = ({
       <View style={styles.infoRow}>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            Məhsul sayı
+            {t('orderHistory.itemsCount')}
           </Text>
           <Text style={[styles.value, { color: colors.textPrimary }]}>
             {itemsCount}
@@ -68,7 +67,7 @@ const OrderDetailHeader = ({
         </View>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            Çatdırılma ünvanı
+            {t('orderHistory.deliveryAddress')}
           </Text>
           <Text
             style={[styles.value, { color: colors.textPrimary }]}
@@ -82,20 +81,20 @@ const OrderDetailHeader = ({
       <View style={styles.infoRow}>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            Status
+            {t('orderHistory.status')}
           </Text>
           <Text style={[styles.value, { color: colors.textPrimary }]}>
-            {statusLabels[order.status] ?? order.status}
+            {statusLabel}
           </Text>
         </View>
         <View style={styles.infoColumn}>
           <Text style={[styles.label, { color: colors.textSecondary }]}>
-            Subtotal/Çatdırılma
+            {t('orderHistory.subtotalDelivery')}
           </Text>
           <Text style={[styles.value, { color: colors.textPrimary }]}>
             {formatPrice(order.total, locale)} /{' '}
             {Number(order.deliveryFee) === 0
-              ? 'pulsuz'
+              ? t('orderHistory.free')
               : formatPrice(order.deliveryFee, locale)}
           </Text>
         </View>
