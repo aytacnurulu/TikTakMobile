@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
@@ -13,6 +14,7 @@ interface OrderHistoryItemProps {
 
 const OrderHistoryItem = ({ order, onPress }: OrderHistoryItemProps) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = createStyles(colors);
 
   return (
@@ -23,11 +25,11 @@ const OrderHistoryItem = ({ order, onPress }: OrderHistoryItemProps) => {
     >
       <View style={styles.left}>
         <View style={styles.column}>
-          <Text style={styles.label}>No</Text>
+          <Text style={styles.label}>{t('orderHistory.orderNo')}</Text>
           <Text style={styles.value}>#{order.orderNumber}</Text>
         </View>
         <View style={styles.addressColumn}>
-          <Text style={styles.label}>Çatdırılma ünvanı</Text>
+          <Text style={styles.label}>{t('orderHistory.deliveryAddress')}</Text>
           <Text style={styles.addressValue} numberOfLines={1} ellipsizeMode="tail">
             {order.address}
           </Text>

@@ -5,6 +5,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import BackIcon from '@/shared/icons/chevron-left.svg';
 import {
   ActivityIndicator,
@@ -26,6 +27,7 @@ type Props = NativeStackScreenProps<AccountStackParamList, 'AccountInfo'>;
 
 const AccountInfoScreen = ({ navigation, route }: Props) => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const styles = createStyles(colors);
   const { data, isPending } = useProfile();
   const user = data?.data;
@@ -77,7 +79,7 @@ const handleSave = () => {
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <BackIcon width={pixelWidth(18)} height={pixelWidth(11)} color={colors.textPrimary} />
         </TouchableOpacity>
-        <Text style={styles.title}>Hesab</Text>
+        <Text style={styles.title}>{t('accountInfo.title')}</Text>
       </View>
 
       <KeyboardAvoidingView
@@ -87,33 +89,33 @@ const handleSave = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.form}>
             <Input
-              label="Ad Soyad"
+              label={t('accountInfo.fullNameLabel')}
               value={fullName}
               onChangeText={setFullName}
-              placeholder="Ad, Soyad"
+              placeholder={t('accountInfo.fullNamePlaceholder')}
             />
             <Input
               ref={addressInputRef}
-              label="Ünvan"
+              label={t('accountInfo.addressLabel')}
               value={address ?? ''}
               onChangeText={setAddress}
-              placeholder="Ünvan"
+              placeholder={t('accountInfo.addressPlaceholder')}
             />
             <Input
-              label="Telefon nömrəsi"
+              label={t('accountInfo.phoneLabel')}
               value={phone}
               onChangeText={setPhone}
-              placeholder="(+994) __ / __ / __ / __"
+              placeholder={t('accountInfo.phonePlaceholder')}
               keyboardType="phone-pad"
             />
             <Input
-              label="Şifrə"
+              label={t('accountInfo.passwordLabel')}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
             />
             <Input
-              label="Şifrənin təkrarı"
+              label={t('accountInfo.passwordRepeatLabel')}
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry
@@ -121,7 +123,7 @@ const handleSave = () => {
           </View>
 
           <Button
-            title="Yadda saxla"
+            title={t('accountInfo.save')}
             onPress={handleSave}
             loading={isSaving}
             disabled={isSaving}

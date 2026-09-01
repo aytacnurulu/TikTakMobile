@@ -105,9 +105,61 @@
     "placeholder": "Search...",
     "prompt": "Type a product name to search"
   },
+  "tabs": {
+    "home": "Home",
+    "search": "Search",
+    "account": "Account"
+  },
   "account": {
     "title": "My account",
     "language": "Language",
-    "logout": "Log out"
+    "logout": "Log out",
+    "menu": {
+      "info": "My account details",
+      "favorites": "My lists",
+      "orders": "Order history",
+      "settings": "Settings",
+      "logout": "Log out"
+    }
+  },
+  "accountInfo": {
+    "title": "Account",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "Full name",
+    "addressLabel": "Address",
+    "addressPlaceholder": "Address",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "(+994) __ / __ / __ / __",
+    "passwordLabel": "Password",
+    "passwordRepeatLabel": "Confirm password",
+    "save": "Save",
+    "saveSuccess": "Saved successfully",
+    "saveError": "An error occurred while saving"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme"
+  },
+  "favorites": {
+    "title": "My lists",
+    "empty": "No products in the list"
+  },
+  "orderHistory": {
+    "title": "Order history",
+    "empty": "No orders found",
+    "orderNo": "No",
+    "date": "Date",
+    "deliveryAddress": "Delivery address",
+    "itemsCount": "Item count",
+    "status": "Status",
+    "subtotalDelivery": "Subtotal/Delivery",
+    "free": "free",
+    "statuses": {
+      "pending": "Order received",
+      "accepted": "Order received",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
   }
 }
