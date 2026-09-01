@@ -134,7 +134,8 @@
     "passwordRepeatLabel": "Повторите пароль",
     "save": "Сохранить",
     "saveSuccess": "Успешно сохранено",
-    "saveError": "Произошла ошибка при сохранении"
+    "saveError": "Произошла ошибка при сохранении",
+    "passwordMismatch": "Пароли не совпадают"
   },
   "settings": {
     "title": "Настройки",

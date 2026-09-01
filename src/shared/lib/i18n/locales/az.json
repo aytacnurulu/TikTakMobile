@@ -134,7 +134,8 @@
     "passwordRepeatLabel": "Şifrənin təkrarı",
     "save": "Yadda saxla",
     "saveSuccess": "Uğurla yadda saxlanıldı",
-    "saveError": "Yadda saxlanılarkən xəta baş verdi"
+    "saveError": "Yadda saxlanılarkən xəta baş verdi",
+    "passwordMismatch": "Şifrələr uyğun gəlmir"
   },
   "settings": {
     "title": "Ayarlar",

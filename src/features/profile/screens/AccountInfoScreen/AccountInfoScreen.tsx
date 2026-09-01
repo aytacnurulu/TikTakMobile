@@ -32,14 +32,25 @@ const AccountInfoScreen = ({ navigation, route }: Props) => {
   const { data, isPending } = useProfile();
   const user = data?.data;
 
-  const [fullName, setFullName] = useState(user?.full_name ?? '');
-  const [address, setAddress] = useState(user?.address ?? '');
-  const [phone, setPhone] = useState(user?.phone ?? '');
+  const [fullName, setFullName] = useState('');
+  const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const addressInputRef = useRef<TextInput>(null);
+  const hydratedRef = useRef(false);
   const focusField = route.params?.focusField;
+
+  // Populate the form once the profile has loaded. Guarded so a background
+  // refetch (e.g. after saving) doesn't overwrite the user's in-progress edits.
+  useEffect(() => {
+    if (user && !hydratedRef.current) {
+      setFullName(user.full_name ?? '');
+      setAddress(user.address ?? '');
+      hydratedRef.current = true;
+    }
+  }, [user]);
 
   useEffect(() => {
     if (focusField === 'address' && !isPending) {
@@ -50,21 +61,30 @@ const AccountInfoScreen = ({ navigation, route }: Props) => {
 
   const { mutate: updateProfile, isPending: isSaving } = useUpdateProfile();
 
-const handleSave = () => {
-  if (password && password !== confirmPassword) {
-    // error state göstər, göndərmə
-    return;
-  }
+  const handleSave = () => {
+    if (password && password !== confirmPassword) {
+      setPasswordError(t('accountInfo.passwordMismatch'));
+      return;
+    }
+    setPasswordError('');
 
-  updateProfile({
-    full_name: fullName,
-    address,
-    img_url: user?.img_url ?? null,  
-    ...(password
-      ? { password, password_repeat: confirmPassword }
-      : {}),
-  });
-};
+    updateProfile(
+      {
+        full_name: fullName,
+        address,
+        img_url: user?.img_url ?? null,
+        ...(password
+          ? { password, password_repeat: confirmPassword }
+          : {}),
+      },
+      {
+        onSuccess: () => {
+          setPassword('');
+          setConfirmPassword('');
+        },
+      },
+    );
+  };
 
   if (isPending) {
     return (
@@ -97,16 +117,16 @@ const handleSave = () => {
             <Input
               ref={addressInputRef}
               label={t('accountInfo.addressLabel')}
-              value={address ?? ''}
+              value={address}
               onChangeText={setAddress}
               placeholder={t('accountInfo.addressPlaceholder')}
             />
             <Input
               label={t('accountInfo.phoneLabel')}
-              value={phone}
-              onChangeText={setPhone}
+              value={user?.phone ?? ''}
               placeholder={t('accountInfo.phonePlaceholder')}
               keyboardType="phone-pad"
+              editable={false}
             />
             <Input
               label={t('accountInfo.passwordLabel')}
@@ -117,8 +137,12 @@ const handleSave = () => {
             <Input
               label={t('accountInfo.passwordRepeatLabel')}
               value={confirmPassword}
-              onChangeText={setConfirmPassword}
+              onChangeText={text => {
+                setConfirmPassword(text);
+                if (passwordError) setPasswordError('');
+              }}
               secureTextEntry
+              error={passwordError}
             />
           </View>
 
