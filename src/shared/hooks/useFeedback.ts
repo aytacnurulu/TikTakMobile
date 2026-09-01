@@ -1,5 +1,5 @@
-import { useFeedbackStore } from './feedback.store';
-import type { FeedbackAction, FeedbackType } from './feedback.store';
+import { useFeedbackStore } from '@/shared/store/feedback.store';
+import type { FeedbackAction, FeedbackType } from '@/shared/store/feedback.store';
 
 interface FeedbackOptions {
   params?: Record<string, string | number>;

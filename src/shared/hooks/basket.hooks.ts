@@ -4,7 +4,8 @@ import { useAuthStore } from '@/shared/store/auth.store';
 import { Basket } from '@/shared/types/basket.types';
 import { Product } from '@/shared/types/product.types';
 import { ApiResponse } from '@/shared/types/api-response.type';
-import { FEEDBACK, showFeedback } from '@/shared/feedback';
+import { FEEDBACK } from '@/shared/constants/feedback.constants';
+import { showFeedback } from '@/shared/hooks/useFeedback';
 
 const BASKET_KEY = ['basket'];
 

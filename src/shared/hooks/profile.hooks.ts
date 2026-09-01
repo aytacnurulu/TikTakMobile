@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { profileService } from '@/shared/services/profile.service';
-import { FEEDBACK, showFeedback } from '@/shared/feedback';
+import { FEEDBACK } from '@/shared/constants/feedback.constants';
+import { showFeedback } from '@/shared/hooks/useFeedback';
 
 export const useProfile = () => {
   return useQuery({

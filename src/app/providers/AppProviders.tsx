@@ -6,7 +6,8 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { DevToolsBubble } from 'react-native-react-query-devtools';
 import { queryClient } from '@/shared/lib/query-client';
-import { ResultModal, Toast } from '@/shared/feedback';
+import Toast from '@/shared/components/Toast';
+import ResultModal from '@/shared/components/ResultModal';
 
 interface AppProvidersProps {
   children: React.ReactNode;
