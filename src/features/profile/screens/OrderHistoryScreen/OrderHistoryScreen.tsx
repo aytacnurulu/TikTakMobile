@@ -1,12 +1,12 @@
 import { AccountStackParamList } from '@/app/stack/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import OrderHistoryItem from '../../components/OrderHistoryItem/OrderHistoryItem';
-import { useTheme } from '@/shared/hooks/useTheme';
 import { styles } from './OrderHistoryScreen.styles';
 import { useOrderHistory } from '../../hooks/order-history.hooks';
 import ScreenContainer from '@/shared/components/ScreenContainer';
+import QueryStateView from '@/shared/components/QueryStateView';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
 import EmptyState from '@/shared/components/EmptyState';
 import { useRef } from 'react';
@@ -21,7 +21,6 @@ const renderOrder = (
 ) => <OrderHistoryItem order={item} onPress={() => onPress(item.id)} />;
 
 const OrderHistoryScreen = ({ navigation }: Props) => {
-  const { colors } = useTheme();
   const { t } = useTranslation();
   const { data, isPending } = useOrderHistory();
   const orders = data ?? [];
@@ -45,11 +44,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
 
   return (
     <ScreenContainer title={t('orderHistory.title')} onBack={handleBackPress}>
-      {isPending ? (
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      ) : (
+      <QueryStateView isPending={isPending}>
         <FlatList
           data={orders}
           keyExtractor={item => String(item.id)}
@@ -57,7 +52,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={<EmptyState message={t('orderHistory.empty')} />}
         />
-      )}
+      </QueryStateView>
       <OrderDetailSheet ref={detailSheetRef} />
     </ScreenContainer>
   );

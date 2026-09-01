@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
@@ -13,9 +12,9 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import ScreenContainer from '@/shared/components/ScreenContainer';
+import QueryStateView from '@/shared/components/QueryStateView';
 import QuantityStepper from '@/shared/components/QuantityStepper';
 import Button from '@/shared/components/Button';
-import EmptyState from '@/shared/components/EmptyState';
 import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
@@ -72,36 +71,16 @@ const BasketScreen = () => {
     </View>
   );
 
-  if (isPending) {
-    return (
-      <ScreenContainer title={t('basket.title')}>
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      </ScreenContainer>
-    );
-  }
-
-  if (isError) {
-    return (
-      <ScreenContainer title={t('basket.title')}>
-        <EmptyState message={t('basket.loadError')} />
-        <Button
-          title={t('common.retry')}
-          onPress={() => refetch()}
-          style={styles.retryButton}
-        />
-      </ScreenContainer>
-    );
-  }
-
   return (
     <ScreenContainer title={t('basket.title')}>
-      {items.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <EmptyState message={t('basket.empty')} />
-        </View>
-      ) : (
+      <QueryStateView
+        isPending={isPending}
+        isError={isError}
+        onRetry={() => refetch()}
+        errorMessage={t('basket.loadError')}
+        isEmpty={items.length === 0}
+        emptyMessage={t('basket.empty')}
+      >
         <View style={styles.content}>
           <FlatList
             data={items}
@@ -124,7 +103,7 @@ const BasketScreen = () => {
             style={styles.checkoutButton}
           />
         </View>
-      )}
+      </QueryStateView>
     </ScreenContainer>
   );
 };
@@ -174,19 +153,6 @@ const styles = StyleSheet.create({
   checkoutButton: {
     marginTop: pixelHeight(14),
     marginBottom: pixelHeight(10),
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingBottom: pixelHeight(80),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  retryButton: {
-    marginBottom: pixelHeight(16),
   },
 });
 

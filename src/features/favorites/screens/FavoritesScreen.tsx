@@ -1,11 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@/shared/hooks/useTheme';
 import { useFavorites } from '@/shared/hooks/favorites.hooks';
 import { Product } from '@/shared/types/product.types';
 import ScreenContainer from '@/shared/components/ScreenContainer';
-import EmptyState from '@/shared/components/EmptyState';
+import QueryStateView from '@/shared/components/QueryStateView';
 import ProductCard from '@/features/product/components/ProductCard';
 import ProductDetailSheet, {
   ProductDetailSheetRef,
@@ -14,7 +13,6 @@ import CompleteOrderBanner from '@/features/product/components/CompleteOrderBann
 import { pixelWidth } from '@/shared/utils/metrics';
 
 const FavoritesScreen = () => {
-  const { colors } = useTheme();
   const { t } = useTranslation();
   const sheetRef = useRef<ProductDetailSheetRef>(null);
   const { data, isPending } = useFavorites();
@@ -31,23 +29,13 @@ const FavoritesScreen = () => {
     [],
   );
 
-  if (isPending) {
-    return (
-      <ScreenContainer title={t('favorites.title')}>
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      </ScreenContainer>
-    );
-  }
-
   return (
     <ScreenContainer title={t('favorites.title')}>
-      {products.length === 0 ? (
-        <View style={styles.emptyState}>
-          <EmptyState message={t('favorites.empty')} />
-        </View>
-      ) : (
+      <QueryStateView
+        isPending={isPending}
+        isEmpty={products.length === 0}
+        emptyMessage={t('favorites.empty')}
+      >
         <FlatList
           data={products}
           numColumns={2}
@@ -56,7 +44,7 @@ const FavoritesScreen = () => {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
         />
-      )}
+      </QueryStateView>
 
       <ProductDetailSheet ref={sheetRef} />
       <CompleteOrderBanner />
@@ -65,17 +53,8 @@ const FavoritesScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   listContent: {
     paddingBottom: pixelWidth(90),
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
   },
 });
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
+import QueryStateView from '@/shared/components/QueryStateView';
 import { useCategories } from '@/shared/hooks/category.hooks';
 import { Category } from '@/shared/types/category.type';
 import HomeHeader from '@/shared/components/HomeHeader';
@@ -34,11 +35,7 @@ const HomeScreen = () => {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      {isPending ? (
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      ) : (
+      <QueryStateView isPending={isPending}>
         <FlatList
           data={categories}
           numColumns={3}
@@ -50,7 +47,7 @@ const HomeScreen = () => {
             <EmptyState message={t('home.categoriesEmpty')} />
           }
         />
-      )}
+      </QueryStateView>
     </SafeAreaView>
   );
 };
@@ -59,11 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: pixelWidth(16),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   listContent: {
     paddingBottom: pixelWidth(16),
