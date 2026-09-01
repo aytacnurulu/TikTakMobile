@@ -117,7 +117,8 @@
     "title": "My account",
     "language": "Language",
     "logout": "Log out",
-    "logoutConfirm": "Are you sure you want to log out?",
+    "logoutConfirmTitle": "Log out",
+    "logoutConfirmMessage": "Do you want to log out?",
     "menu": {
       "info": "My account details",
       "favorites": "My lists",

@@ -95,9 +95,10 @@ const AccountScreen = ({ navigation }: Props) => {
 
       <ConfirmModal
         visible={logoutVisible}
-        title={t('account.menu.logout')}
-        message={t('account.logoutConfirm')}
-        confirmLabel={t('account.menu.logout')}
+        title={t('account.logoutConfirmTitle')}
+        message={t('account.logoutConfirmMessage')}
+        confirmLabel={t('account.logout')}
+        cancelLabel={t('common.cancel')}
         destructive
         onConfirm={confirmLogout}
         onCancel={() => setLogoutVisible(false)}

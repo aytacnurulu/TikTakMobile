@@ -117,7 +117,8 @@
     "title": "Hesabım",
     "language": "Dil",
     "logout": "Çıxış et",
-    "logoutConfirm": "Hesabdan çıxmaq istədiyinizə əminsiniz?",
+    "logoutConfirmTitle": "Çıxış",
+    "logoutConfirmMessage": "Çıxış etmək istəyirsiniz?",
     "menu": {
       "info": "Hesab məlumatlarım",
       "favorites": "Siyahılarım",

@@ -117,7 +117,8 @@
     "title": "Мой аккаунт",
     "language": "Язык",
     "logout": "Выйти",
-    "logoutConfirm": "Вы уверены, что хотите выйти из аккаунта?",
+    "logoutConfirmTitle": "Выход",
+    "logoutConfirmMessage": "Вы хотите выйти из аккаунта?",
     "menu": {
       "info": "Данные аккаунта",
       "favorites": "Мои списки",
