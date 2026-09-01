@@ -134,7 +134,8 @@
     "passwordRepeatLabel": "Confirm password",
     "save": "Save",
     "saveSuccess": "Saved successfully",
-    "saveError": "An error occurred while saving"
+    "saveError": "An error occurred while saving",
+    "passwordMismatch": "Passwords do not match"
   },
   "settings": {
     "title": "Settings",
