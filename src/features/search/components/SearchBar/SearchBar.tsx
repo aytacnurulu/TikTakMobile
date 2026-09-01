@@ -4,7 +4,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import SearchIcon from '@/shared/icons/search.svg';
 import CloseIcon from '@/shared/icons/close.svg';
-import { styles } from './SearchBar.styles';
+import { createStyles } from './SearchBar.styles';
 
 interface SearchBarProps {
   value: string;
@@ -14,9 +14,10 @@ interface SearchBarProps {
 
 const SearchBar = ({ value, onChangeText, placeholder }: SearchBarProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.surface }]}>
+    <View style={styles.container}>
       <SearchIcon
         width={pixelWidth(18)}
         height={pixelWidth(18)}
@@ -28,7 +29,7 @@ const SearchBar = ({ value, onChangeText, placeholder }: SearchBarProps) => {
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.textPlaceholder}
-        style={[styles.input, { color: colors.textPrimary }]}
+        style={styles.input}
         returnKeyType="search"
         autoCorrect={false}
       />

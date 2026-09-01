@@ -8,10 +8,11 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { formatPrice } from '@/shared/utils/currency';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { useBasket } from '@/shared/hooks/basket.hooks';
-import { styles } from './CompleteOrderBanner.styles';
+import { createStyles } from './CompleteOrderBanner.styles';
 
 const CompleteOrderBanner = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const navigation =
@@ -32,24 +33,17 @@ const CompleteOrderBanner = () => {
 
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        { backgroundColor: colors.primary, shadowColor: colors.textPrimary },
-      ]}
+      style={styles.container}
       activeOpacity={0.85}
       onPress={() => navigation.navigate('Basket')}
     >
       <View style={styles.left}>
-        <View style={[styles.badge, { backgroundColor: colors.textOnPrimary }]}>
-          <Text style={[styles.badgeText, { color: colors.primary }]}>
-            {count}
-          </Text>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{count}</Text>
         </View>
-        <Text style={[styles.label, { color: colors.textOnPrimary }]}>
-          {t('basket.orders')}
-        </Text>
+        <Text style={styles.label}>{t('basket.orders')}</Text>
       </View>
-      <Text style={[styles.price, { color: colors.textOnPrimary }]}>
+      <Text style={styles.price}>
         {formatPrice(String(totalPrice), locale)}
       </Text>
     </TouchableOpacity>
