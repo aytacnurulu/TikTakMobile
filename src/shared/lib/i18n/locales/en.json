@@ -1,7 +1,9 @@
 {
   "common": {
     "retry": "Retry",
-    "ok": "Close"
+    "ok": "Close",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "auth": {
     "welcome": {
@@ -115,6 +117,7 @@
     "title": "My account",
     "language": "Language",
     "logout": "Log out",
+    "logoutConfirm": "Are you sure you want to log out?",
     "menu": {
       "info": "My account details",
       "favorites": "My lists",

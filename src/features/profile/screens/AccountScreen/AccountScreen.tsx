@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/shared/store/auth.store';
+import ConfirmModal from '@/shared/components/ConfirmModal';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AccountStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
@@ -40,13 +41,19 @@ const AccountScreen = ({ navigation }: Props) => {
   const { data, isPending } = useProfile();
   const user = data?.data;
   const logout = useAuthStore(state => state.logout);
+  const [logoutVisible, setLogoutVisible] = useState(false);
 
   const handleItemPress = (route: keyof AccountStackParamList | null) => {
     if (route) {
       navigation.navigate(route as any);
     } else {
-      logout();
+      setLogoutVisible(true);
     }
+  };
+
+  const confirmLogout = () => {
+    setLogoutVisible(false);
+    logout();
   };
 
   if (isPending) {
@@ -85,6 +92,16 @@ const AccountScreen = ({ navigation }: Props) => {
           />
         ))}
       </View>
+
+      <ConfirmModal
+        visible={logoutVisible}
+        title={t('account.menu.logout')}
+        message={t('account.logoutConfirm')}
+        confirmLabel={t('account.menu.logout')}
+        destructive
+        onConfirm={confirmLogout}
+        onCancel={() => setLogoutVisible(false)}
+      />
     </SafeAreaView>
   );
 };

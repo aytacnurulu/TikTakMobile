@@ -1,7 +1,9 @@
 {
   "common": {
     "retry": "Yenidən yoxla",
-    "ok": "Bağla"
+    "ok": "Bağla",
+    "confirm": "Təsdiqlə",
+    "cancel": "Ləğv et"
   },
   "auth": {
     "welcome": {
@@ -115,6 +117,7 @@
     "title": "Hesabım",
     "language": "Dil",
     "logout": "Çıxış et",
+    "logoutConfirm": "Hesabdan çıxmaq istədiyinizə əminsiniz?",
     "menu": {
       "info": "Hesab məlumatlarım",
       "favorites": "Siyahılarım",
