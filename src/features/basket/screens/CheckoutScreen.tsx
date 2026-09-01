@@ -33,7 +33,7 @@ const CheckoutScreen = () => {
   const locale = useLocaleStore(state => state.locale);
   const { data } = useBasket();
   const [note, setNote] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('CASH');
   const createOrder = useCreateOrder();
   const items = data?.data.items ?? [];
   const total = data?.data.total ?? '0';
@@ -116,15 +116,15 @@ const CheckoutScreen = () => {
         <View style={styles.paymentOptions}>
           <PaymentOption
             label={t('checkout.cash')}
-            selected={paymentMethod === 'cash'}
+            selected={paymentMethod === 'CASH'}
             color={colors.primary}
-            onPress={() => setPaymentMethod('cash')}
+            onPress={() => setPaymentMethod('CASH')}
           />
           <PaymentOption
             label={t('checkout.card')}
-            selected={paymentMethod === 'card'}
+            selected={paymentMethod === 'CARD'}
             color={colors.primary}
-            onPress={() => setPaymentMethod('card')}
+            onPress={() => setPaymentMethod('CARD')}
           />
         </View>
 
@@ -171,8 +171,9 @@ const CheckoutScreen = () => {
             createOrder.mutate(
               {
                 address: profile?.address ?? '',
+                phone: profile?.phone ?? '',
                 ...(note.trim() ? { note: note.trim() } : {}),
-                payment_method: paymentMethod,
+                paymentMethod,
               },
               { onSuccess: () => navigation.navigate('OrderSuccess') },
             )
