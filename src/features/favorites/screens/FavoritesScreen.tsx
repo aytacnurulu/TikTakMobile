@@ -1,15 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { FlatList, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { AccountStackParamList } from '@/app/stack/types';
-import { useTheme } from '@/shared/hooks/useTheme';
 import { useFavorites } from '@/shared/hooks/favorites.hooks';
 import { Product } from '@/shared/types/product.types';
-import ScreenHeader from '@/shared/components/ScreenHeader';
-import EmptyState from '@/shared/components/EmptyState';
+import ScreenContainer from '@/shared/components/ScreenContainer';
+import QueryStateView from '@/shared/components/QueryStateView';
 import ProductCard from '@/features/product/components/ProductCard';
 import ProductDetailSheet, {
   ProductDetailSheetRef,
@@ -18,10 +13,7 @@ import CompleteOrderBanner from '@/features/product/components/CompleteOrderBann
 import { pixelWidth } from '@/shared/utils/metrics';
 
 const FavoritesScreen = () => {
-  const { colors } = useTheme();
   const { t } = useTranslation();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<AccountStackParamList>>();
   const sheetRef = useRef<ProductDetailSheetRef>(null);
   const { data, isPending } = useFavorites();
 
@@ -37,36 +29,13 @@ const FavoritesScreen = () => {
     [],
   );
 
-  if (isPending) {
-    return (
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-        <ScreenHeader
-          title={t('favorites.title')}
-          onBackPress={() => navigation.goBack()}
-        />
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScreenHeader
-        title={t('favorites.title')}
-        onBackPress={() => navigation.goBack()}
-      />
-
-      {products.length === 0 ? (
-        <View style={styles.emptyState}>
-          <EmptyState message={t('favorites.empty')} />
-        </View>
-      ) : (
+    <ScreenContainer title={t('favorites.title')}>
+      <QueryStateView
+        isPending={isPending}
+        isEmpty={products.length === 0}
+        emptyMessage={t('favorites.empty')}
+      >
         <FlatList
           data={products}
           numColumns={2}
@@ -75,30 +44,17 @@ const FavoritesScreen = () => {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
         />
-      )}
+      </QueryStateView>
 
       <ProductDetailSheet ref={sheetRef} />
       <CompleteOrderBanner />
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   listContent: {
     paddingBottom: pixelWidth(90),
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
   },
 });
 

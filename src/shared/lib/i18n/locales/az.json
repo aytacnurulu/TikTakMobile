@@ -1,6 +1,7 @@
 {
   "common": {
     "retry": "Yenidən yoxla",
+    "loadError": "Məlumat yüklənmədi",
     "ok": "Bağla",
     "confirm": "Təsdiqlə",
     "cancel": "Ləğv et"

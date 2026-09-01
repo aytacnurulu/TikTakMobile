@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   Image,
   RefreshControl,
@@ -8,15 +7,15 @@ import {
   Text,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
-import ScreenHeader from '@/shared/components/ScreenHeader';
+import ScreenContainer from '@/shared/components/ScreenContainer';
+import QueryStateView from '@/shared/components/QueryStateView';
 import QuantityStepper from '@/shared/components/QuantityStepper';
 import Button from '@/shared/components/Button';
-import EmptyState from '@/shared/components/EmptyState';
+import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
@@ -72,45 +71,16 @@ const BasketScreen = () => {
     </View>
   );
 
-  if (isPending) {
-    return (
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  if (isError) {
-    return (
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
-        <EmptyState message={t('basket.loadError')} />
-        <Button
-          title={t('common.retry')}
-          onPress={() => refetch()}
-          style={styles.retryButton}
-        />
-      </SafeAreaView>
-    );
-  }
-
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
-      {items.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <EmptyState message={t('basket.empty')} />
-        </View>
-      ) : (
+    <ScreenContainer title={t('basket.title')}>
+      <QueryStateView
+        isPending={isPending}
+        isError={isError}
+        onRetry={() => refetch()}
+        errorMessage={t('basket.loadError')}
+        isEmpty={items.length === 0}
+        emptyMessage={t('basket.empty')}
+      >
         <View style={styles.content}>
           <FlatList
             data={items}
@@ -125,24 +95,7 @@ const BasketScreen = () => {
               />
             }
           />
-          <View style={[styles.summary, { borderTopColor: colors.border }]}>
-            <View>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.total')}: {formatPrice(total, locale)}
-              </Text>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.delivery')}: {t('basket.free')}
-              </Text>
-            </View>
-            <View style={styles.totalBlock}>
-              <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-                {t('basket.grandTotal')}:
-              </Text>
-              <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
-                {formatPrice(total, locale)}
-              </Text>
-            </View>
-          </View>
+          <OrderSummary total={total} divider style={styles.summary} />
           <Button
             title={t('basket.checkout')}
             onPress={() => navigation.navigate('Checkout')}
@@ -150,16 +103,12 @@ const BasketScreen = () => {
             style={styles.checkoutButton}
           />
         </View>
-      )}
-    </SafeAreaView>
+      </QueryStateView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
   content: {
     flex: 1,
   },
@@ -199,44 +148,11 @@ const styles = StyleSheet.create({
     gap: pixelWidth(5),
   },
   summary: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: pixelHeight(14),
     marginTop: 'auto',
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  summaryText: {
-    fontSize: pixelFont(12),
-    lineHeight: pixelFont(18),
-  },
-  totalBlock: {
-    alignItems: 'flex-end',
-  },
-  totalLabel: {
-    fontSize: pixelFont(13),
-    fontWeight: '700',
-  },
-  totalValue: {
-    marginTop: pixelHeight(2),
-    fontSize: pixelFont(14),
-    fontWeight: '800',
   },
   checkoutButton: {
     marginTop: pixelHeight(14),
     marginBottom: pixelHeight(10),
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingBottom: pixelHeight(80),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  retryButton: {
-    marginBottom: pixelHeight(16),
   },
 });
 

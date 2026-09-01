@@ -1,13 +1,12 @@
 import { AccountStackParamList } from '@/app/stack/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import OrderHistoryItem from '../../components/OrderHistoryItem/OrderHistoryItem';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '@/shared/hooks/useTheme';
-import { createStyles } from './OrderHistoryScreen.styles';
+import { styles } from './OrderHistoryScreen.styles';
 import { useOrderHistory } from '../../hooks/order-history.hooks';
-import ScreenHeader from '@/shared/components/ScreenHeader';
+import ScreenContainer from '@/shared/components/ScreenContainer';
+import QueryStateView from '@/shared/components/QueryStateView';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
 import EmptyState from '@/shared/components/EmptyState';
 import { useRef } from 'react';
@@ -22,9 +21,7 @@ const renderOrder = (
 ) => <OrderHistoryItem order={item} onPress={() => onPress(item.id)} />;
 
 const OrderHistoryScreen = ({ navigation }: Props) => {
-  const { colors } = useTheme();
   const { t } = useTranslation();
-  const styles = createStyles(colors);
   const { data, isPending } = useOrderHistory();
   const orders = data ?? [];
   const detailSheetRef = useRef<OrderDetailSheetRef>(null);
@@ -46,14 +43,8 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScreenHeader title={t('orderHistory.title')} onBackPress={handleBackPress} />
-
-      {isPending ? (
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      ) : (
+    <ScreenContainer title={t('orderHistory.title')} onBack={handleBackPress}>
+      <QueryStateView isPending={isPending}>
         <FlatList
           data={orders}
           keyExtractor={item => String(item.id)}
@@ -61,10 +52,9 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={<EmptyState message={t('orderHistory.empty')} />}
         />
-      )}
+      </QueryStateView>
       <OrderDetailSheet ref={detailSheetRef} />
-    </SafeAreaView>
-
+    </ScreenContainer>
   );
 };
 

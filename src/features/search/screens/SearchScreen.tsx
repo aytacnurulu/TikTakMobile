@@ -1,11 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
+import QueryStateView from '@/shared/components/QueryStateView';
 import HomeHeader from '@/shared/components/HomeHeader';
 import SearchBar from '@/features/search/components/SearchBar';
 import SearchResultCard from '@/features/search/components/SearchResultCard';
@@ -46,25 +47,23 @@ const SearchScreen = () => {
 
       {debouncedQuery.length === 0 ? (
         <EmptyState message={t('search.prompt')} icon={null} />
-      ) : isFetching && !isFetchingNextPage ? (
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
       ) : (
-        <FlatList
-          data={products}
-          keyExtractor={item => String(item.id)}
-          renderItem={renderProduct}
-          contentContainerStyle={styles.listContent}
-          onEndReached={() => hasNextPage && fetchNextPage()}
-          onEndReachedThreshold={0.5}
-          ListEmptyComponent={<EmptyState message={t('product.empty')} />}
-          ListFooterComponent={
-            isFetchingNextPage ? (
-              <ActivityIndicator style={styles.footerLoader} color={colors.primary} />
-            ) : null
-          }
-        />
+        <QueryStateView isPending={isFetching && !isFetchingNextPage}>
+          <FlatList
+            data={products}
+            keyExtractor={item => String(item.id)}
+            renderItem={renderProduct}
+            contentContainerStyle={styles.listContent}
+            onEndReached={() => hasNextPage && fetchNextPage()}
+            onEndReachedThreshold={0.5}
+            ListEmptyComponent={<EmptyState message={t('product.empty')} />}
+            ListFooterComponent={
+              isFetchingNextPage ? (
+                <ActivityIndicator style={styles.footerLoader} color={colors.primary} />
+              ) : null
+            }
+          />
+        </QueryStateView>
       )}
 
       <ProductDetailSheet ref={sheetRef} />
@@ -76,11 +75,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: pixelWidth(16),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   listContent: {
     paddingBottom: pixelWidth(90),

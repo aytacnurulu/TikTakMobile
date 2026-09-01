@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EmptyState from '@/shared/components/EmptyState';
+import QueryStateView from '@/shared/components/QueryStateView';
 import HomeHeader from '@/shared/components/HomeHeader';
 import { useProducts } from '@/features/product/hooks/product.hooks';
 import { Product } from '@/shared/types/product.types';
@@ -54,11 +55,7 @@ const ProductListScreen = () => {
         onSelect={category => setSelectedCategory(category)}
       />
 
-      {isPending ? (
-        <View style={styles.loader}>
-          <ActivityIndicator color={colors.primary} />
-        </View>
-      ) : (
+      <QueryStateView isPending={isPending}>
         <FlatList
           data={products}
           numColumns={2}
@@ -75,7 +72,7 @@ const ProductListScreen = () => {
             ) : null
           }
         />
-      )}
+      </QueryStateView>
 
       <ProductDetailSheet ref={sheetRef} />
       <CompleteOrderBanner />
@@ -87,11 +84,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: pixelWidth(16),
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   productsList: {
     flex: 1,

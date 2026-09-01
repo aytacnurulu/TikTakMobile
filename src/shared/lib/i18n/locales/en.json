@@ -1,6 +1,7 @@
 {
   "common": {
     "retry": "Retry",
+    "loadError": "Could not load data",
     "ok": "Close",
     "confirm": "Confirm",
     "cancel": "Cancel"

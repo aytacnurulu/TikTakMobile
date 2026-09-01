@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 import { pixelWidth } from '@/shared/utils/metrics';
 
 export const styles = StyleSheet.create({
-  listContent: {
-    paddingBottom: pixelWidth(16),
+  container: {
+    flex: 1,
+  },
+  padded: {
+    paddingHorizontal: pixelWidth(16),
   },
 });
