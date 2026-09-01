@@ -2,12 +2,10 @@ import { StyleSheet } from 'react-native';
 import { pixelWidth } from '@/shared/utils/metrics';
 
 export const styles = StyleSheet.create({
-  loader: {
+  container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  listContent: {
-    paddingBottom: pixelWidth(16),
+  padded: {
+    paddingHorizontal: pixelWidth(16),
   },
 });

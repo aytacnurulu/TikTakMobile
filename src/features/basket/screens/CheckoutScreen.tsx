@@ -8,12 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
-import ScreenHeader from '@/shared/components/ScreenHeader';
+import ScreenContainer from '@/shared/components/ScreenContainer';
 import Button from '@/shared/components/Button';
 import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
@@ -45,13 +44,7 @@ const CheckoutScreen = () => {
     : t('checkout.errorFallback');
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScreenHeader
-        title={t('basket.checkout')}
-        onBackPress={() => navigation.goBack()}
-      />
+    <ScreenContainer title={t('basket.checkout')}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
@@ -169,7 +162,7 @@ const CheckoutScreen = () => {
           <Text style={styles.errorText}>{orderErrorMessage}</Text>
         ) : null}
       </ScrollView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
@@ -213,10 +206,6 @@ const PaymentOption = ({
 );
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
   scrollContent: {
     paddingTop: pixelHeight(18),
     paddingBottom: pixelHeight(10),

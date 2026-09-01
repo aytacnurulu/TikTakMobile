@@ -8,12 +8,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
-import ScreenHeader from '@/shared/components/ScreenHeader';
+import ScreenContainer from '@/shared/components/ScreenContainer';
 import QuantityStepper from '@/shared/components/QuantityStepper';
 import Button from '@/shared/components/Button';
 import EmptyState from '@/shared/components/EmptyState';
@@ -75,38 +74,29 @@ const BasketScreen = () => {
 
   if (isPending) {
     return (
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
+      <ScreenContainer title={t('basket.title')}>
         <View style={styles.loader}>
           <ActivityIndicator color={colors.primary} />
         </View>
-      </SafeAreaView>
+      </ScreenContainer>
     );
   }
 
   if (isError) {
     return (
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-        <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
+      <ScreenContainer title={t('basket.title')}>
         <EmptyState message={t('basket.loadError')} />
         <Button
           title={t('common.retry')}
           onPress={() => refetch()}
           style={styles.retryButton}
         />
-      </SafeAreaView>
+      </ScreenContainer>
     );
   }
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScreenHeader title={t('basket.title')} onBackPress={() => navigation.goBack()} />
+    <ScreenContainer title={t('basket.title')}>
       {items.length === 0 ? (
         <View style={styles.emptyContainer}>
           <EmptyState message={t('basket.empty')} />
@@ -135,15 +125,11 @@ const BasketScreen = () => {
           />
         </View>
       )}
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
   content: {
     flex: 1,
   },

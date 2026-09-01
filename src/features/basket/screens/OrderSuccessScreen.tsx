@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
-import ScreenHeader from '@/shared/components/ScreenHeader';
+import ScreenContainer from '@/shared/components/ScreenContainer';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 
@@ -27,13 +26,7 @@ const OrderSuccessScreen = () => {
   }, [navigation]);
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
-      <ScreenHeader
-        title={t('basket.checkout')}
-        onBackPress={() => navigation.goBack()}
-      />
+    <ScreenContainer title={t('basket.checkout')}>
       <View style={styles.content}>
         <View
           style={[styles.successBadge, { backgroundColor: colors.surface }]}
@@ -54,15 +47,11 @@ const OrderSuccessScreen = () => {
           {t('orderSuccess.message')}
         </Text>
       </View>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
   content: {
     flex: 1,
     alignItems: 'center',
