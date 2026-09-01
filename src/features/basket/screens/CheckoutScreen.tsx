@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import Button from '@/shared/components/Button';
+import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useAuthStore } from '@/shared/store/auth.store';
 import { useBasket } from '@/shared/hooks/basket.hooks';
@@ -144,25 +145,7 @@ const CheckoutScreen = () => {
               </Text>
             </View>
           ))}
-          <View style={[styles.divider, { backgroundColor: colors.border }]} />
-          <View style={styles.summaryRow}>
-            <View>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.total')}: {formatPrice(total, locale)}
-              </Text>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.delivery')}: {t('basket.free')}
-              </Text>
-            </View>
-            <View style={styles.totalBlock}>
-              <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-                {t('basket.grandTotal')}:
-              </Text>
-              <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
-                {formatPrice(total, locale)}
-              </Text>
-            </View>
-          </View>
+          <OrderSummary total={total} divider />
         </View>
 
         <Button
@@ -323,30 +306,6 @@ const styles = StyleSheet.create({
   },
   orderPrice: {
     fontSize: pixelFont(13),
-  },
-  divider: {
-    height: StyleSheet.hairlineWidth,
-    marginVertical: pixelHeight(14),
-  },
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  summaryText: {
-    fontSize: pixelFont(12),
-    lineHeight: pixelFont(18),
-  },
-  totalBlock: {
-    alignItems: 'flex-end',
-  },
-  totalLabel: {
-    fontSize: pixelFont(13),
-    fontWeight: '700',
-  },
-  totalValue: {
-    marginTop: pixelHeight(2),
-    fontSize: pixelFont(14),
-    fontWeight: '800',
   },
   submitButton: {
     marginTop: pixelHeight(12),

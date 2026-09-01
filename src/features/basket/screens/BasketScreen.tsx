@@ -17,6 +17,7 @@ import ScreenHeader from '@/shared/components/ScreenHeader';
 import QuantityStepper from '@/shared/components/QuantityStepper';
 import Button from '@/shared/components/Button';
 import EmptyState from '@/shared/components/EmptyState';
+import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
 import { formatPrice } from '@/shared/utils/currency';
@@ -125,24 +126,7 @@ const BasketScreen = () => {
               />
             }
           />
-          <View style={[styles.summary, { borderTopColor: colors.border }]}>
-            <View>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.total')}: {formatPrice(total, locale)}
-              </Text>
-              <Text style={[styles.summaryText, { color: colors.textPrimary }]}>
-                {t('basket.delivery')}: {t('basket.free')}
-              </Text>
-            </View>
-            <View style={styles.totalBlock}>
-              <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-                {t('basket.grandTotal')}:
-              </Text>
-              <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
-                {formatPrice(total, locale)}
-              </Text>
-            </View>
-          </View>
+          <OrderSummary total={total} divider style={styles.summary} />
           <Button
             title={t('basket.checkout')}
             onPress={() => navigation.navigate('Checkout')}
@@ -199,27 +183,7 @@ const styles = StyleSheet.create({
     gap: pixelWidth(5),
   },
   summary: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: pixelHeight(14),
     marginTop: 'auto',
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  summaryText: {
-    fontSize: pixelFont(12),
-    lineHeight: pixelFont(18),
-  },
-  totalBlock: {
-    alignItems: 'flex-end',
-  },
-  totalLabel: {
-    fontSize: pixelFont(13),
-    fontWeight: '700',
-  },
-  totalValue: {
-    marginTop: pixelHeight(2),
-    fontSize: pixelFont(14),
-    fontWeight: '800',
   },
   checkoutButton: {
     marginTop: pixelHeight(14),
