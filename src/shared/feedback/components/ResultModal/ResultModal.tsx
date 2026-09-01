@@ -1,0 +1,99 @@
+import React from 'react';
+import { Modal, Pressable, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from '@/shared/hooks/useTheme';
+import { useResultModalStore } from '@/shared/feedback/resultModal.store';
+import type { ResultModalAction } from '@/shared/feedback/resultModal.store';
+import { styles } from './ResultModal.styles';
+
+const GLYPH = { success: '✓', error: '✕' } as const;
+
+/**
+ * Blocking result dialog for milestone outcomes that need acknowledgement or a
+ * follow-up action — "order placed successfully" + "View orders", etc.
+ * Mounted once in AppProviders; driven by `useResultModalStore`.
+ */
+const ResultModal = () => {
+  const { t } = useTranslation();
+  const { colors } = useTheme();
+
+  const {
+    visible,
+    type,
+    titleKey,
+    messageKey,
+    params,
+    primaryAction,
+    secondaryAction,
+    dismiss,
+  } = useResultModalStore();
+
+  const accent = type === 'error' ? colors.danger : colors.primary;
+
+  const runAction = (action?: ResultModalAction) => {
+    action?.onPress?.();
+    dismiss();
+  };
+
+  return (
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={dismiss}
+    >
+      <View style={styles.backdrop}>
+        <View style={[styles.card, { backgroundColor: colors.background }]}>
+          <View style={[styles.glyph, { backgroundColor: accent }]}>
+            <Text style={styles.glyphText}>{GLYPH[type]}</Text>
+          </View>
+
+          {titleKey ? (
+            <Text style={[styles.title, { color: colors.textPrimary }]}>
+              {t(titleKey, params)}
+            </Text>
+          ) : null}
+
+          {messageKey ? (
+            <Text style={[styles.message, { color: colors.textSecondary }]}>
+              {t(messageKey, params)}
+            </Text>
+          ) : null}
+
+          <View style={styles.actions}>
+            {secondaryAction ? (
+              <Pressable
+                style={[
+                  styles.button,
+                  styles.buttonSecondary,
+                  { borderColor: colors.border },
+                ]}
+                onPress={() => runAction(secondaryAction)}
+              >
+                <Text
+                  style={[
+                    styles.buttonSecondaryText,
+                    { color: colors.textPrimary },
+                  ]}
+                >
+                  {t(secondaryAction.labelKey)}
+                </Text>
+              </Pressable>
+            ) : null}
+
+            <Pressable
+              style={[styles.button, { backgroundColor: accent }]}
+              onPress={() => runAction(primaryAction)}
+            >
+              <Text style={styles.buttonPrimaryText}>
+                {t(primaryAction?.labelKey ?? 'common.ok')}
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+
+export default ResultModal;
