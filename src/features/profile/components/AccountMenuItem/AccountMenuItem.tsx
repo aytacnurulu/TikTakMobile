@@ -9,9 +9,10 @@ interface AccountMenuItemProps {
   Icon: React.FC<SvgProps>;
   label: string;
   onPress: () => void;
+  iconColor?: string;
 }
 
-const AccountMenuItem = ({ Icon, label, onPress }: AccountMenuItemProps) => {
+const AccountMenuItem = ({ Icon, label, onPress, iconColor }: AccountMenuItemProps) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
 
@@ -23,7 +24,7 @@ const AccountMenuItem = ({ Icon, label, onPress }: AccountMenuItemProps) => {
     >
       <View style={styles.left}>
         <View style={styles.iconWrapper}>
-          <Icon width={pixelWidth(18)} height={pixelWidth(18)} color={colors.textPrimary} />
+          <Icon width={pixelWidth(18)} height={pixelWidth(18)} color={iconColor ?? colors.textPrimary} />
         </View>
         <Text style={styles.label}>{label}</Text>
       </View>
