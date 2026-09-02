@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.types';
-import ChevronRightIcon from '@/shared/icons/chevron-right.svg';
+import ChevronRightIcon from '@/shared/icons/chevron-right-small.svg';
 import { createStyles } from './OrderHistoryItem.styles';
 
 interface OrderHistoryItemProps {

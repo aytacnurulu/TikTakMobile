@@ -14,6 +14,7 @@ export const lightColors = {
   danger: '#E5484D',
   warning: '#F5A623',
   info: '#3E63DD',
+  label:'#2B3043'
 };
 
 // Estimated by inverting the light palette — not measured from a dark-mode design yet.
@@ -33,6 +34,7 @@ export const darkColors = {
   danger: '#FF6369',
   warning: '#FFB224',
   info: '#7A9BFF',
+  label:'#2B3043'
 };
 
 export type ThemeColors = typeof lightColors;

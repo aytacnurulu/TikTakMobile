@@ -8,34 +8,33 @@ export const createStyles = (colors: ThemeColors) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingVertical: pixelWidth(14),
-      borderBottomWidth: 1,
-      borderBottomColor: colors.border,
+      paddingVertical: pixelWidth(16),
     },
     left: {
       flexDirection: 'row',
       flex: 1,
-      gap: pixelWidth(24),
+      gap: pixelWidth(40),
     },
     column: {
       gap: pixelWidth(4),
     },
     label: {
-      fontSize: pixelFont(12),
-      color: colors.textSecondary,
+      fontSize: pixelFont(14),
+      color: colors.label,
+      fontWeight: '400'
     },
     value: {
-      fontSize: pixelFont(13),
-      fontWeight: '500',
-      color: colors.textPrimary,
+      fontSize: pixelFont(14),
+      fontWeight: '300',
+      color: colors.label,
     },
     addressColumn: {
       flex: 1,
-      gap: pixelWidth(4),
+      gap: pixelWidth(2),
     },
     addressValue: {
-      fontSize: pixelFont(13),
-      fontWeight: '500',
-      color: colors.textPrimary,
+      fontSize: pixelFont(16),
+      fontWeight: '300',
+      color: colors.label,
     },
   });
