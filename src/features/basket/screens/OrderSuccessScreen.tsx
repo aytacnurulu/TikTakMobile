@@ -17,9 +17,24 @@ const OrderSuccessScreen = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.navigate('Main', {
-        screen: 'Account',
-        params: { screen: 'OrderHistory' },
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Main',
+            state: {
+              routes: [
+                {
+                  name: 'Account',
+                  state: {
+                    index: 1,
+                    routes: [{ name: 'Account' }, { name: 'OrderHistory' }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
     }, 3000);
 

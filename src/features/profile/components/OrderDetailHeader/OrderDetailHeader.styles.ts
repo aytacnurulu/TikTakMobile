@@ -8,24 +8,23 @@ export const createStyles = (colors: ThemeColors) =>
       flexDirection: 'row',
       marginBottom: pixelHeight(16),
     },
+    lastInfoRow: {
+      flexDirection: 'row',
+      marginBottom: pixelHeight(30),
+    },
     infoColumn: {
       flex: 1,
       gap: pixelHeight(4),
       paddingRight: pixelWidth(12),
     },
     label: {
-      fontSize: pixelFont(12),
-      color: colors.textSecondary,
+      fontSize: pixelFont(14),
+      fontWeight: '400',
+      color: colors.label,
     },
     value: {
       fontSize: pixelFont(14),
-      fontWeight: '600',
-      color: colors.textPrimary,
-    },
-    divider: {
-      height: 1,
-      width: '100%',
-      marginBottom: pixelHeight(16),
-      backgroundColor: colors.border,
+      fontWeight: '300',
+      color: colors.label,
     },
   });
