@@ -17,12 +17,15 @@ export const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
     },
     basketButton: {
-      padding: pixelWidth(4),
+      paddingTop: pixelWidth(8),
+      paddingRight: pixelWidth(8),
+      paddingBottom: pixelWidth(4),
+      paddingLeft: pixelWidth(4),
     },
     badge: {
       position: 'absolute',
-      top: -pixelHeight(4),
-      right: -pixelWidth(4),
+      top: 0,
+      right: 0,
       minWidth: pixelWidth(16),
       height: pixelWidth(16),
       borderRadius: pixelWidth(8),
