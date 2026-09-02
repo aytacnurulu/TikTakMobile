@@ -12,6 +12,7 @@ import { OrderHistoryItem, OrderItem } from '@/shared/types/order.types';
 import { createStyles } from './OrderDetailSheet.styles';
 import OrderDetailProductItem from '../OrderDetailProductItem/OrderDetailProductItem';
 import OrderDetailHeader from '../OrderDetailHeader/OrderDetailHeader';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface OrderDetailSheetRef {
   open: (order: OrderHistoryItem) => void;
@@ -30,6 +31,8 @@ const OrderDetailSheet = forwardRef<OrderDetailSheetRef>((_props, ref) => {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const locale = useLocaleStore(state => state.locale);
+  const insets = useSafeAreaInsets();
+
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [order, setOrder] = useState<OrderHistoryItem | null>(null);
 
@@ -61,7 +64,7 @@ const OrderDetailSheet = forwardRef<OrderDetailSheetRef>((_props, ref) => {
       enableDynamicSizing
       maxDynamicContentSize={Dimensions.get('window').height * 0.85}
       enablePanDownToClose
-      bottomInset={0}
+      bottomInset={insets.bottom}
       backdropComponent={renderBackdrop}
       backgroundStyle={styles.sheetBackground}
       handleIndicatorStyle={styles.handleIndicator}
