@@ -9,7 +9,7 @@ import {
 import { useTheme } from '@/shared/hooks/useTheme';
 import { Locale, useLocaleStore } from '@/shared/store/locale.store';
 import i18n from '@/shared/lib/i18n';
-import { styles } from './LanguageSelectSheet.styles';
+import { createStyles } from './LanguageSelectSheet.styles';
 
 export interface LanguageSelectSheetRef {
   open: () => void;
@@ -32,6 +32,7 @@ const renderBackdrop = (props: BottomSheetBackdropProps) => (
 
 const LanguageSelectSheet = forwardRef<LanguageSelectSheetRef>((_props, ref) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const locale = useLocaleStore(state => state.locale);
   const setLocale = useLocaleStore(state => state.setLocale);
@@ -54,11 +55,8 @@ const LanguageSelectSheet = forwardRef<LanguageSelectSheetRef>((_props, ref) => 
       enablePanDownToClose
       bottomInset={0}
       backdropComponent={renderBackdrop}
-      backgroundStyle={{ backgroundColor: colors.background }}
-      handleIndicatorStyle={[
-        styles.handleIndicator,
-        { backgroundColor: colors.textPlaceholder },
-      ]}
+      backgroundStyle={styles.sheetBackground}
+      handleIndicatorStyle={styles.handleIndicator}
       containerStyle={styles.sheetContainer}
     >
       <BottomSheetView style={styles.content}>
@@ -86,11 +84,7 @@ const LanguageSelectSheet = forwardRef<LanguageSelectSheetRef>((_props, ref) => 
                   { borderColor: isSelected ? colors.primary : colors.border },
                 ]}
               >
-                {isSelected && (
-                  <View
-                    style={[styles.radioInner, { backgroundColor: colors.primary }]}
-                  />
-                )}
+                {isSelected && <View style={styles.radioInner} />}
               </View>
             </TouchableOpacity>
           );

@@ -9,7 +9,7 @@ import {
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { OrderHistoryItem, OrderItem } from '@/shared/types/order.types';
-import { styles } from './OrderDetailSheet.styles';
+import { createStyles } from './OrderDetailSheet.styles';
 import OrderDetailProductItem from '../OrderDetailProductItem/OrderDetailProductItem';
 import OrderDetailHeader from '../OrderDetailHeader/OrderDetailHeader';
 
@@ -28,6 +28,7 @@ const renderBackdrop = (props: BottomSheetBackdropProps) => (
 
 const OrderDetailSheet = forwardRef<OrderDetailSheetRef>((_props, ref) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const locale = useLocaleStore(state => state.locale);
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const [order, setOrder] = useState<OrderHistoryItem | null>(null);
@@ -57,11 +58,8 @@ const OrderDetailSheet = forwardRef<OrderDetailSheetRef>((_props, ref) => {
       enablePanDownToClose
       bottomInset={0}
       backdropComponent={renderBackdrop}
-      backgroundStyle={{ backgroundColor: colors.background }}
-      handleIndicatorStyle={[
-        styles.handleIndicator,
-        { backgroundColor: colors.textPlaceholder },
-      ]}
+      backgroundStyle={styles.sheetBackground}
+      handleIndicatorStyle={styles.handleIndicator}
       containerStyle={styles.sheetContainer}
     >
       <BottomSheetFlatList

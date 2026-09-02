@@ -4,7 +4,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
 import { OrderItem } from '@/shared/types/order.types';
-import { styles } from './OrderDetailProductItem.styles';
+import { createStyles } from './OrderDetailProductItem.styles';
 
 interface OrderDetailProductItemProps {
   item: OrderItem;
@@ -12,29 +12,23 @@ interface OrderDetailProductItemProps {
 
 const OrderDetailProductItem = ({ item }: OrderDetailProductItemProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const locale = useLocaleStore(state => state.locale);
 
   return (
     <View style={styles.container}>
-      <View
-        style={[styles.imageWrapper, { backgroundColor: colors.surface }]}
-      >
+      <View style={styles.imageWrapper}>
         <Image source={{ uri: item.product.img_url }} style={styles.image} />
       </View>
       <View style={styles.info}>
-        <Text
-          style={[styles.title, { color: colors.textPrimary }]}
-          numberOfLines={1}
-        >
+        <Text style={styles.title} numberOfLines={1}>
           {item.product.title}
         </Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+        <Text style={styles.subtitle}>
           {item.quantity} {item.product.type}
         </Text>
       </View>
-      <Text style={[styles.price, { color: colors.textPrimary }]}>
-        {formatPrice(item.total_price, locale)}
-      </Text>
+      <Text style={styles.price}>{formatPrice(item.total_price, locale)}</Text>
     </View>
   );
 };

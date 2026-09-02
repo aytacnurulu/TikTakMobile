@@ -21,6 +21,7 @@ import {
   pixelHeight,
   pixelWidth,
 } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import Button from '@/shared/components/Button';
 import OnboardingIllustration from '@/features/onboarding/components/OnboardingIllustration';
 import OnboardingProgress from '@/features/onboarding/components/OnboardingProgress';
@@ -40,6 +41,7 @@ const SLIDE_VARIANTS: Pick<OnboardingSlide, 'key' | 'variant'>[] = [
 
 const OnboardingScreen = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const navigation = useNavigation<OnboardingNavigationProp>();
   const completeOnboarding = useOnboardingStore(state => state.completeOnboarding);
@@ -80,9 +82,9 @@ const OnboardingScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={[styles.wordmark, { color: colors.primary }]}>TikTak</Text>
+        <Text style={styles.wordmark}>TikTak</Text>
         <Button
           variant="text"
           title={t('onboarding.skip')}
@@ -146,15 +148,9 @@ const OnboardingScreen = () => {
               </Animated.View>
 
               <View style={styles.textBlock}>
-                <Text style={[styles.eyebrow, { color: colors.primary }]}>
-                  {item.eyebrow}
-                </Text>
-                <Text style={[styles.title, { color: colors.textPrimary }]}>
-                  {item.title}
-                </Text>
-                <Text style={[styles.description, { color: colors.textSecondary }]}>
-                  {item.description}
-                </Text>
+                <Text style={styles.eyebrow}>{item.eyebrow}</Text>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.description}>{item.description}</Text>
               </View>
             </View>
           );
@@ -173,72 +169,78 @@ const OnboardingScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: pixelWidth(24),
-    paddingTop: pixelHeight(8),
-  },
-  wordmark: {
-    fontSize: pixelFont(18),
-    fontWeight: '700',
-  },
-  skipButton: {
-    paddingVertical: pixelHeight(4),
-  },
-  hidden: {
-    opacity: 0,
-  },
-  list: {
-    flex: 1,
-  },
-  slide: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: pixelWidth(28),
-    paddingBottom: pixelHeight(56),
-  },
-  illustrationWrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textBlock: {
-    marginTop: pixelHeight(32),
-    alignItems: 'center',
-    gap: gapVertical(12),
-  },
-  eyebrow: {
-    fontSize: pixelFont(12),
-    fontWeight: '700',
-    letterSpacing: 1.2,
-  },
-  title: {
-    fontSize: pixelFont(24),
-    fontWeight: '700',
-    textAlign: 'center',
-    lineHeight: pixelFont(30),
-  },
-  description: {
-    fontSize: pixelFont(14),
-    textAlign: 'center',
-    lineHeight: pixelFont(21),
-    paddingHorizontal: pixelWidth(8),
-  },
-  footer: {
-    paddingHorizontal: pixelWidth(24),
-    paddingBottom: pixelHeight(16),
-    paddingTop: pixelHeight(20),
-    gap: gapVertical(20),
-  },
-  nextButton: {
-    marginTop: 0,
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: pixelWidth(24),
+      paddingTop: pixelHeight(8),
+    },
+    wordmark: {
+      fontSize: pixelFont(18),
+      fontWeight: '700',
+      color: colors.primary,
+    },
+    skipButton: {
+      paddingVertical: pixelHeight(4),
+    },
+    hidden: {
+      opacity: 0,
+    },
+    list: {
+      flex: 1,
+    },
+    slide: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: pixelWidth(28),
+      paddingBottom: pixelHeight(56),
+    },
+    illustrationWrapper: {
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    textBlock: {
+      marginTop: pixelHeight(32),
+      alignItems: 'center',
+      gap: gapVertical(12),
+    },
+    eyebrow: {
+      fontSize: pixelFont(12),
+      fontWeight: '700',
+      letterSpacing: 1.2,
+      color: colors.primary,
+    },
+    title: {
+      fontSize: pixelFont(24),
+      fontWeight: '700',
+      textAlign: 'center',
+      lineHeight: pixelFont(30),
+      color: colors.textPrimary,
+    },
+    description: {
+      fontSize: pixelFont(14),
+      textAlign: 'center',
+      lineHeight: pixelFont(21),
+      paddingHorizontal: pixelWidth(8),
+      color: colors.textSecondary,
+    },
+    footer: {
+      paddingHorizontal: pixelWidth(24),
+      paddingBottom: pixelHeight(16),
+      paddingTop: pixelHeight(20),
+      gap: gapVertical(20),
+    },
+    nextButton: {
+      marginTop: 0,
+    },
+  });
 
 export default OnboardingScreen;

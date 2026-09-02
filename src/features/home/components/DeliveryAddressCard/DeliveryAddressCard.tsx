@@ -7,12 +7,13 @@ import { MainTabParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import Button from '@/shared/components/Button';
 import { useProfile } from '@/shared/hooks/profile.hooks';
-import { styles } from './DeliveryAddressCard.styles';
+import { createStyles } from './DeliveryAddressCard.styles';
 
 type DeliveryAddressNavigationProp = BottomTabNavigationProp<MainTabParamList>;
 
 const DeliveryAddressCard = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const navigation = useNavigation<DeliveryAddressNavigationProp>();
   const { data } = useProfile();
@@ -27,10 +28,8 @@ const DeliveryAddressCard = () => {
 
   if (!address) {
     return (
-      <View style={[styles.container, { backgroundColor: colors.surface }]}>
-        <Text style={[styles.label, { color: colors.textPrimary }]}>
-          {t('home.deliveryAddress')}
-        </Text>
+      <View style={styles.container}>
+        <Text style={styles.label}>{t('home.deliveryAddress')}</Text>
         <Button
           title="Çatdırılma ünvanı əlavə et"
           variant="text"
@@ -42,14 +41,9 @@ const DeliveryAddressCard = () => {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.surface }]}>
-      <Text style={[styles.label, { color: colors.textPrimary }]}>
-        {t('home.deliveryAddress')}
-      </Text>
-      <Text
-        style={[styles.address, { color: colors.textSecondary }]}
-        numberOfLines={1}
-      >
+    <View style={styles.container}>
+      <Text style={styles.label}>{t('home.deliveryAddress')}</Text>
+      <Text style={styles.address} numberOfLines={1}>
         {address}
       </Text>
     </View>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { styles } from './ConfirmModal.styles';
+import { createStyles } from './ConfirmModal.styles';
 
 interface ConfirmModalProps {
   visible: boolean;
@@ -34,6 +34,7 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const styles = createStyles(colors);
 
   const confirmColor = destructive ? colors.danger : colors.primary;
 
@@ -46,29 +47,19 @@ const ConfirmModal = ({
     >
       <Pressable style={styles.backdrop} onPress={onCancel}>
         {/* stops backdrop taps from closing when they land on the card */}
-        <Pressable style={[styles.card, { backgroundColor: colors.background }]}>
-          {title ? (
-            <Text style={[styles.title, { color: colors.textPrimary }]}>
-              {title}
-            </Text>
-          ) : null}
+        <Pressable style={styles.card}>
+          {title ? <Text style={styles.title}>{title}</Text> : null}
 
           {message ? (
-            <Text style={[styles.message, { color: colors.textSecondary }]}>
-              {message}
-            </Text>
+            <Text style={styles.message}>{message}</Text>
           ) : null}
 
           <View style={styles.actions}>
             <Pressable
-              style={[
-                styles.button,
-                styles.cancelButton,
-                { borderColor: colors.border },
-              ]}
+              style={[styles.button, styles.cancelButton]}
               onPress={onCancel}
             >
-              <Text style={[styles.cancelText, { color: colors.textPrimary }]}>
+              <Text style={styles.cancelText}>
                 {cancelLabel ?? t('common.cancel')}
               </Text>
             </Pressable>
