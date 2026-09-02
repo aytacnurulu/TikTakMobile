@@ -7,6 +7,13 @@ import { OrderHistoryItem as OrderHistoryItemType } from '@/shared/types/order.t
 import ChevronRightIcon from '@/shared/icons/chevron-right-small.svg';
 import { createStyles } from './OrderHistoryItem.styles';
 
+const ADDRESS_MAX_LENGTH = 25;
+
+const truncateAddress = (address: string) =>
+  address.length > ADDRESS_MAX_LENGTH
+    ? `${address.slice(0, ADDRESS_MAX_LENGTH)}...`
+    : address;
+
 interface OrderHistoryItemProps {
   order: OrderHistoryItemType;
   onPress: () => void;
@@ -31,7 +38,7 @@ const OrderHistoryItem = ({ order, onPress }: OrderHistoryItemProps) => {
         <View style={styles.addressColumn}>
           <Text style={styles.label}>{t('orderHistory.deliveryAddress')}</Text>
           <Text style={styles.addressValue} numberOfLines={1} ellipsizeMode="tail">
-            {order.address}
+            {truncateAddress(order.address)}
           </Text>
         </View>
       </View>
