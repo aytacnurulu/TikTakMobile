@@ -5,14 +5,23 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    // marginBottom: pixelHeight(16),
+  },
+    wrapper: {
     marginBottom: pixelHeight(16),
   },
+  divider: {
+    height: 1,
+    width: '100%',
+    marginTop: pixelHeight(17),
+    backgroundColor: '#F6F5FB',
+  },
   imageWrapper: {
-    width: pixelWidth(48),
-    height: pixelWidth(48),
+    width: pixelWidth(70.36),
+    height: pixelWidth(66),
     borderRadius: pixelWidth(10),
     overflow: 'hidden',
-    marginRight: pixelWidth(12),
+    marginRight: pixelWidth(17),
   },
   image: {
     width: '100%',
@@ -24,14 +33,15 @@ export const styles = StyleSheet.create({
     gap: pixelHeight(4),
   },
   title: {
-    fontSize: pixelFont(14),
-    fontWeight: '500',
+    fontSize: pixelFont(16),
+    fontWeight: '300',
   },
   subtitle: {
-    fontSize: pixelFont(12),
+    fontSize: pixelFont(16),
+    fontWeight: '300',
   },
   price: {
-    fontSize: pixelFont(14),
-    fontWeight: '600',
+    fontSize: pixelFont(16),
+    fontWeight: '300',
   },
 });

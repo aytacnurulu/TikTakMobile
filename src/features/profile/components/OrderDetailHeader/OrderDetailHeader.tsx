@@ -14,6 +14,13 @@ const formatDate = (dateString: string) => {
   return `${day}.${month}.${date.getFullYear()}`;
 };
 
+const ADDRESS_MAX_LENGTH = 25;
+
+const truncateAddress = (address: string) =>
+  address.length > ADDRESS_MAX_LENGTH
+    ? `${address.slice(0, ADDRESS_MAX_LENGTH)}...`
+    : address;
+
 interface OrderDetailHeaderProps {
   order: OrderHistoryItem;
   itemsCount: number;
@@ -54,12 +61,12 @@ const OrderDetailHeader = ({
         <View style={styles.infoColumn}>
           <Text style={styles.label}>{t('orderHistory.deliveryAddress')}</Text>
           <Text style={styles.value} numberOfLines={2}>
-            {order.address}
+            {truncateAddress(order.address)}
           </Text>
         </View>
       </View>
 
-      <View style={styles.infoRow}>
+      <View style={styles.lastInfoRow}>
         <View style={styles.infoColumn}>
           <Text style={styles.label}>{t('orderHistory.status')}</Text>
           <Text style={styles.value}>{statusLabel}</Text>
@@ -74,8 +81,6 @@ const OrderDetailHeader = ({
           </Text>
         </View>
       </View>
-
-      <View style={styles.divider} />
     </>
   );
 };

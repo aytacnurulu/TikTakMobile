@@ -8,13 +8,16 @@ import { styles } from './OrderDetailProductItem.styles';
 
 interface OrderDetailProductItemProps {
   item: OrderItem;
+  isLast?: boolean;
 }
 
-const OrderDetailProductItem = ({ item }: OrderDetailProductItemProps) => {
+const OrderDetailProductItem = ({ item, isLast }: OrderDetailProductItemProps) => {
+  console.log('[ITEM]', item.id, 'isLast:', isLast);
   const { colors } = useTheme();
   const locale = useLocaleStore(state => state.locale);
 
   return (
+    <View style={styles.wrapper}>
     <View style={styles.container}>
       <View
         style={[styles.imageWrapper, { backgroundColor: colors.surface }]}
@@ -23,19 +26,21 @@ const OrderDetailProductItem = ({ item }: OrderDetailProductItemProps) => {
       </View>
       <View style={styles.info}>
         <Text
-          style={[styles.title, { color: colors.textPrimary }]}
+          style={[styles.title, { color: colors.label }]}
           numberOfLines={1}
         >
           {item.product.title}
         </Text>
-        <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+        <Text style={[styles.subtitle, { color: colors.label }]}>
           {item.quantity} {item.product.type}
         </Text>
       </View>
-      <Text style={[styles.price, { color: colors.textPrimary }]}>
+      <Text style={[styles.price, { color: colors.label }]}>
         {formatPrice(item.total_price, locale)}
       </Text>
     </View>
+          { !isLast ? <View style={styles.divider} /> : null }
+    </View >
   );
 };
 

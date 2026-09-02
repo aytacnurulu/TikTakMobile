@@ -43,8 +43,13 @@ const OrderDetailSheet = forwardRef<OrderDetailSheetRef>((_props, ref) => {
     order?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
 
   const renderItem = useCallback(
-    ({ item }: { item: OrderItem }) => <OrderDetailProductItem item={item} />,
-    [],
+    ({ item, index }: { item: OrderItem; index: number }) => (
+      <OrderDetailProductItem
+        item={item}
+        isLast={index === (order?.items.length ?? 0) - 1}
+      />
+    ),
+    [order],
   );
 
   const keyExtractor = useCallback((item: OrderItem) => String(item.id), []);
