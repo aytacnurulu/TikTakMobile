@@ -40,8 +40,8 @@ const CheckoutScreen = () => {
   const orderErrorMessage = axios.isAxiosError(createOrder.error)
     ? createOrder.error.response?.data?.message ?? createOrder.error.message
     : createOrder.error instanceof Error
-    ? createOrder.error.message
-    : t('checkout.errorFallback');
+      ? createOrder.error.message
+      : t('checkout.errorFallback');
 
   return (
     <ScreenContainer title={t('basket.checkout')}>
