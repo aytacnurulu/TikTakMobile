@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useDebouncedValue } from '@/shared/hooks/useDebouncedValue';
 import { pixelWidth } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import EmptyState from '@/shared/components/EmptyState';
 import QueryStateView from '@/shared/components/QueryStateView';
 import HomeHeader from '@/shared/components/HomeHeader';
@@ -18,6 +19,7 @@ import { Product } from '@/shared/types/product.types';
 
 const SearchScreen = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebouncedValue(query);
@@ -35,9 +37,7 @@ const SearchScreen = () => {
   );
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <SafeAreaView style={styles.container}>
       <HomeHeader />
       <SearchBar
         value={query}
@@ -71,17 +71,19 @@ const SearchScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
-  listContent: {
-    paddingBottom: pixelWidth(90),
-  },
-  footerLoader: {
-    marginVertical: pixelWidth(16),
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingHorizontal: pixelWidth(16),
+      backgroundColor: colors.background,
+    },
+    listContent: {
+      paddingBottom: pixelWidth(90),
+    },
+    footerLoader: {
+      marginVertical: pixelWidth(16),
+    },
+  });
 
 export default SearchScreen;

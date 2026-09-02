@@ -17,6 +17,7 @@ import {
 } from '@/shared/utils/metrics';
 import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import { useLogin } from '@/features/auth/hooks/auth.hooks';
 import { LoginPayload } from '@/shared/types/auth.types';
 import { ApiErrorResponse } from '@/shared/types/api-response.type';
@@ -28,6 +29,7 @@ type LoginScreenNavigationProp = NativeStackNavigationProp<
 
 const LoginScreen = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const navigation = useNavigation<LoginScreenNavigationProp>();
   const { mutate, isPending, error } = useLogin();
@@ -48,12 +50,8 @@ const LoginScreen = () => {
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-      <Text style={[styles.title, { color: colors.textPrimary }]}>
-        {t('auth.login.title')}
-      </Text>
+      <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>{t('auth.login.title')}</Text>
 
       <Formik<LoginPayload>
         initialValues={{ phone: '', password: '' }}
@@ -96,9 +94,7 @@ const LoginScreen = () => {
       </Formik>
 
       <View style={styles.footer}>
-        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          {t('auth.login.noAccount')}{' '}
-        </Text>
+        <Text style={styles.footerText}>{t('auth.login.noAccount')} </Text>
         <Button
           variant="text"
           title={t('auth.login.signup')}
@@ -110,40 +106,44 @@ const LoginScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: pixelWidth(24),
-  },
-  title: {
-    fontSize: pixelFont(24),
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: pixelHeight(40),
-  },
-  form: {
-    gap: gapVertical(20),
-  },
-  submitButton: {
-    marginTop: pixelHeight(12),
-  },
-  apiError: {
-    fontSize: pixelFont(13),
-    color: '#E5484D',
-    textAlign: 'center',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: pixelHeight(16),
-  },
-  footerText: {
-    fontSize: pixelFont(13),
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    flex: {
+      flex: 1,
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: pixelWidth(24),
+      backgroundColor: colors.background,
+    },
+    title: {
+      fontSize: pixelFont(24),
+      fontWeight: '700',
+      textAlign: 'center',
+      marginBottom: pixelHeight(40),
+      color: colors.textPrimary,
+    },
+    form: {
+      gap: gapVertical(20),
+    },
+    submitButton: {
+      marginTop: pixelHeight(12),
+    },
+    apiError: {
+      fontSize: pixelFont(13),
+      color: colors.danger,
+      textAlign: 'center',
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: pixelHeight(16),
+    },
+    footerText: {
+      fontSize: pixelFont(13),
+      color: colors.textSecondary,
+    },
+  });
 
 export default LoginScreen;

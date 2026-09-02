@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import EmptyState from '@/shared/components/EmptyState';
 import QueryStateView from '@/shared/components/QueryStateView';
 import HomeHeader from '@/shared/components/HomeHeader';
@@ -25,6 +26,7 @@ type ProductListScreenRouteProp = RouteProp<HomeStackParamList, 'Products'>;
 const ProductListScreen = () => {
   const { params } = useRoute<ProductListScreenRouteProp>();
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<Pick<Category, 'id' | 'name'>>({
     id: params.categoryId,
@@ -45,9 +47,7 @@ const ProductListScreen = () => {
   );
 
   return (
-    <SafeAreaView
-      style={[styles.container, { backgroundColor: colors.background }]}
-    >
+    <SafeAreaView style={styles.container}>
       <HomeHeader />
       <CategoriesBanner />
       <CategoryChips
@@ -80,20 +80,22 @@ const ProductListScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: pixelWidth(16),
-  },
-  productsList: {
-    flex: 1,
-  },
-  listContent: {
-    paddingBottom: pixelWidth(90),
-  },
-  footerLoader: {
-    marginVertical: pixelWidth(16),
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingHorizontal: pixelWidth(16),
+      backgroundColor: colors.background,
+    },
+    productsList: {
+      flex: 1,
+    },
+    listContent: {
+      paddingBottom: pixelWidth(90),
+    },
+    footerLoader: {
+      marginVertical: pixelWidth(16),
+    },
+  });
 
 export default ProductListScreen;

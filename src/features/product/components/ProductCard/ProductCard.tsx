@@ -13,7 +13,7 @@ import {
   useRemoveFromBasket,
 } from '@/shared/hooks/basket.hooks';
 import { Product } from '@/shared/types/product.types';
-import { styles } from './ProductCard.styles';
+import { createStyles } from './ProductCard.styles';
 
 interface ProductCardProps {
   product: Product;
@@ -22,6 +22,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, onPress }: ProductCardProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const { data } = useBasket();
@@ -37,14 +38,10 @@ const ProductCard = ({ product, onPress }: ProductCardProps) => {
     <Card style={styles.card}>
       <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
         <Image source={{ uri: product.img_url }} style={styles.image} />
-        <Text
-          style={[styles.title, { color: colors.textPrimary }]}
-          numberOfLines={2}
-          ellipsizeMode="tail"
-        >
+        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
           {product.title}
         </Text>
-        <Text style={[styles.price, { color: colors.textPrimary }]}>
+        <Text style={styles.price}>
           {formatPrice(product.price, locale)}
         </Text>
       </TouchableOpacity>

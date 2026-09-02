@@ -10,8 +10,11 @@ import {
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useCampaigns } from '@/features/home/hooks/campaign.hooks';
 import { Campaign } from '@/features/home/types/campaign.types';
-import { ThemeColors } from '@/shared/constants/theme.constants';
-import { ITEM_WIDTH, styles } from './PromoBanner.styles';
+import {
+  createStyles,
+  ITEM_WIDTH,
+  PromoBannerStyles,
+} from './PromoBanner.styles';
 
 const AUTO_SCROLL_INTERVAL = 5000;
 
@@ -19,10 +22,12 @@ const AUTO_SCROLL_INTERVAL = 5000;
 // Kept light — just enough to lift the text off the photo, not darken the whole banner.
 const SCRIM_BAND_ALPHAS = [0, 0.06, 0.14, 0.24, 0.34];
 
-const renderBanner = (colors: ThemeColors) => ({ item }: { item: Campaign }) => (
+const renderBanner =
+  (styles: PromoBannerStyles) =>
+  ({ item }: { item: Campaign }) => (
   <ImageBackground
     source={{ uri: item.img_url }}
-    style={[styles.banner, { backgroundColor: colors.surface }]}
+    style={styles.banner}
     imageStyle={styles.bannerImage}
   >
     <View style={styles.scrim} pointerEvents="none">
@@ -46,6 +51,7 @@ const renderBanner = (colors: ThemeColors) => ({ item }: { item: Campaign }) => 
 
 const PromoBanner = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { data } = useCampaigns();
   const campaigns = data?.data ?? [];
   const listRef = useRef<FlatList<Campaign>>(null);
@@ -83,7 +89,7 @@ const PromoBanner = () => {
       data={campaigns}
       horizontal
       keyExtractor={item => String(item.id)}
-      renderItem={renderBanner(colors)}
+      renderItem={renderBanner(styles)}
       showsHorizontalScrollIndicator={false}
       snapToInterval={ITEM_WIDTH}
       decelerationRate="fast"

@@ -10,7 +10,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import EyeIcon from '@/shared/icons/eye.svg';
 import EyeOffIcon from '@/shared/icons/eye-off.svg';
-import { styles } from './Input.styles';
+import { createStyles } from './Input.styles';
 
 interface InputProps
   extends Pick<
@@ -41,11 +41,12 @@ const Input = forwardRef<TextInput, InputProps>(
     ref,
   ) => {
     const { colors } = useTheme();
+    const styles = createStyles(colors);
     const [secureVisible, setSecureVisible] = useState(false);
 
     return (
       <View style={styles.container}>
-        <Text style={[styles.label, { color: colors.textPrimary }]}>{label}</Text>
+        <Text style={styles.label}>{label}</Text>
         <View style={styles.inputWrapper}>
           <TextInput
             ref={ref}
@@ -60,11 +61,10 @@ const Input = forwardRef<TextInput, InputProps>(
             keyboardType={keyboardType}
             style={[
               styles.input,
-              { backgroundColor: colors.surface, color: colors.textPrimary },
               multiline && styles.multiline,
               secureTextEntry && styles.inputWithIcon,
-              !editable && { color: colors.textSecondary, opacity: 0.6 },
-              error && { borderColor: '#E5484D', borderWidth: 1 },
+              !editable && styles.inputDisabled,
+              error && styles.inputError,
             ]}
           />
           {secureTextEntry ? (

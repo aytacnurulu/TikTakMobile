@@ -4,7 +4,7 @@ import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
 import { Product } from '@/shared/types/product.types';
-import { styles } from './SearchResultCard.styles';
+import { createStyles } from './SearchResultCard.styles';
 
 interface SearchResultCardProps {
   product: Product;
@@ -13,24 +13,21 @@ interface SearchResultCardProps {
 
 const SearchResultCard = ({ product, onPress }: SearchResultCardProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const locale = useLocaleStore(state => state.locale);
 
   return (
     <TouchableOpacity
-      style={[styles.container, { borderColor: colors.border }]}
+      style={styles.container}
       onPress={onPress}
       activeOpacity={0.8}
     >
       <Image source={{ uri: product.img_url }} style={styles.image} />
       <View style={styles.info}>
-        <Text
-          style={[styles.title, { color: colors.textPrimary }]}
-          numberOfLines={2}
-          ellipsizeMode="tail"
-        >
+        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
           {product.title}
         </Text>
-        <Text style={[styles.price, { color: colors.textPrimary }]}>
+        <Text style={styles.price}>
           {formatPrice(product.price, locale)}
         </Text>
       </View>

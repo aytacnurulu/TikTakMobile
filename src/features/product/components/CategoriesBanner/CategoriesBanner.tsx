@@ -7,7 +7,7 @@ import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import GridIcon from '@/shared/icons/grid.svg';
-import { styles } from './CategoriesBanner.styles';
+import { createStyles } from './CategoriesBanner.styles';
 
 type CategoriesBannerNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -16,12 +16,13 @@ type CategoriesBannerNavigationProp = NativeStackNavigationProp<
 
 const CategoriesBanner = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const navigation = useNavigation<CategoriesBannerNavigationProp>();
 
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: colors.primary }]}
+      style={styles.container}
       activeOpacity={0.8}
       onPress={() => navigation.navigate('Home')}
     >
@@ -30,9 +31,7 @@ const CategoriesBanner = () => {
         height={pixelWidth(18)}
         fill={colors.textOnPrimary}
       />
-      <Text style={[styles.label, { color: colors.textOnPrimary }]}>
-        {t('product.browseCategories')}
-      </Text>
+      <Text style={styles.label}>{t('product.browseCategories')}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,47 +1,43 @@
 import { StyleSheet } from 'react-native';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 
-export const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // marginBottom: pixelHeight(16),
-  },
-    wrapper: {
-    marginBottom: pixelHeight(16),
-  },
-  divider: {
-    height: 1,
-    width: '100%',
-    marginTop: pixelHeight(17),
-    backgroundColor: '#F6F5FB',
-  },
-  imageWrapper: {
-    width: pixelWidth(70.36),
-    height: pixelWidth(66),
-    borderRadius: pixelWidth(10),
-    overflow: 'hidden',
-    marginRight: pixelWidth(17),
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  info: {
-    flex: 1,
-    gap: pixelHeight(4),
-  },
-  title: {
-    fontSize: pixelFont(16),
-    fontWeight: '300',
-  },
-  subtitle: {
-    fontSize: pixelFont(16),
-    fontWeight: '300',
-  },
-  price: {
-    fontSize: pixelFont(16),
-    fontWeight: '300',
-  },
-});
+export const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: pixelHeight(16),
+    },
+    imageWrapper: {
+      width: pixelWidth(48),
+      height: pixelWidth(48),
+      borderRadius: pixelWidth(10),
+      overflow: 'hidden',
+      marginRight: pixelWidth(12),
+      backgroundColor: colors.surface,
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
+    },
+    info: {
+      flex: 1,
+      gap: pixelHeight(4),
+    },
+    title: {
+      fontSize: pixelFont(14),
+      fontWeight: '500',
+      color: colors.textPrimary,
+    },
+    subtitle: {
+      fontSize: pixelFont(12),
+      color: colors.textSecondary,
+    },
+    price: {
+      fontSize: pixelFont(14),
+      fontWeight: '600',
+      color: colors.textPrimary,
+    },
+  });

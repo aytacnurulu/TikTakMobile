@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useResultModalStore } from '@/shared/store/resultModal.store';
 import type { ResultModalAction } from '@/shared/store/resultModal.store';
-import { styles } from './ResultModal.styles';
+import { createStyles } from './ResultModal.styles';
 
 const GLYPH = { success: '✓', error: '✕' } as const;
 
@@ -16,6 +16,7 @@ const GLYPH = { success: '✓', error: '✕' } as const;
 const ResultModal = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const styles = createStyles(colors);
 
   const {
     visible,
@@ -43,39 +44,26 @@ const ResultModal = () => {
       onRequestClose={dismiss}
     >
       <View style={styles.backdrop}>
-        <View style={[styles.card, { backgroundColor: colors.background }]}>
+        <View style={styles.card}>
           <View style={[styles.glyph, { backgroundColor: accent }]}>
             <Text style={styles.glyphText}>{GLYPH[type]}</Text>
           </View>
 
           {titleKey ? (
-            <Text style={[styles.title, { color: colors.textPrimary }]}>
-              {t(titleKey, params)}
-            </Text>
+            <Text style={styles.title}>{t(titleKey, params)}</Text>
           ) : null}
 
           {messageKey ? (
-            <Text style={[styles.message, { color: colors.textSecondary }]}>
-              {t(messageKey, params)}
-            </Text>
+            <Text style={styles.message}>{t(messageKey, params)}</Text>
           ) : null}
 
           <View style={styles.actions}>
             {secondaryAction ? (
               <Pressable
-                style={[
-                  styles.button,
-                  styles.buttonSecondary,
-                  { borderColor: colors.border },
-                ]}
+                style={[styles.button, styles.buttonSecondary]}
                 onPress={() => runAction(secondaryAction)}
               >
-                <Text
-                  style={[
-                    styles.buttonSecondaryText,
-                    { color: colors.textPrimary },
-                  ]}
-                >
+                <Text style={styles.buttonSecondaryText}>
                   {t(secondaryAction.labelKey)}
                 </Text>
               </Pressable>

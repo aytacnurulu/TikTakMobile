@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import { formatPrice } from '@/shared/utils/currency';
-import { styles } from './OrderSummary.styles';
+import { createStyles } from './OrderSummary.styles';
 
 interface OrderSummaryProps {
   total: string;
@@ -19,31 +19,26 @@ interface OrderSummaryProps {
  */
 const OrderSummary = ({ total, divider = false, style }: OrderSummaryProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const formattedTotal = formatPrice(total, locale);
 
   return (
     <View style={style}>
-      {divider ? (
-        <View style={[styles.divider, { backgroundColor: colors.border }]} />
-      ) : null}
+      {divider ? <View style={styles.divider} /> : null}
       <View style={styles.row}>
         <View>
-          <Text style={[styles.text, { color: colors.textPrimary }]}>
+          <Text style={styles.text}>
             {t('basket.total')}: {formattedTotal}
           </Text>
-          <Text style={[styles.text, { color: colors.textPrimary }]}>
+          <Text style={styles.text}>
             {t('basket.delivery')}: {t('basket.free')}
           </Text>
         </View>
         <View style={styles.totalBlock}>
-          <Text style={[styles.totalLabel, { color: colors.textPrimary }]}>
-            {t('basket.grandTotal')}:
-          </Text>
-          <Text style={[styles.totalValue, { color: colors.textPrimary }]}>
-            {formattedTotal}
-          </Text>
+          <Text style={styles.totalLabel}>{t('basket.grandTotal')}:</Text>
+          <Text style={styles.totalValue}>{formattedTotal}</Text>
         </View>
       </View>
     </View>

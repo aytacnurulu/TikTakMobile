@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 
 const NUM_COLUMNS = 3;
 const CARD_MARGIN = pixelWidth(6);
@@ -19,27 +20,31 @@ const CARD_WIDTH =
 const IMAGE_SIZE = CARD_WIDTH - pixelWidth(20);
 const NAME_WIDTH = CARD_WIDTH - pixelWidth(16);
 
-export const styles = StyleSheet.create({
-  container: {
-    width: CARD_WIDTH,
-    margin: CARD_MARGIN,
-    borderRadius: pixelWidth(12),
-    borderWidth: 1,
-    paddingVertical: pixelHeight(12),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: IMAGE_SIZE,
-    height: IMAGE_SIZE,
-    borderRadius: pixelWidth(8),
-    resizeMode: 'contain',
-  },
-  name: {
-    width: NAME_WIDTH,
-    marginTop: pixelHeight(8),
-    fontSize: pixelFont(12),
-    fontWeight: '500',
-    textAlign: 'center',
-  },
-});
+export const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      width: CARD_WIDTH,
+      margin: CARD_MARGIN,
+      borderRadius: pixelWidth(12),
+      borderWidth: 1,
+      paddingVertical: pixelHeight(12),
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.background,
+      borderColor: colors.border,
+    },
+    image: {
+      width: IMAGE_SIZE,
+      height: IMAGE_SIZE,
+      borderRadius: pixelWidth(8),
+      resizeMode: 'contain',
+    },
+    name: {
+      width: NAME_WIDTH,
+      marginTop: pixelHeight(8),
+      fontSize: pixelFont(12),
+      fontWeight: '500',
+      textAlign: 'center',
+      color: colors.textPrimary,
+    },
+  });

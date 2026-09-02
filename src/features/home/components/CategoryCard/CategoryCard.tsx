@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '@/app/stack/types';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { Category } from '@/shared/types/category.type';
-import { styles } from './CategoryCard.styles';
+import { createStyles } from './CategoryCard.styles';
 
 type CategoryCardNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
@@ -18,14 +18,12 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const navigation = useNavigation<CategoryCardNavigationProp>();
 
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        { backgroundColor: colors.background, borderColor: colors.border },
-      ]}
+      style={styles.container}
       activeOpacity={0.7}
       onPress={() =>
         navigation.navigate('Products', {
@@ -35,10 +33,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       }
     >
       <Image source={{ uri: category.img_url }} style={styles.image} />
-      <Text
-        style={[styles.name, { color: colors.textPrimary }]}
-        numberOfLines={1}
-      >
+      <Text style={styles.name} numberOfLines={1}>
         {category.name}
       </Text>
     </TouchableOpacity>

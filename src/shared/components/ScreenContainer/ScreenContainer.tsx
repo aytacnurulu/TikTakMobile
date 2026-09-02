@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import ScreenHeader from '@/shared/components/ScreenHeader';
 import { useTheme } from '@/shared/hooks/useTheme';
-import { styles } from './ScreenContainer.styles';
+import { createStyles } from './ScreenContainer.styles';
 
 interface ScreenContainerProps {
   title: string;
@@ -30,17 +30,13 @@ const ScreenContainer = ({
   children,
 }: ScreenContainerProps) => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const navigation = useNavigation();
   const handleBack = onBack ?? (() => navigation.goBack());
 
   return (
     <SafeAreaView
-      style={[
-        styles.container,
-        padded && styles.padded,
-        { backgroundColor: colors.background },
-        style,
-      ]}
+      style={[styles.container, padded && styles.padded, style]}
     >
       <ScreenHeader
         title={title}

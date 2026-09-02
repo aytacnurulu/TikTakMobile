@@ -18,6 +18,7 @@ import Button from '@/shared/components/Button';
 import OrderSummary from '@/shared/components/OrderSummary';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import { formatPrice } from '@/shared/utils/currency';
 import { useLocaleStore } from '@/shared/store/locale.store';
 import {
@@ -29,6 +30,7 @@ import { BasketItem } from '@/shared/types/basket.types';
 
 const BasketScreen = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const locale = useLocaleStore(state => state.locale);
   const navigation =
@@ -41,19 +43,16 @@ const BasketScreen = () => {
   const isMutating = addToBasket.isPending || removeFromBasket.isPending;
 
   const renderItem = ({ item }: { item: BasketItem }) => (
-    <View style={[styles.item, { borderBottomColor: colors.border }]}>
+    <View style={styles.item}>
       <Image
         source={{ uri: item.product.img_url }}
         style={styles.productImage}
       />
       <View style={styles.productInfo}>
-        <Text
-          style={[styles.productTitle, { color: colors.textPrimary }]}
-          numberOfLines={2}
-        >
+        <Text style={styles.productTitle} numberOfLines={2}>
           {item.product.title}
         </Text>
-        <Text style={[styles.productPrice, { color: colors.textSecondary }]}>
+        <Text style={styles.productPrice}>
           {formatPrice(item.product.price, locale)}
         </Text>
       </View>
@@ -108,52 +107,56 @@ const BasketScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  content: {
-    flex: 1,
-  },
-  listContent: {
-    paddingTop: pixelHeight(18),
-    paddingBottom: pixelHeight(12),
-  },
-  item: {
-    minHeight: pixelHeight(80),
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: pixelHeight(10),
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  productImage: {
-    width: pixelWidth(58),
-    height: pixelWidth(58),
-    borderRadius: pixelWidth(12),
-    marginRight: pixelWidth(12),
-  },
-  productInfo: {
-    flex: 1,
-    alignSelf: 'center',
-  },
-  productTitle: {
-    fontSize: pixelFont(14),
-    fontWeight: '700',
-    lineHeight: pixelFont(18),
-  },
-  productPrice: {
-    marginTop: pixelHeight(3),
-    fontSize: pixelFont(13),
-  },
-  stepper: {
-    width: pixelWidth(104),
-    height: pixelHeight(36),
-    gap: pixelWidth(5),
-  },
-  summary: {
-    marginTop: 'auto',
-  },
-  checkoutButton: {
-    marginTop: pixelHeight(14),
-    marginBottom: pixelHeight(10),
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    content: {
+      flex: 1,
+    },
+    listContent: {
+      paddingTop: pixelHeight(18),
+      paddingBottom: pixelHeight(12),
+    },
+    item: {
+      minHeight: pixelHeight(80),
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: pixelHeight(10),
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderBottomColor: colors.border,
+    },
+    productImage: {
+      width: pixelWidth(58),
+      height: pixelWidth(58),
+      borderRadius: pixelWidth(12),
+      marginRight: pixelWidth(12),
+    },
+    productInfo: {
+      flex: 1,
+      alignSelf: 'center',
+    },
+    productTitle: {
+      fontSize: pixelFont(14),
+      fontWeight: '700',
+      lineHeight: pixelFont(18),
+      color: colors.textPrimary,
+    },
+    productPrice: {
+      marginTop: pixelHeight(3),
+      fontSize: pixelFont(13),
+      color: colors.textSecondary,
+    },
+    stepper: {
+      width: pixelWidth(104),
+      height: pixelHeight(36),
+      gap: pixelWidth(5),
+    },
+    summary: {
+      marginTop: 'auto',
+    },
+    checkoutButton: {
+      marginTop: pixelHeight(14),
+      marginBottom: pixelHeight(10),
+    },
+  });
 
 export default BasketScreen;

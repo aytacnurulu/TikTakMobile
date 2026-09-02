@@ -17,6 +17,7 @@ import {
 } from '@/shared/utils/metrics';
 import Input from '@/shared/components/Input';
 import Button from '@/shared/components/Button';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 import { useRegister } from '@/features/auth/hooks/auth.hooks';
 import { SignupPayload } from '@/shared/types/auth.types';
 import { ApiErrorResponse } from '@/shared/types/api-response.type';
@@ -28,6 +29,7 @@ type SignupScreenNavigationProp = NativeStackNavigationProp<
 
 const SignupScreen = () => {
   const { colors } = useTheme();
+  const styles = createStyles(colors);
   const { t } = useTranslation();
   const navigation = useNavigation<SignupScreenNavigationProp>();
   const { mutate, isPending, error } = useRegister();
@@ -49,12 +51,8 @@ const SignupScreen = () => {
       style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <SafeAreaView
-        style={[styles.container, { backgroundColor: colors.background }]}
-      >
-      <Text style={[styles.title, { color: colors.textPrimary }]}>
-        {t('auth.signup.title')}
-      </Text>
+      <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>{t('auth.signup.title')}</Text>
 
       <Formik<SignupPayload>
         initialValues={{ full_name: '', phone: '', password: '' }}
@@ -105,9 +103,7 @@ const SignupScreen = () => {
       </Formik>
 
       <View style={styles.footer}>
-        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-          {t('auth.signup.haveAccount')}{' '}
-        </Text>
+        <Text style={styles.footerText}>{t('auth.signup.haveAccount')} </Text>
         <Button
           variant="text"
           title={t('auth.signup.login')}
@@ -119,40 +115,44 @@ const SignupScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: pixelWidth(24),
-  },
-  title: {
-    fontSize: pixelFont(24),
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: pixelHeight(40),
-  },
-  form: {
-    gap: gapVertical(20),
-  },
-  submitButton: {
-    marginTop: pixelHeight(12),
-  },
-  apiError: {
-    fontSize: pixelFont(13),
-    color: '#E5484D',
-    textAlign: 'center',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: pixelHeight(16),
-  },
-  footerText: {
-    fontSize: pixelFont(13),
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    flex: {
+      flex: 1,
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      paddingHorizontal: pixelWidth(24),
+      backgroundColor: colors.background,
+    },
+    title: {
+      fontSize: pixelFont(24),
+      fontWeight: '700',
+      textAlign: 'center',
+      marginBottom: pixelHeight(40),
+      color: colors.textPrimary,
+    },
+    form: {
+      gap: gapVertical(20),
+    },
+    submitButton: {
+      marginTop: pixelHeight(12),
+    },
+    apiError: {
+      fontSize: pixelFont(13),
+      color: colors.danger,
+      textAlign: 'center',
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: pixelHeight(16),
+    },
+    footerText: {
+      fontSize: pixelFont(13),
+      color: colors.textSecondary,
+    },
+  });
 
 export default SignupScreen;

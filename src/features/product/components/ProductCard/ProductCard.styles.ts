@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { deviceWidth, pixelFont, pixelHeight, pixelWidth } from '@/shared/utils/metrics';
+import {
+  deviceWidth,
+  pixelFont,
+  pixelHeight,
+  pixelWidth,
+} from '@/shared/utils/metrics';
+import { ThemeColors } from '@/shared/constants/theme.constants';
 
 // Fixed 2-column grid: screen padding (16) on each edge + card margin (6) on
 // all 4 card edges across the row. A flex:1 card would stretch to fill the
@@ -13,34 +19,37 @@ const CARD_HEIGHT = pixelHeight(210);
 // replaces the other.
 const ACTION_HEIGHT = pixelHeight(32);
 
-export const styles = StyleSheet.create({
-  card: {
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
-    margin: CARD_MARGIN,
-    padding: pixelWidth(8),
-  },
-  image: {
-    width: '100%',
-    height: pixelWidth(100),
-    borderRadius: pixelWidth(10),
-    resizeMode: 'contain',
-  },
-  title: {
-    height: pixelHeight(30),
-    marginTop: pixelHeight(6),
-    fontSize: pixelFont(12),
-    fontWeight: '600',
-  },
-  price: {
-    marginTop: pixelHeight(2),
-    marginBottom: pixelHeight(6),
-    fontSize: pixelFont(13),
-    fontWeight: '700',
-  },
-  action: {
-    width: '100%',
-    height: ACTION_HEIGHT,
-    paddingVertical: 0,
-  },
-});
+export const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    card: {
+      width: CARD_WIDTH,
+      height: CARD_HEIGHT,
+      margin: CARD_MARGIN,
+      padding: pixelWidth(8),
+    },
+    image: {
+      width: '100%',
+      height: pixelWidth(100),
+      borderRadius: pixelWidth(10),
+      resizeMode: 'contain',
+    },
+    title: {
+      height: pixelHeight(30),
+      marginTop: pixelHeight(6),
+      fontSize: pixelFont(12),
+      fontWeight: '600',
+      color: colors.textPrimary,
+    },
+    price: {
+      marginTop: pixelHeight(2),
+      marginBottom: pixelHeight(6),
+      fontSize: pixelFont(13),
+      fontWeight: '700',
+      color: colors.textPrimary,
+    },
+    action: {
+      width: '100%',
+      height: ACTION_HEIGHT,
+      paddingVertical: 0,
+    },
+  });
