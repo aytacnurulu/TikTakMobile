@@ -30,6 +30,7 @@ const menuItems: {
   labelKey: string;
   Icon: React.FC<any>;
   navigate: ((navigation: AccountNavigation) => void) | null;
+  iconColor?: (colors: ReturnType<typeof useTheme>['colors']) => string;
 }[] = [
   {
     id: 'info',
@@ -55,7 +56,13 @@ const menuItems: {
     Icon: SettingsIcon,
     navigate: navigation => navigation.navigate(ACCOUNT_ROUTES.SETTINGS),
   },
-  { id: 'logout', labelKey: 'account.menu.logout', Icon: LogoutIcon, navigate: null },
+  {
+    id: 'logout',
+    labelKey: 'account.menu.logout',
+    Icon: LogoutIcon,
+    navigate: null,
+    iconColor: colors => colors.danger,
+  },
 ];
 
 const AccountScreen = ({ navigation }: Props) => {
@@ -115,6 +122,7 @@ const AccountScreen = ({ navigation }: Props) => {
             Icon={item.Icon}
             label={t(item.labelKey)}
             onPress={() => handleItemPress(item.navigate)}
+            iconColor={item.iconColor?.(colors)}
           />
         ))}
       </View>

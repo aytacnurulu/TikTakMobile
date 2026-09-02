@@ -34,7 +34,7 @@ export const darkColors = {
   danger: '#FF6369',
   warning: '#FFB224',
   info: '#7A9BFF',
-  label:'#2B3043'
+  label:'#F5F5F7'
 };
 
 export type ThemeColors = typeof lightColors;
