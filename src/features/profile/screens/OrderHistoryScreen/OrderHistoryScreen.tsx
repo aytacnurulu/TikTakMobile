@@ -52,6 +52,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
           renderItem={props => renderOrder(props, handleOrderPress)}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={<EmptyState message={t('orderHistory.empty')} />}
+          showsVerticalScrollIndicator={false}
         />
       </QueryStateView>
       <OrderDetailSheet ref={detailSheetRef} />
