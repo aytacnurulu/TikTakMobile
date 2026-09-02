@@ -1,4 +1,5 @@
 import { AccountStackParamList } from '@/app/stack/types';
+import { ACCOUNT_ROUTES } from '@/shared/constants/routes.constants';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
@@ -38,7 +39,7 @@ const OrderHistoryScreen = ({ navigation }: Props) => {
     if (navigation.canGoBack()) {
       navigation.goBack();
     } else {
-      navigation.navigate('Account' as any);
+      navigation.navigate(ACCOUNT_ROUTES.ACCOUNT);
     }
   };
 

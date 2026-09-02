@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '@/app/stack/types';
+import { HOME_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { Category } from '@/shared/types/category.type';
 import { createStyles } from './CategoryCard.styles';
@@ -26,7 +27,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       style={styles.container}
       activeOpacity={0.7}
       onPress={() =>
-        navigation.navigate('Products', {
+        navigation.navigate(HOME_ROUTES.PRODUCTS, {
           categoryId: category.id,
           categoryName: category.name,
         })

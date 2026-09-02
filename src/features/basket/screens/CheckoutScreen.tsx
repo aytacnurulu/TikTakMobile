@@ -11,6 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
+import { ROOT_ROUTES } from '@/shared/constants/routes.constants';
 import ScreenContainer from '@/shared/components/ScreenContainer';
 import Button from '@/shared/components/Button';
 import OrderSummary from '@/shared/components/OrderSummary';
@@ -37,11 +38,14 @@ const CheckoutScreen = () => {
   const createOrder = useCreateOrder();
   const items = data?.data.items ?? [];
   const total = data?.data.total ?? '0';
-  const orderErrorMessage = axios.isAxiosError(createOrder.error)
+  const serverMessage = axios.isAxiosError(createOrder.error)
     ? createOrder.error.response?.data?.message ?? createOrder.error.message
     : createOrder.error instanceof Error
       ? createOrder.error.message
-      : t('checkout.errorFallback');
+      : undefined;
+  const orderErrorMessage = serverMessage?.trim()
+    ? serverMessage
+    : t('checkout.errorFallback');
 
   return (
     <ScreenContainer title={t('basket.checkout')}>
@@ -122,7 +126,7 @@ const CheckoutScreen = () => {
                 ...(note.trim() ? { note: note.trim() } : {}),
                 paymentMethod,
               },
-              { onSuccess: () => navigation.navigate('OrderSuccess') },
+              { onSuccess: () => navigation.navigate(ROOT_ROUTES.ORDER_SUCCESS) },
             )
           }
           disabled={items.length === 0 || createOrder.isPending}

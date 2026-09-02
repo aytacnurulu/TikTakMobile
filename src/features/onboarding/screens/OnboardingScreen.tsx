@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
+import { AUTH_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
   deviceWidth,
@@ -62,7 +63,7 @@ const OnboardingScreen = () => {
 
   const goToAuth = () => {
     completeOnboarding();
-    navigation.reset({ index: 0, routes: [{ name: 'Welcome' }] });
+    navigation.reset({ index: 0, routes: [{ name: AUTH_ROUTES.WELCOME }] });
   };
 
   const handleNext = () => {

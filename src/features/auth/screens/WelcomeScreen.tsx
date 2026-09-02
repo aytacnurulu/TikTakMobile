@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
+import { AUTH_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
   gapVertical,
@@ -38,7 +39,7 @@ const WelcomeScreen = () => {
 
         <Button
           title={t('auth.welcome.signup')}
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate(AUTH_ROUTES.SIGNUP)}
           style={styles.submitButton}
         />
 
@@ -49,7 +50,7 @@ const WelcomeScreen = () => {
           <Button
             variant="text"
             title={t('auth.welcome.login')}
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate(AUTH_ROUTES.LOGIN)}
           />
         </View>
       </View>
