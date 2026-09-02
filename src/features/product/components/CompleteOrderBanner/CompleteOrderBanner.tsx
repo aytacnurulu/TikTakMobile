@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
+import { ROOT_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { formatPrice } from '@/shared/utils/currency';
 import { useLocaleStore } from '@/shared/store/locale.store';
@@ -35,7 +36,7 @@ const CompleteOrderBanner = () => {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.85}
-      onPress={() => navigation.navigate('Basket')}
+      onPress={() => navigation.navigate(ROOT_ROUTES.BASKET)}
     >
       <View style={styles.left}>
         <View style={styles.badge}>

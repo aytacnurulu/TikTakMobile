@@ -4,6 +4,7 @@ import { useAuthStore } from '@/shared/store/auth.store';
 import ConfirmModal from '@/shared/components/ConfirmModal';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AccountStackParamList } from '@/app/stack/types';
+import { ACCOUNT_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { createStyles } from './AccountScreen.styles';
 import { useProfile } from '@/shared/hooks/profile.hooks';
@@ -20,18 +21,41 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 type Props = NativeStackScreenProps<AccountStackParamList, 'Account'>;
+type AccountNavigation = Props['navigation'];
 
+// `navigate` is a per-item thunk (not a bare route name) so each call passes a
+// string literal and stays type-checked; `null` marks the logout action.
 const menuItems: {
   id: string;
   labelKey: string;
   Icon: React.FC<any>;
-  route: keyof AccountStackParamList | null;
+  navigate: ((navigation: AccountNavigation) => void) | null;
 }[] = [
-  { id: 'info', labelKey: 'account.menu.info', Icon: AccountIcon, route: 'AccountInfo' },
-  { id: 'favorites', labelKey: 'account.menu.favorites', Icon: HeartIcon, route: 'Favorites' },
-  { id: 'orders', labelKey: 'account.menu.orders', Icon: BasketIcon, route: 'OrderHistory' },
-  { id: 'settings', labelKey: 'account.menu.settings', Icon: SettingsIcon, route: 'Settings' },
-  { id: 'logout', labelKey: 'account.menu.logout', Icon: LogoutIcon, route: null },
+  {
+    id: 'info',
+    labelKey: 'account.menu.info',
+    Icon: AccountIcon,
+    navigate: navigation => navigation.navigate(ACCOUNT_ROUTES.ACCOUNT_INFO),
+  },
+  {
+    id: 'favorites',
+    labelKey: 'account.menu.favorites',
+    Icon: HeartIcon,
+    navigate: navigation => navigation.navigate(ACCOUNT_ROUTES.FAVORITES),
+  },
+  {
+    id: 'orders',
+    labelKey: 'account.menu.orders',
+    Icon: BasketIcon,
+    navigate: navigation => navigation.navigate(ACCOUNT_ROUTES.ORDER_HISTORY),
+  },
+  {
+    id: 'settings',
+    labelKey: 'account.menu.settings',
+    Icon: SettingsIcon,
+    navigate: navigation => navigation.navigate(ACCOUNT_ROUTES.SETTINGS),
+  },
+  { id: 'logout', labelKey: 'account.menu.logout', Icon: LogoutIcon, navigate: null },
 ];
 
 const AccountScreen = ({ navigation }: Props) => {
@@ -43,9 +67,11 @@ const AccountScreen = ({ navigation }: Props) => {
   const logout = useAuthStore(state => state.logout);
   const [logoutVisible, setLogoutVisible] = useState(false);
 
-  const handleItemPress = (route: keyof AccountStackParamList | null) => {
-    if (route) {
-      navigation.navigate(route as any);
+  const handleItemPress = (
+    navigate: ((navigation: AccountNavigation) => void) | null,
+  ) => {
+    if (navigate) {
+      navigate(navigation);
     } else {
       setLogoutVisible(true);
     }
@@ -88,7 +114,7 @@ const AccountScreen = ({ navigation }: Props) => {
             key={item.id}
             Icon={item.Icon}
             label={t(item.labelKey)}
-            onPress={() => handleItemPress(item.route)}
+            onPress={() => handleItemPress(item.navigate)}
           />
         ))}
       </View>

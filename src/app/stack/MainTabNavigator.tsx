@@ -4,6 +4,7 @@ import HomeStackNavigator from '@/app/stack/HomeStackNavigator';
 import SearchScreen from '@/features/search/screens/SearchScreen';
 import AccountStackNavigator from '@/app/stack/AccountStackNavigator';
 import { MainTabParamList } from '@/app/stack/types';
+import { TAB_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import HomeIcon from '@/shared/icons/home.svg';
 import SearchIcon from '@/shared/icons/search.svg';
@@ -44,17 +45,17 @@ const MainTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name={TAB_ROUTES.HOME}
         component={HomeStackNavigator}
         options={{ tabBarLabel: t('tabs.home'), tabBarIcon: renderHomeIcon }}
       />
       <Tab.Screen
-        name="Search"
+        name={TAB_ROUTES.SEARCH}
         component={SearchScreen}
         options={{ tabBarLabel: t('tabs.search'), tabBarIcon: renderSearchIcon }}
       />
       <Tab.Screen
-        name="Account"
+        name={TAB_ROUTES.ACCOUNT}
         component={AccountStackNavigator}
         options={{ tabBarLabel: t('tabs.account'), tabBarIcon: renderAccountIcon }}
       />

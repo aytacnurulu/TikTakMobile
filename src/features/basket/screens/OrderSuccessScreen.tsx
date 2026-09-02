@@ -4,6 +4,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
+import {
+  ACCOUNT_ROUTES,
+  ROOT_ROUTES,
+  TAB_ROUTES,
+} from '@/shared/constants/routes.constants';
 import ScreenContainer from '@/shared/components/ScreenContainer';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { createStyles } from './OrderSuccessScreen.styles';
@@ -21,14 +26,17 @@ const OrderSuccessScreen = () => {
         index: 0,
         routes: [
           {
-            name: 'Main',
+            name: ROOT_ROUTES.MAIN,
             state: {
               routes: [
                 {
-                  name: 'Account',
+                  name: TAB_ROUTES.ACCOUNT,
                   state: {
                     index: 1,
-                    routes: [{ name: 'Account' }, { name: 'OrderHistory' }],
+                    routes: [
+                      { name: ACCOUNT_ROUTES.ACCOUNT },
+                      { name: ACCOUNT_ROUTES.ORDER_HISTORY },
+                    ],
                   },
                 },
               ],

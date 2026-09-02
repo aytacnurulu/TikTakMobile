@@ -71,7 +71,12 @@
   },
   "home": {
     "deliveryAddress": "Адрес доставки:",
+    "addDeliveryAddress": "Добавить адрес доставки",
     "categoriesEmpty": "Категории не найдены"
+  },
+  "currency": {
+    "symbol": "AZN",
+    "decimalSeparator": ","
   },
   "product": {
     "browseCategories": "Смотреть все категории",

@@ -71,7 +71,12 @@
   },
   "home": {
     "deliveryAddress": "Delivery address:",
+    "addDeliveryAddress": "Add delivery address",
     "categoriesEmpty": "No categories found"
+  },
+  "currency": {
+    "symbol": "AZN",
+    "decimalSeparator": "."
   },
   "product": {
     "browseCategories": "Browse all categories",

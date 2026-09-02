@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@/app/stack/types';
+import { ROOT_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import { useBasket } from '@/shared/hooks/basket.hooks';
@@ -24,7 +25,7 @@ const HomeHeader = () => {
       <TouchableOpacity
         style={styles.basketButton}
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('Basket')}
+        onPress={() => navigation.navigate(ROOT_ROUTES.BASKET)}
       >
         <BasketIcon
           width={pixelWidth(22)}

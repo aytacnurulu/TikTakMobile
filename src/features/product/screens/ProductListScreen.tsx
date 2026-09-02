@@ -61,6 +61,7 @@ const ProductListScreen = () => {
           numColumns={2}
           keyExtractor={item => String(item.id)}
           renderItem={renderProduct}
+          showsVerticalScrollIndicator={false}
           style={styles.productsList}
           contentContainerStyle={styles.listContent}
           onEndReached={() => hasNextPage && fetchNextPage()}

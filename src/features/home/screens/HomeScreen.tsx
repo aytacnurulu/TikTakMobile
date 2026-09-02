@@ -42,6 +42,7 @@ const HomeScreen = () => {
           keyExtractor={item => String(item.id)}
           renderItem={renderCategory}
           ListHeaderComponent={ListHeader}
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={
             <EmptyState message={t('home.categoriesEmpty')} />

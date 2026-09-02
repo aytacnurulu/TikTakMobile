@@ -11,6 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { RootStackParamList } from '@/app/stack/types';
+import { ROOT_ROUTES } from '@/shared/constants/routes.constants';
 import ScreenContainer from '@/shared/components/ScreenContainer';
 import QueryStateView from '@/shared/components/QueryStateView';
 import QuantityStepper from '@/shared/components/QuantityStepper';
@@ -97,7 +98,7 @@ const BasketScreen = () => {
           <OrderSummary total={total} divider style={styles.summary} />
           <Button
             title={t('basket.checkout')}
-            onPress={() => navigation.navigate('Checkout')}
+            onPress={() => navigation.navigate(ROOT_ROUTES.CHECKOUT)}
             disabled={isMutating}
             style={styles.checkoutButton}
           />

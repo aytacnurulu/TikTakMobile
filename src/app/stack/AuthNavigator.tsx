@@ -4,6 +4,7 @@ import WelcomeScreen from '@/features/auth/screens/WelcomeScreen';
 import LoginScreen from '@/features/auth/screens/LoginScreen';
 import SignupScreen from '@/features/auth/screens/SignupScreen';
 import { AuthStackParamList } from '@/app/stack/types';
+import { AUTH_ROUTES } from '@/shared/constants/routes.constants';
 import { useOnboardingStore } from '@/features/onboarding/store/onboarding.store';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -16,12 +17,14 @@ const AuthNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={hasCompletedOnboarding ? 'Welcome' : 'Onboarding'}
+      initialRouteName={
+        hasCompletedOnboarding ? AUTH_ROUTES.WELCOME : AUTH_ROUTES.ONBOARDING
+      }
     >
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name={AUTH_ROUTES.ONBOARDING} component={OnboardingScreen} />
+      <Stack.Screen name={AUTH_ROUTES.WELCOME} component={WelcomeScreen} />
+      <Stack.Screen name={AUTH_ROUTES.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={AUTH_ROUTES.SIGNUP} component={SignupScreen} />
     </Stack.Navigator>
   );
 };

@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import { AuthStackParamList } from '@/app/stack/types';
+import { AUTH_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import {
   gapVertical,
@@ -107,7 +108,7 @@ const SignupScreen = () => {
         <Button
           variant="text"
           title={t('auth.signup.login')}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate(AUTH_ROUTES.LOGIN)}
         />
       </View>
       </SafeAreaView>

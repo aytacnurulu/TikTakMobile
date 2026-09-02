@@ -14,7 +14,7 @@ export const orderService = {
     );
 
     if (!response.result) {
-      throw new Error(response.message || 'Sifariş yaradılmadı');
+      throw new Error(response.message ?? '');
     }
 
     return response;

@@ -71,7 +71,12 @@
   },
   "home": {
     "deliveryAddress": "Çatdırılma ünvanı:",
+    "addDeliveryAddress": "Çatdırılma ünvanı əlavə et",
     "categoriesEmpty": "Kateqoriya tapılmadı"
+  },
+  "currency": {
+    "symbol": "₼",
+    "decimalSeparator": "."
   },
   "product": {
     "browseCategories": "Əsas kateqoriyalara bax",

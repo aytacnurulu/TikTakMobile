@@ -4,6 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { MainTabParamList } from '@/app/stack/types';
+import {
+  ACCOUNT_ROUTES,
+  TAB_ROUTES,
+} from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import Button from '@/shared/components/Button';
 import { useProfile } from '@/shared/hooks/profile.hooks';
@@ -20,8 +24,8 @@ const DeliveryAddressCard = () => {
   const address = data?.data?.address;
 
   const handleAddAddress = () => {
-    navigation.navigate('Account', {
-      screen: 'AccountInfo',
+    navigation.navigate(TAB_ROUTES.ACCOUNT, {
+      screen: ACCOUNT_ROUTES.ACCOUNT_INFO,
       params: { focusField: 'address' },
     });
   };
@@ -31,7 +35,7 @@ const DeliveryAddressCard = () => {
       <View style={styles.container}>
         <Text style={styles.label}>{t('home.deliveryAddress')}</Text>
         <Button
-          title="Çatdırılma ünvanı əlavə et"
+          title={t('home.addDeliveryAddress')}
           variant="text"
           onPress={handleAddAddress}
           style={styles.addButton}

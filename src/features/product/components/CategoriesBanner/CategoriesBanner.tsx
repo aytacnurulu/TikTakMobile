@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { HomeStackParamList } from '@/app/stack/types';
+import { HOME_ROUTES } from '@/shared/constants/routes.constants';
 import { useTheme } from '@/shared/hooks/useTheme';
 import { pixelWidth } from '@/shared/utils/metrics';
 import GridIcon from '@/shared/icons/grid.svg';
@@ -24,7 +25,7 @@ const CategoriesBanner = () => {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.8}
-      onPress={() => navigation.navigate('Home')}
+      onPress={() => navigation.navigate(HOME_ROUTES.HOME)}
     >
       <GridIcon
         width={pixelWidth(18)}

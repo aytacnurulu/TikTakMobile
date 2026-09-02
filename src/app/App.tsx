@@ -1,5 +1,6 @@
 import '../shared/lib/i18n';
 import React, { useCallback, useMemo } from 'react';
+import { StatusBar } from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -35,6 +36,10 @@ const App = () => {
 
   return (
     <AppProviders>
+      <StatusBar
+        barStyle={theme === 'dark' ? 'light-content' : 'dark-content'}
+        backgroundColor={colors.background}
+      />
       <NavigationContainer theme={navigationTheme} onReady={onNavigationReady}>
         <RootNavigator />
       </NavigationContainer>
